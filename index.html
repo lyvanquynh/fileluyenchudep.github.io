@@ -1,229 +1,204 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>File Luyện Chữ Đẹp – BaolongEdu</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>File Luyện Chữ Đẹp – BaolongEdu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f5f9ff;
-      color: #333;
-    }
-
-    header {
-  background: #4facfe;
-  color: white;
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:"Segoe UI",Arial,sans-serif;
+background:#f4f7fb;
+color:#333;
+line-height:1.6
 }
 
-header img {
-  height: 80px;
+/* HEADER */
+header{
+background:#2b7cff;
+color:white;
+padding:16px 24px;
+display:flex;
+align-items:center;
+gap:16px
+}
+header img{height:70px}
+header h1{margin:0;font-size:24px}
+header p{margin:4px 0 0;font-size:14px;opacity:.9}
+
+/* HERO */
+.hero{
+background:linear-gradient(135deg,#2b7cff,#00c6ff);
+color:white;
+padding:60px 20px;
+text-align:center
+}
+.hero h2{font-size:36px;margin-bottom:12px}
+.hero p{font-size:18px;max-width:700px;margin:0 auto 25px}
+.hero a{
+background:white;
+color:#2b7cff;
+padding:12px 28px;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 4px 10px rgba(0,0,0,.15)
 }
 
-    header h1 {
-      margin: 0;
-      font-size: 26px;
-    }
-
-    header p {
-      margin: 4px 0 0;
-      font-size: 14px;
-      opacity: 0.9;
-    }
-
-    .hero {
-      background: linear-gradient(to right, #4facfe, #00f2fe);
-      color: white;
-      padding: 20px 20px;
-      text-align: center;
-    }
-
-    .hero h2 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 25px;
-    }
-
-    .hero a {
-      background: white;
-      color: #0077cc;
-      padding: 12px 24px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .section {
-      padding: 40px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      text-align: center;
-    }
-
-    .feature {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .product {
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      background: #fff;
-    }
-
-    .product-content {
-      padding: 16px;
-      flex: 1;
-    }
-
-    .product-content h3 {
-      margin-top: 0;
-    }
-
-    .product-content p {
-      font-size: 14px;
-      color: #555;
-    }
-
-    .product-content a {
-      display: inline-block;
-      margin-top: 10px;
-      background: #4facfe;
-      color: white;
-      padding: 8px 14px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    footer {
-      background: #222;
-      color: #ccc;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-    }
-    .section h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #0077cc;
+/* SECTION */
+.section{
+padding:50px 20px;
+max-width:1200px;
+margin:auto
+}
+.section h2{
+text-align:center;
+color:#2b7cff;
+margin-bottom:30px
 }
 
-  </style>
+/* FEATURES */
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px
+}
+.feature{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 3px 8px rgba(0,0,0,.08);
+text-align:center;
+font-weight:500
+}
+
+/* PRODUCTS */
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:24px
+}
+.product{
+background:white;
+border-radius:14px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,.1);
+display:flex;
+flex-direction:column;
+transition:.3s
+}
+.product:hover{transform:translateY(-5px)}
+.product img{
+width:100%;
+height:200px;
+object-fit:contain;
+background:#fff
+}
+.product-content{
+padding:18px;
+flex:1;
+display:flex;
+flex-direction:column
+}
+.product-content h3{margin:0 0 8px}
+.product-content p{font-size:14px;color:#555;flex:1}
+.product-content a{
+align-self:flex-start;
+background:#2b7cff;
+color:white;
+padding:8px 16px;
+border-radius:20px;
+text-decoration:none;
+font-size:14px
+}
+
+/* WHO */
+.who ul{
+max-width:600px;
+margin:auto;
+font-size:16px
+}
+.who li{margin-bottom:8px}
+
+/* FOOTER */
+footer{
+background:#1e1e1e;
+color:#ccc;
+text-align:center;
+padding:25px;
+font-size:14px
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo ">
-  <div>
-    <h1>File Luyện Chữ Đẹp</h1>
-    <p>Kho tài liệu luyện chữ cho giáo viên - học sinh và người lớn</p>
-  </div>
+<img src="logo.png" alt="Logo">
+<div>
+<h1>File Luyện Chữ Đẹp</h1>
+<p>Kho tài liệu luyện chữ cho giáo viên – học sinh – người lớn</p>
+</div>
 </header>
 
 <section class="hero">
-  <h2>File luyện chữ đẹp cho học sinh các cấp</h2>
-  <p>Bộ tài liệu luyện chữ chuẩn mẫu, dễ in, dễ sử dụng tại nhà và trên iPad</p>
-  <a href="#sanpham">Xem các bộ tài liệu</a>
+<h2>File luyện chữ đẹp cho học sinh các cấp</h2>
+<p>Bộ tài liệu luyện chữ chuẩn mẫu, dễ in, dễ sử dụng tại nhà và trên iPad</p>
+<a href="#sanpham">Xem các bộ tài liệu</a>
 </section>
 
 <section class="section">
-  <div class="features">
-    <div class="feature">
-      ✓ Mẫu chữ chuẩn BGD<br>
-      ✓ Mẫu chữ sáng tạo viết tay
-    </div>
-    <div class="feature">
-      ✓ Dễ in – dễ sử dụng<br>
-      ✓ Lưu trữ không giới hạn
-    </div>
-    <div class="feature">
-      ✓ Phù hợp giáo viên & phụ huynh<br>
-      ✓ Học sinh các cấp
-    </div>
-    <div class="feature">
-      ✓ Dùng được trên iPad, máy in<br>
-      ✓ Luyện viết trên giấy
-    </div>
-  </div>
+<div class="features">
+<div class="feature">✓ Mẫu chữ chuẩn Bộ GD</div>
+<div class="feature">✓ Mẫu chữ sáng tạo viết tay</div>
+<div class="feature">✓ Dễ in – dễ sử dụng</div>
+<div class="feature">✓ Phù hợp giáo viên & phụ huynh</div>
+<div class="feature">✓ Dùng trên iPad & giấy</div>
+<div class="feature">✓ Lưu trữ không giới hạn</div>
+</div>
 </section>
 
 <section class="section" id="sanpham">
-  <h2>Bộ 1 – Tài liệu giảng dạy luyện chữ đẹp</h2>
+<h2>Bộ 1 – Tài liệu giảng dạy luyện chữ đẹp</h2>
 
-  <div class="products">
+<div class="products">
 
-    <!-- Sản phẩm 1 -->
-    <div class="product">
-      <img src="A4-Hacotronli/thumb.jpg" alt="A4 - Hạ cỡ chữ tròn li">
-      <div class="product-content">
-        <h3>A4 – Hạ cỡ chữ tròn li</h3>
-        <p>Tài liệu luyện chữ tròn li, phù hợp học sinh lớp 1 – 2.</p>
-        <a href="A4-Hacotronli/" target="_blank">Xem chi tiết</a>
-      </div>
-    </div>
+<div class="product">
+<img src="A4-Hacotronli/thumb.jpg" alt="A4 - Hạ cỡ chữ tròn li">
+<div class="product-content">
+<h3>A4 – Hạ cỡ chữ tròn li</h3>
+<p>Tài liệu luyện chữ tròn li, phù hợp học sinh lớp 1 – 2.</p>
+<a href="A4-Hacotronli/" target="_blank">Xem chi tiết</a>
+</div>
+</div>
 
-    <!-- Sản phẩm 2 -->
-    <div class="product">
-      <img src="E2-SangtaoQuyen2Nangcao/thumb.jpg" alt="E2 - Sáng tạo quyển 2 nâng cao">
-      <div class="product-content">
-        <h3>E2 – Sáng tạo quyển 2 (Nâng cao)</h3>
-        <p>Tài liệu luyện chữ sáng tạo, dành cho học sinh trình độ nâng cao.</p>
-        <a href="E2-SangtaoQuyen2Nangcao/" target="_blank">Xem chi tiết</a>
-      </div>
-    </div>
+<div class="product">
+<img src="E2-SangtaoQuyen2Nangcao/thumb.jpg" alt="E2 - Sáng tạo quyển 2 nâng cao">
+<div class="product-content">
+<h3>E2 – Sáng tạo quyển 2 (Nâng cao)</h3>
+<p>Tài liệu luyện chữ sáng tạo, dành cho học sinh trình độ nâng cao.</p>
+<a href="E2-SangtaoQuyen2Nangcao/" target="_blank">Xem chi tiết</a>
+</div>
+</div>
 
-  </div>
+</div>
 </section>
 
-<section class="section">
-  <h2>👩‍🏫 Tài liệu này dành cho ai?</h2>
-  <ul>
-    <li>Giáo viên mầm non - tiểu học</li>
-    <li>Phụ huynh luyện chữ cho con tại nhà</li>
-    <li>Học sinh tiền tiểu học, cấp 1 – 2 – 3</li>
-  </ul>
+<section class="section who">
+<h2>Tài liệu này dành cho ai?</h2>
+<ul>
+<li>Giáo viên mầm non – tiểu học</li>
+<li>Phụ huynh luyện chữ cho con tại nhà</li>
+<li>Học sinh tiền tiểu học, cấp 1 – 2 – 3</li>
+</ul>
 </section>
 
 <footer>
-  <p>BaolongEdu – File Luyện Chữ Đẹp</p>
-  <p>Zalo: 0977 727 089 | Facebook: BaolongEdu</p>
-  <p>© 2026 File Luyện Chữ Đẹp</p>
+<p>BaolongEdu – File Luyện Chữ Đẹp</p>
+<p>Zalo: 0977 727 089 | Facebook: BaolongEdu</p>
+<p>© 2026 File Luyện Chữ Đẹp</p>
 </footer>
 
 </body>
