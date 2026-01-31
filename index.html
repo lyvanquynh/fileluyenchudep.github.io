@@ -137,6 +137,31 @@ cursor:pointer;
 
 .btn-cart{background:#9c27b0;}
 
+/* QUICK CONTACT BUTTONS */
+.quick-contact{
+position:fixed;
+right:20px;
+bottom:100px;
+display:flex;
+flex-direction:column;
+gap:10px;
+z-index:998;
+}
+.quick-contact a{
+width:48px;
+height:48px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+color:white;
+text-decoration:none;
+box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+.quick-contact .phone{background:#4caf50;}
+.quick-contact .zalo{background:#028fe3;}
+
 /* CART */
 #cart-box{
 position:fixed;
@@ -366,13 +391,18 @@ font-size:14px
 </div>
 </section>
 
+<!-- QUICK CONTACT -->
+<div class="quick-contact">
+<a href="tel:0977727089" class="phone">📞</a>
+<a href="https://zalo.me/0977727089" target="_blank" class="zalo">💬</a>
+</div>
+
 <!-- CART -->
 <div id="cart-box" class="minimized" onclick="openCart()">
 <div id="cart-count">0</div>
 🛒
 </div>
 
-<!-- CART FULL -->
 <div id="cart-box-full" style="display:none">
 <div id="cart-box">
 <div id="cart-count">0</div>
