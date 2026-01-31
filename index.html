@@ -103,7 +103,6 @@ display:flex;
 flex-direction:column
 }
 
-/* THU HẸP KHOẢNG CÁCH */
 .product-content h3{margin-bottom:2px;}
 .price{
 color:#e60000;
@@ -150,7 +149,41 @@ border-radius:12px;
 padding:12px;
 z-index:999;
 font-size:14px;
+transition:.3s;
 }
+
+#cart-box.minimized{
+width:60px;
+height:60px;
+padding:0;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+#cart-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:6px;
+}
+
+#cart-count{
+position:absolute;
+top:-6px;
+right:-6px;
+background:red;
+color:white;
+font-size:12px;
+width:20px;
+height:20px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
 #cart-items{
 list-style:none;
 padding:0;
@@ -158,12 +191,14 @@ margin:0 0 10px;
 max-height:200px;
 overflow:auto;
 }
+
 #cart-items li{
 display:flex;
 justify-content:space-between;
 align-items:center;
 margin-bottom:4px;
 }
+
 #cart-items button{
 background:red;
 color:white;
@@ -173,10 +208,12 @@ width:20px;
 height:20px;
 cursor:pointer;
 }
+
 .cart-buttons{
 display:flex;
 gap:6px;
 }
+
 .cart-buttons button{
 flex:1;
 background:#2b7cff;
@@ -197,6 +234,7 @@ align-items:center;
 justify-content:center;
 z-index:1000;
 }
+
 #pay-content{
 background:white;
 padding:22px;
@@ -205,22 +243,26 @@ max-width:380px;
 text-align:center;
 box-shadow:0 8px 25px rgba(0,0,0,.25);
 }
+
 #pay-content img{
 width:100%;
 max-width:280px;
 margin-bottom:10px;
 }
+
 .pay-amount{
 font-size:22px;
 font-weight:bold;
 color:#e60000;
 margin:12px 0 6px;
 }
+
 .pay-guide{
 font-size:15px;
 line-height:1.6;
 margin-bottom:10px;
 }
+
 .download-qr{
 display:inline-block;
 margin:6px 0 12px;
@@ -229,9 +271,9 @@ color:#2b7cff;
 text-decoration:none;
 font-weight:600;
 }
-.download-qr:hover{
-text-decoration:underline;
-}
+
+.download-qr:hover{text-decoration:underline;}
+
 #pay-content button{
 margin-top:10px;
 background:#2b7cff;
@@ -283,7 +325,7 @@ font-size:14px
 <div class="products">
 
 <div class="product">
-<img src="A1-Giaotrinhkythuat/thumb.jpg" alt="A1">
+<img src="A1-Giaotrinhkythuat/thumb.jpg">
 <div class="product-content">
 <h3>A1 - Giáo trình kỹ thuật LCĐ</h3>
 <div class="price">10.000đ</div>
@@ -296,7 +338,7 @@ font-size:14px
 </div>
 
 <div class="product">
-<img src="A4-Hacotronli/thumb.jpg" alt="A4">
+<img src="A4-Hacotronli/thumb.jpg">
 <div class="product-content">
 <h3>A4 – Hạ cỡ chữ tròn li</h3>
 <div class="price">10.000đ</div>
@@ -308,27 +350,21 @@ font-size:14px
 </div>
 </div>
 
-<div class="product">
-<img src="E2-SangtaoQuyen2Nangcao/thumb.jpg" alt="E2">
-<div class="product-content">
-<h3>E2 – Sáng tạo quyển 2</h3>
-<div class="price">10.000đ</div>
-<p>Tài liệu luyện chữ sáng tạo</p>
-<div class="product-actions">
-<a href="E2-SangtaoQuyen2Nangcao/" target="_blank">Xem chi tiết</a>
-<button class="btn-cart" onclick="addToCart('E2 – Sáng tạo quyển 2',10000)">Thêm giỏ</button>
-</div>
-</div>
-</div>
-
 </div>
 </section>
 
-<!-- CART BOX -->
+<!-- CART -->
 <div id="cart-box">
-<h3>🛒 Giỏ hàng</h3>
+<div id="cart-count">0</div>
+
+<div id="cart-header">
+<b>🛒 Giỏ hàng</b>
+<button onclick="toggleCart()">➖</button>
+</div>
+
 <ul id="cart-items"></ul>
 <p><b>Tổng:</b> <span id="cart-total">0</span>đ</p>
+
 <div class="cart-buttons">
 <button onclick="clearCart()">Xóa</button>
 <button onclick="openPay()">Thanh toán</button>
@@ -338,10 +374,10 @@ font-size:14px
 <!-- POPUP -->
 <div id="pay-modal">
 <div id="pay-content">
-<img src="qr.jpg" alt="QR Thanh toán" id="qr-img">
+<img src="qr.jpg">
 <div class="pay-amount" id="pay-amount"></div>
 <p class="pay-guide" id="pay-text"></p>
-<a href="qr.jpg" download class="download-qr">📥 Lưu ảnh QR về máy</a>
+<a href="qr.jpg" target="_blank" class="download-qr">📥 Mở ảnh QR (nhấn giữ để lưu)</a>
 <button onclick="closePay()">Đóng</button>
 </div>
 </div>
@@ -354,6 +390,7 @@ font-size:14px
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || []
+let minimized=false
 
 function addToCart(name, price){
 cart.push({name, price})
@@ -379,9 +416,21 @@ function saveCart(){
 localStorage.setItem("cart", JSON.stringify(cart))
 }
 
+function toggleCart(){
+const box=document.getElementById("cart-box")
+minimized=!minimized
+if(minimized){
+box.classList.add("minimized")
+box.innerHTML="🛒"
+}else{
+location.reload()
+}
+}
+
 function renderCart(){
 const list=document.getElementById("cart-items")
 const totalEl=document.getElementById("cart-total")
+const countEl=document.getElementById("cart-count")
 list.innerHTML=""
 let total=0
 cart.forEach((item,i)=>{
@@ -391,22 +440,14 @@ li.innerHTML=item.name+"<span>"+item.price.toLocaleString()+"đ</span><button on
 list.appendChild(li)
 })
 totalEl.textContent=total.toLocaleString()
+countEl.textContent=cart.length
 }
 
 function openPay(){
-if(cart.length==0){
-alert("Giỏ hàng trống")
-return
-}
+if(cart.length==0){alert("Giỏ hàng trống");return}
 let total=cart.reduce((s,i)=>s+i.price,0)
-
-document.getElementById("pay-amount").innerText =
-"Số tiền cần thanh toán: " + total.toLocaleString() + "đ"
-
-document.getElementById("pay-text").innerText =
-"Hãy chuyển khoản đúng số tiền ở trên.\n" +
-"Sau đó chụp lại bill thanh toán và gửi đến Zalo: 0977 727 089 để xác nhận đơn hàng."
-
+document.getElementById("pay-amount").innerText="Số tiền cần thanh toán: "+total.toLocaleString()+"đ"
+document.getElementById("pay-text").innerText="Hãy chuyển khoản đúng số tiền ở trên.\nSau đó chụp lại bill thanh toán và gửi đến Zalo: 0977 727 089 để xác nhận đơn hàng."
 document.getElementById("pay-modal").style.display="flex"
 }
 
