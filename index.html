@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>File Luyện Chữ Đẹp – BaolongEdu</title>
+<meta name="description" content="Kho file luyện chữ đẹp cho học sinh, giáo viên và phụ huynh. Tài liệu chuẩn mẫu, dễ in, dễ sử dụng tại nhà và trên iPad.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -197,6 +198,11 @@ transition:.2s;
 opacity:1;
 }
 
+/* show tooltip on mobile */
+@media(max-width:768px){
+  .qc-btn::after{opacity:1;}
+}
+
 /* shake animation */
 @keyframes shake{
 0%,90%,100%{transform:translateX(0)}
@@ -206,36 +212,21 @@ opacity:1;
 98%{transform:translateX(3px)}
 }
 
-/* CART */
+/* CART ICON */
 #cart-box{
 position:fixed;
 right:20px;
 bottom:20px;
 background:white;
-width:260px;
-box-shadow:0 4px 12px rgba(0,0,0,.2);
-border-radius:12px;
-padding:12px;
-z-index:999;
-font-size:14px;
-transition:.3s;
-}
-
-#cart-box.minimized{
 width:60px;
 height:60px;
-padding:0;
+box-shadow:0 4px 12px rgba(0,0,0,.2);
+border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
-}
-
-#cart-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:6px;
+z-index:999;
 }
 
 #cart-count{
@@ -251,6 +242,27 @@ border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
+}
+
+/* CART FULL */
+#cart-box-full-inner{
+position:fixed;
+right:20px;
+bottom:20px;
+background:white;
+width:260px;
+box-shadow:0 4px 12px rgba(0,0,0,.2);
+border-radius:12px;
+padding:12px;
+z-index:999;
+font-size:14px;
+}
+
+#cart-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:6px;
 }
 
 #cart-items{
@@ -341,8 +353,6 @@ text-decoration:none;
 font-weight:600;
 }
 
-.download-qr:hover{text-decoration:underline;}
-
 #pay-content button{
 margin-top:10px;
 background:var(--main-color);
@@ -394,7 +404,7 @@ font-size:14px
 <div class="products">
 
 <div class="product">
-<img src="A1-Giaotrinhkythuat/thumb.jpg">
+<img src="A1-Giaotrinhkythuat/thumb.jpg" loading="lazy">
 <div class="product-content">
 <h3>A1 - Giáo trình kỹ thuật LCĐ</h3>
 <div class="price">10.000đ</div>
@@ -407,7 +417,7 @@ font-size:14px
 </div>
 
 <div class="product">
-<img src="A4-Hacotronli/thumb.jpg">
+<img src="A4-Hacotronli/thumb.jpg" loading="lazy">
 <div class="product-content">
 <h3>A4 – Hạ cỡ chữ tròn li</h3>
 <div class="price">10.000đ</div>
@@ -420,7 +430,7 @@ font-size:14px
 </div>
 
 <div class="product">
-<img src="E2-SangtaoQuyen2Nangcao/thumb.jpg">
+<img src="E2-SangtaoQuyen2Nangcao/thumb.jpg" loading="lazy">
 <div class="product-content">
 <h3>E2 – Sáng tạo quyển 2 (Nâng cao)</h3>
 <div class="price">10.000đ</div>
@@ -448,15 +458,15 @@ font-size:14px
 </a>
 </div>
 
-<!-- CART -->
-<div id="cart-box" class="minimized" onclick="openCart()">
+<!-- CART ICON -->
+<div id="cart-box" onclick="openCart()">
 <div id="cart-count">0</div>
 🛒
 </div>
 
+<!-- CART FULL -->
 <div id="cart-box-full" style="display:none">
-<div id="cart-box">
-<div id="cart-count">0</div>
+<div id="cart-box-full-inner">
 <div id="cart-header">
 <b>🛒 Giỏ hàng</b>
 <button onclick="toggleCart()">➖</button>
@@ -473,7 +483,7 @@ font-size:14px
 <!-- POPUP -->
 <div id="pay-modal">
 <div id="pay-content">
-<img src="qr.jpg">
+<img src="qr.jpg" loading="lazy">
 <div class="pay-amount" id="pay-amount"></div>
 <p class="pay-guide" id="pay-text"></p>
 <a href="qr.jpg" target="_blank" class="download-qr">📥 Mở ảnh QR (nhấn giữ để lưu)</a>
@@ -518,9 +528,7 @@ renderCart()
 }
 
 function updateCartCount(){
-document.querySelectorAll("#cart-count").forEach(e=>{
-e.textContent = cart.length
-})
+document.getElementById("cart-count").textContent = cart.length
 }
 
 function openCart(){
@@ -536,7 +544,6 @@ document.getElementById("cart-box-full").style.display="none"
 function renderCart(){
 const list=document.getElementById("cart-items")
 const totalEl=document.getElementById("cart-total")
-if(!list || !totalEl) return
 list.innerHTML=""
 let total=0
 cart.forEach((item,i)=>{
