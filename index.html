@@ -102,16 +102,45 @@ flex:1;
 display:flex;
 flex-direction:column
 }
-.product-content h3{margin:0 0 8px}
-.product-content p{font-size:14px;color:#555;flex:1}
+
+/* THU HẸP KHOẢNG CÁCH */
+.product-content h3{
+margin-bottom:2px;
+}
+.price{
+color:#e60000;
+font-size:18px;
+font-weight:bold;
+margin:2px 0 4px;
+}
+.product-content p{
+font-size:14px;
+color:#555;
+margin-top:0;
+flex:1
+}
+
+.product-actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
 .product-content a{
-align-self:flex-start;
 background:#2b7cff;
 color:white;
 padding:8px 16px;
 border-radius:20px;
 text-decoration:none;
 font-size:14px
+}
+
+.btn-buy{
+background:#ff9800;
+}
+
+.btn-zalo{
+background:#00bfa5;
 }
 
 /* FOOTER */
@@ -122,37 +151,6 @@ text-align:center;
 padding:25px;
 font-size:14px
 }
-.price{
-color:#e60000;
-font-size:18px;
-font-weight:bold;
-margin:6px 0 10px;
-}
-
-.product-actions{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-}
-
-.btn-buy{
-background:#ff9800;
-color:white;
-padding:8px 14px;
-border-radius:20px;
-text-decoration:none;
-font-size:14px;
-}
-
-.btn-zalo{
-background:#00bfa5;
-color:white;
-padding:8px 14px;
-border-radius:20px;
-text-decoration:none;
-font-size:14px;
-}
-
 </style>
 </head>
 
@@ -189,9 +187,7 @@ font-size:14px;
 <img src="A1-Giaotrinhkythuat/thumb.jpg" alt="A1 - Giáo trình kỹ thuật LCĐ">
 <div class="product-content">
 <h3>A1 - Giáo trình kỹ thuật LCĐ</h3>
-
 <div class="price">10.000đ</div>
-
 <p>Giáo trình hướng dẫn kỹ thuật viết chữ đẹp, song song chữ nhỡ và chữ nhỏ</p>
 
 <div class="product-actions">
