@@ -92,7 +92,7 @@ transition:.3s
 .product:hover{transform:translateY(-5px)}
 .product img{
 width:100%;
-aspect-ratio: 3 / 1;
+aspect-ratio:3/1;
 object-fit:contain;
 background:#fff;
 }
@@ -104,9 +104,7 @@ flex-direction:column
 }
 
 /* THU HẸP KHOẢNG CÁCH */
-.product-content h3{
-margin-bottom:2px;
-}
+.product-content h3{margin-bottom:2px;}
 .price{
 color:#e60000;
 font-size:18px;
@@ -122,25 +120,73 @@ flex:1
 
 .product-actions{
 display:flex;
-gap:10px;
+gap:8px;
 flex-wrap:wrap;
 }
 
-.product-content a{
+.product-content a,
+.btn-cart{
 background:#2b7cff;
 color:white;
-padding:8px 16px;
+padding:8px 14px;
 border-radius:20px;
 text-decoration:none;
-font-size:14px
+font-size:14px;
+border:none;
+cursor:pointer;
 }
 
-.btn-buy{
-background:#ff9800;
-}
+.btn-buy{background:#ff9800;}
+.btn-zalo{background:#00bfa5;}
+.btn-cart{background:#9c27b0;}
 
-.btn-zalo{
-background:#00bfa5;
+/* CART */
+#cart-box{
+position:fixed;
+right:20px;
+bottom:20px;
+background:white;
+width:260px;
+box-shadow:0 4px 12px rgba(0,0,0,.2);
+border-radius:12px;
+padding:12px;
+z-index:999;
+font-size:14px;
+}
+#cart-items{
+list-style:none;
+padding:0;
+margin:0 0 10px;
+max-height:200px;
+overflow:auto;
+}
+#cart-items li{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:4px;
+}
+#cart-items button{
+background:red;
+color:white;
+border:none;
+border-radius:50%;
+width:20px;
+height:20px;
+cursor:pointer;
+}
+.cart-buttons{
+display:flex;
+gap:6px;
+}
+.cart-buttons button{
+flex:1;
+background:#2b7cff;
+color:white;
+border:none;
+border-radius:6px;
+padding:6px;
+cursor:pointer;
 }
 
 /* FOOTER */
@@ -184,46 +230,128 @@ font-size:14px
 <div class="products">
 
 <div class="product">
-<img src="A1-Giaotrinhkythuat/thumb.jpg" alt="A1 - Giáo trình kỹ thuật LCĐ">
+<img src="A1-Giaotrinhkythuat/thumb.jpg" alt="A1">
 <div class="product-content">
 <h3>A1 - Giáo trình kỹ thuật LCĐ</h3>
 <div class="price">10.000đ</div>
-<p>Giáo trình hướng dẫn kỹ thuật viết chữ đẹp, song song chữ nhỡ và chữ nhỏ</p>
-
+<p>Giáo trình hướng dẫn kỹ thuật viết chữ đẹp</p>
 <div class="product-actions">
 <a href="A1-Giaotrinhkythuat/" target="_blank">Xem chi tiết</a>
 <a href="https://www.baolongedu.site/huong-dan-thanh-toan" target="_blank" class="btn-buy">Mua ngay</a>
 <a href="https://zalo.me/0977727089" target="_blank" class="btn-zalo">Zalo</a>
+<button class="btn-cart" onclick="addToCart('A1 - Giáo trình kỹ thuật LCĐ',10000)">Thêm giỏ</button>
 </div>
 </div>
 </div>
 
 <div class="product">
-<img src="A4-Hacotronli/thumb.jpg" alt="A4 - Hạ cỡ chữ tròn li">
+<img src="A4-Hacotronli/thumb.jpg" alt="A4">
 <div class="product-content">
 <h3>A4 – Hạ cỡ chữ tròn li</h3>
-<p>Tài liệu luyện chữ tròn li, phù hợp học sinh lớp 1 – 2.</p>
+<div class="price">10.000đ</div>
+<p>Tài liệu luyện chữ tròn li</p>
+<div class="product-actions">
 <a href="A4-Hacotronli/" target="_blank">Xem chi tiết</a>
+<a href="https://www.baolongedu.site/huong-dan-thanh-toan" target="_blank" class="btn-buy">Mua ngay</a>
+<a href="https://zalo.me/0977727089" target="_blank" class="btn-zalo">Zalo</a>
+<button class="btn-cart" onclick="addToCart('A4 – Hạ cỡ chữ tròn li',10000)">Thêm giỏ</button>
+</div>
 </div>
 </div>
 
 <div class="product">
-<img src="E2-SangtaoQuyen2Nangcao/thumb.jpg" alt="E2 - Sáng tạo quyển 2 nâng cao">
+<img src="E2-SangtaoQuyen2Nangcao/thumb.jpg" alt="E2">
 <div class="product-content">
-<h3>E2 – Sáng tạo quyển 2 (Nâng cao)</h3>
-<p>Tài liệu luyện chữ sáng tạo, dành cho học sinh trình độ nâng cao.</p>
+<h3>E2 – Sáng tạo quyển 2</h3>
+<div class="price">10.000đ</div>
+<p>Tài liệu luyện chữ sáng tạo</p>
+<div class="product-actions">
 <a href="E2-SangtaoQuyen2Nangcao/" target="_blank">Xem chi tiết</a>
+<a href="https://www.baolongedu.site/huong-dan-thanh-toan" target="_blank" class="btn-buy">Mua ngay</a>
+<a href="https://zalo.me/0977727089" target="_blank" class="btn-zalo">Zalo</a>
+<button class="btn-cart" onclick="addToCart('E2 – Sáng tạo quyển 2',10000)">Thêm giỏ</button>
+</div>
 </div>
 </div>
 
 </div>
 </section>
 
+<!-- CART BOX -->
+<div id="cart-box">
+<h3>🛒 Giỏ hàng</h3>
+<ul id="cart-items"></ul>
+<p><b>Tổng:</b> <span id="cart-total">0</span>đ</p>
+<div class="cart-buttons">
+<button onclick="clearCart()">Xóa</button>
+<button onclick="sendZalo()">Gửi Zalo</button>
+</div>
+</div>
+
 <footer>
 <p>BaolongEdu – File Luyện Chữ Đẹp</p>
 <p>Zalo: 0977 727 089 | Facebook: BaolongEdu</p>
 <p>© 2026 File Luyện Chữ Đẹp</p>
 </footer>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || []
+
+function addToCart(name, price){
+cart.push({name, price})
+saveCart()
+renderCart()
+}
+
+function removeItem(index){
+cart.splice(index,1)
+saveCart()
+renderCart()
+}
+
+function clearCart(){
+if(confirm("Xóa toàn bộ giỏ hàng?")){
+cart=[]
+saveCart()
+renderCart()
+}
+}
+
+function saveCart(){
+localStorage.setItem("cart", JSON.stringify(cart))
+}
+
+function renderCart(){
+const list=document.getElementById("cart-items")
+const totalEl=document.getElementById("cart-total")
+list.innerHTML=""
+let total=0
+cart.forEach((item,i)=>{
+total+=item.price
+const li=document.createElement("li")
+li.innerHTML=item.name+"<span>"+item.price.toLocaleString()+"đ</span><button onclick='removeItem("+i+")'>×</button>"
+list.appendChild(li)
+})
+totalEl.textContent=total.toLocaleString()
+}
+
+function sendZalo(){
+if(cart.length==0){
+alert("Giỏ hàng trống")
+return
+}
+let text="Đơn hàng:%0A"
+let total=0
+cart.forEach(i=>{
+text+="- "+i.name+" ("+i.price+"đ)%0A"
+total+=i.price
+})
+text+="Tổng: "+total+"đ"
+window.open("https://zalo.me/0977727089?text="+text)
+}
+
+renderCart()
+</script>
 
 </body>
 </html>
