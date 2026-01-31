@@ -137,7 +137,6 @@ cursor:pointer;
 }
 
 .btn-buy{background:#ff9800;}
-.btn-zalo{background:#00bfa5;}
 .btn-cart{background:#9c27b0;}
 
 /* CART */
@@ -189,13 +188,36 @@ padding:6px;
 cursor:pointer;
 }
 
-/* FOOTER */
-footer{
-background:#1e1e1e;
-color:#ccc;
+/* POPUP QR */
+#pay-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.5);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:1000;
+}
+#pay-content{
+background:white;
+padding:20px;
+border-radius:12px;
+max-width:360px;
 text-align:center;
-padding:25px;
-font-size:14px
+}
+#pay-content img{
+width:100%;
+max-width:280px;
+margin-bottom:10px;
+}
+#pay-content button{
+margin-top:10px;
+background:#2b7cff;
+color:white;
+border:none;
+border-radius:6px;
+padding:8px 16px;
+cursor:pointer;
 }
 </style>
 </head>
@@ -238,7 +260,6 @@ font-size:14px
 <div class="product-actions">
 <a href="A1-Giaotrinhkythuat/" target="_blank">Xem chi tiết</a>
 <a href="https://www.baolongedu.site/huong-dan-thanh-toan" target="_blank" class="btn-buy">Mua ngay</a>
-<a href="https://zalo.me/0977727089" target="_blank" class="btn-zalo">Zalo</a>
 <button class="btn-cart" onclick="addToCart('A1 - Giáo trình kỹ thuật LCĐ',10000)">Thêm giỏ</button>
 </div>
 </div>
@@ -253,7 +274,6 @@ font-size:14px
 <div class="product-actions">
 <a href="A4-Hacotronli/" target="_blank">Xem chi tiết</a>
 <a href="https://www.baolongedu.site/huong-dan-thanh-toan" target="_blank" class="btn-buy">Mua ngay</a>
-<a href="https://zalo.me/0977727089" target="_blank" class="btn-zalo">Zalo</a>
 <button class="btn-cart" onclick="addToCart('A4 – Hạ cỡ chữ tròn li',10000)">Thêm giỏ</button>
 </div>
 </div>
@@ -268,7 +288,6 @@ font-size:14px
 <div class="product-actions">
 <a href="E2-SangtaoQuyen2Nangcao/" target="_blank">Xem chi tiết</a>
 <a href="https://www.baolongedu.site/huong-dan-thanh-toan" target="_blank" class="btn-buy">Mua ngay</a>
-<a href="https://zalo.me/0977727089" target="_blank" class="btn-zalo">Zalo</a>
 <button class="btn-cart" onclick="addToCart('E2 – Sáng tạo quyển 2',10000)">Thêm giỏ</button>
 </div>
 </div>
@@ -284,7 +303,16 @@ font-size:14px
 <p><b>Tổng:</b> <span id="cart-total">0</span>đ</p>
 <div class="cart-buttons">
 <button onclick="clearCart()">Xóa</button>
-<button onclick="sendZalo()">Gửi Zalo</button>
+<button onclick="openPay()">Thanh toán</button>
+</div>
+</div>
+
+<!-- POPUP -->
+<div id="pay-modal">
+<div id="pay-content">
+<img src="qr.jpg" alt="QR Thanh toán">
+<p id="pay-text"></p>
+<button onclick="closePay()">Đóng</button>
 </div>
 </div>
 
@@ -335,19 +363,21 @@ list.appendChild(li)
 totalEl.textContent=total.toLocaleString()
 }
 
-function sendZalo(){
+function openPay(){
 if(cart.length==0){
 alert("Giỏ hàng trống")
 return
 }
-let text="Đơn hàng:%0A"
-let total=0
-cart.forEach(i=>{
-text+="- "+i.name+" ("+i.price+"đ)%0A"
-total+=i.price
-})
-text+="Tổng: "+total+"đ"
-window.open("https://zalo.me/0977727089?text="+text)
+let total=cart.reduce((s,i)=>s+i.price,0)
+document.getElementById("pay-text").innerText=
+"Hãy chuyển khoản thanh toán số tiền tương ứng với sản phẩm bạn đã chọn là: "
++ total.toLocaleString() + "đ\n\n"
++ "Sau đó chụp lại bill thanh toán và gửi đến Zalo: 0977 727 089 để xác nhận đơn hàng"
+document.getElementById("pay-modal").style.display="flex"
+}
+
+function closePay(){
+document.getElementById("pay-modal").style.display="none"
 }
 
 renderCart()
