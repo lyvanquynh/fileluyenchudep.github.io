@@ -200,15 +200,38 @@ z-index:1000;
 }
 #pay-content{
 background:white;
-padding:20px;
-border-radius:12px;
-max-width:360px;
+padding:22px;
+border-radius:16px;
+max-width:380px;
 text-align:center;
+box-shadow:0 8px 25px rgba(0,0,0,.25);
 }
 #pay-content img{
 width:100%;
 max-width:280px;
 margin-bottom:10px;
+}
+.pay-amount{
+font-size:22px;
+font-weight:bold;
+color:#e60000;
+margin:12px 0 6px;
+}
+.pay-guide{
+font-size:15px;
+line-height:1.6;
+margin-bottom:10px;
+}
+.download-qr{
+display:inline-block;
+margin:6px 0 12px;
+font-size:14px;
+color:#2b7cff;
+text-decoration:none;
+font-weight:600;
+}
+.download-qr:hover{
+text-decoration:underline;
 }
 #pay-content button{
 margin-top:10px;
@@ -310,8 +333,10 @@ cursor:pointer;
 <!-- POPUP -->
 <div id="pay-modal">
 <div id="pay-content">
-<img src="qr.jpg" alt="QR Thanh toán">
-<p id="pay-text"></p>
+<img src="qr.jpg" alt="QR Thanh toán" id="qr-img">
+<div class="pay-amount" id="pay-amount"></div>
+<p class="pay-guide" id="pay-text"></p>
+<a href="qr.jpg" download class="download-qr">📥 Lưu ảnh QR về máy</a>
 <button onclick="closePay()">Đóng</button>
 </div>
 </div>
@@ -369,10 +394,14 @@ alert("Giỏ hàng trống")
 return
 }
 let total=cart.reduce((s,i)=>s+i.price,0)
-document.getElementById("pay-text").innerText=
-"Hãy chuyển khoản thanh toán số tiền tương ứng với sản phẩm bạn đã chọn là: "
-+ total.toLocaleString() + "đ\n\n"
-+ "Sau đó chụp lại bill thanh toán và gửi đến Zalo: 0977 727 089 để xác nhận đơn hàng"
+
+document.getElementById("pay-amount").innerText =
+"Số tiền cần thanh toán: " + total.toLocaleString() + "đ"
+
+document.getElementById("pay-text").innerText =
+"Hãy chuyển khoản đúng số tiền ở trên.\n" +
+"Sau đó chụp lại bill thanh toán và gửi đến Zalo: 0977 727 089 để xác nhận đơn hàng."
+
 document.getElementById("pay-modal").style.display="flex"
 }
 
