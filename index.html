@@ -141,7 +141,8 @@ cursor:pointer;
 #cart-box{
 position:fixed;
 right:20px;
-bottom:20px;
+top:50%;
+transform:translateY(-50%);
 background:white;
 width:260px;
 box-shadow:0 4px 12px rgba(0,0,0,.2);
@@ -162,13 +163,6 @@ justify-content:center;
 cursor:pointer;
 }
 
-#cart-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:6px;
-}
-
 #cart-count{
 position:absolute;
 top:-6px;
@@ -182,6 +176,14 @@ border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
+z-index:10;
+}
+
+#cart-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:6px;
 }
 
 #cart-items{
@@ -191,14 +193,12 @@ margin:0 0 10px;
 max-height:200px;
 overflow:auto;
 }
-
 #cart-items li{
 display:flex;
 justify-content:space-between;
 align-items:center;
 margin-bottom:4px;
 }
-
 #cart-items button{
 background:red;
 color:white;
@@ -208,12 +208,10 @@ width:20px;
 height:20px;
 cursor:pointer;
 }
-
 .cart-buttons{
 display:flex;
 gap:6px;
 }
-
 .cart-buttons button{
 flex:1;
 background:#2b7cff;
@@ -234,7 +232,6 @@ align-items:center;
 justify-content:center;
 z-index:1000;
 }
-
 #pay-content{
 background:white;
 padding:22px;
@@ -243,26 +240,22 @@ max-width:380px;
 text-align:center;
 box-shadow:0 8px 25px rgba(0,0,0,.25);
 }
-
 #pay-content img{
 width:100%;
 max-width:280px;
 margin-bottom:10px;
 }
-
 .pay-amount{
 font-size:22px;
 font-weight:bold;
 color:#e60000;
 margin:12px 0 6px;
 }
-
 .pay-guide{
 font-size:15px;
 line-height:1.6;
 margin-bottom:10px;
 }
-
 .download-qr{
 display:inline-block;
 margin:6px 0 12px;
@@ -271,9 +264,7 @@ color:#2b7cff;
 text-decoration:none;
 font-weight:600;
 }
-
 .download-qr:hover{text-decoration:underline;}
-
 #pay-content button{
 margin-top:10px;
 background:#2b7cff;
@@ -390,7 +381,7 @@ font-size:14px
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || []
-let minimized=false
+let minimized = false
 
 function addToCart(name, price){
 cart.push({name, price})
@@ -417,11 +408,15 @@ localStorage.setItem("cart", JSON.stringify(cart))
 }
 
 function toggleCart(){
-const box=document.getElementById("cart-box")
-minimized=!minimized
+const box = document.getElementById("cart-box")
+minimized = !minimized
+
 if(minimized){
 box.classList.add("minimized")
-box.innerHTML="🛒"
+box.innerHTML = `
+  <div id="cart-count">${cart.length}</div>
+  🛒
+`
 }else{
 location.reload()
 }
@@ -431,14 +426,17 @@ function renderCart(){
 const list=document.getElementById("cart-items")
 const totalEl=document.getElementById("cart-total")
 const countEl=document.getElementById("cart-count")
+
 list.innerHTML=""
 let total=0
+
 cart.forEach((item,i)=>{
 total+=item.price
 const li=document.createElement("li")
 li.innerHTML=item.name+"<span>"+item.price.toLocaleString()+"đ</span><button onclick='removeItem("+i+")'>×</button>"
 list.appendChild(li)
 })
+
 totalEl.textContent=total.toLocaleString()
 countEl.textContent=cart.length
 }
