@@ -315,19 +315,21 @@ font-size:14px
 
 <div class="products">
 
+<!-- A1 -->
 <div class="product">
-<img src="A1-Giaotrinhkythuat/thumb.jpg">
+<img src="A1-Giatrinhkythuat/thumb.jpg">
 <div class="product-content">
 <h3>A1 - Giáo trình kỹ thuật LCĐ</h3>
 <div class="price">10.000đ</div>
 <p>Giáo trình hướng dẫn kỹ thuật viết chữ đẹp</p>
 <div class="product-actions">
-<a href="A1-Giaotrinhkythuat/" target="_blank">Xem chi tiết</a>
+<a href="A1-Giatrinhkythuat/" target="_blank">Xem chi tiết</a>
 <button class="btn-cart" onclick="addToCart('A1 - Giáo trình kỹ thuật LCĐ',10000)">Thêm giỏ</button>
 </div>
 </div>
 </div>
 
+<!-- A4 -->
 <div class="product">
 <img src="A4-Hacotronli/thumb.jpg">
 <div class="product-content">
@@ -337,6 +339,20 @@ font-size:14px
 <div class="product-actions">
 <a href="A4-Hacotronli/" target="_blank">Xem chi tiết</a>
 <button class="btn-cart" onclick="addToCart('A4 – Hạ cỡ chữ tròn li',10000)">Thêm giỏ</button>
+</div>
+</div>
+</div>
+
+<!-- E2 -->
+<div class="product">
+<img src="E2-SangtaoQuyen2Nangcao/thumb.jpg">
+<div class="product-content">
+<h3>E2 – Sáng tạo quyển 2 (Nâng cao)</h3>
+<div class="price">10.000đ</div>
+<p>Tài liệu luyện chữ sáng tạo nâng cao</p>
+<div class="product-actions">
+<a href="E2-SangtaoQuyen2Nangcao/" target="_blank">Xem chi tiết</a>
+<button class="btn-cart" onclick="addToCart('E2 – Sáng tạo quyển 2',10000)">Thêm giỏ</button>
 </div>
 </div>
 </div>
@@ -418,7 +434,21 @@ box.innerHTML = `
   🛒
 `
 }else{
-location.reload()
+box.classList.remove("minimized")
+box.innerHTML = `
+<div id="cart-count">${cart.length}</div>
+<div id="cart-header">
+<b>🛒 Giỏ hàng</b>
+<button onclick="toggleCart()">➖</button>
+</div>
+<ul id="cart-items"></ul>
+<p><b>Tổng:</b> <span id="cart-total">0</span>đ</p>
+<div class="cart-buttons">
+<button onclick="clearCart()">Xóa</button>
+<button onclick="openPay()">Thanh toán</button>
+</div>
+`
+renderCart()
 }
 }
 
@@ -426,6 +456,8 @@ function renderCart(){
 const list=document.getElementById("cart-items")
 const totalEl=document.getElementById("cart-total")
 const countEl=document.getElementById("cart-count")
+
+if(!list || !totalEl) return
 
 list.innerHTML=""
 let total=0
