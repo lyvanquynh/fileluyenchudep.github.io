@@ -6,6 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root{
+  --main-color:#2b7cff;
+  --zalo:#028fe3;
+  --messenger:#0084ff;
+  --phone:#4caf50;
+}
+
 *{box-sizing:border-box}
 body{
 margin:0;
@@ -17,7 +24,7 @@ line-height:1.6
 
 /* HEADER */
 header{
-background:#2b7cff;
+background:var(--main-color);
 color:white;
 padding:16px 24px;
 display:flex;
@@ -30,7 +37,7 @@ header p{margin:4px 0 0;font-size:14px;opacity:.9}
 
 /* HERO */
 .hero{
-background:linear-gradient(135deg,#2b7cff,#00c6ff);
+background:linear-gradient(135deg,var(--main-color),#00c6ff);
 color:white;
 padding:60px 20px;
 text-align:center
@@ -39,7 +46,7 @@ text-align:center
 .hero p{font-size:18px;max-width:700px;margin:0 auto 25px}
 .hero a{
 background:white;
-color:#2b7cff;
+color:var(--main-color);
 padding:12px 28px;
 border-radius:30px;
 text-decoration:none;
@@ -55,7 +62,7 @@ margin:auto
 }
 .section h2{
 text-align:center;
-color:#2b7cff;
+color:var(--main-color);
 margin-bottom:30px
 }
 
@@ -125,7 +132,7 @@ flex-wrap:wrap;
 
 .product-content a,
 .btn-cart{
-background:#2b7cff;
+background:var(--main-color);
 color:white;
 padding:8px 14px;
 border-radius:20px;
@@ -137,30 +144,67 @@ cursor:pointer;
 
 .btn-cart{background:#9c27b0;}
 
-/* QUICK CONTACT BUTTONS */
+/* QUICK CONTACT */
 .quick-contact{
 position:fixed;
 right:20px;
 bottom:100px;
 display:flex;
 flex-direction:column;
-gap:10px;
+gap:12px;
 z-index:998;
 }
-.quick-contact a{
-width:48px;
-height:48px;
+
+.qc-btn{
+width:52px;
+height:52px;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:22px;
-color:white;
-text-decoration:none;
-box-shadow:0 4px 10px rgba(0,0,0,.2);
+position:relative;
+animation:shake 3s infinite;
+box-shadow:0 4px 12px rgba(0,0,0,.25);
 }
-.quick-contact .phone{background:#4caf50;}
-.quick-contact .zalo{background:#028fe3;}
+
+.qc-btn img{
+width:28px;
+height:28px;
+}
+
+/* colors */
+.phone{background:var(--phone)}
+.zalo{background:var(--zalo)}
+.messenger{background:var(--messenger)}
+
+/* tooltip */
+.qc-btn::after{
+content:attr(data-tooltip);
+position:absolute;
+right:60px;
+background:#333;
+color:white;
+padding:4px 8px;
+font-size:13px;
+border-radius:6px;
+white-space:nowrap;
+opacity:0;
+pointer-events:none;
+transition:.2s;
+}
+
+.qc-btn:hover::after{
+opacity:1;
+}
+
+/* shake animation */
+@keyframes shake{
+0%,90%,100%{transform:translateX(0)}
+92%{transform:translateX(-3px)}
+94%{transform:translateX(3px)}
+96%{transform:translateX(-3px)}
+98%{transform:translateX(3px)}
+}
 
 /* CART */
 #cart-box{
@@ -241,7 +285,7 @@ gap:6px;
 
 .cart-buttons button{
 flex:1;
-background:#2b7cff;
+background:var(--main-color);
 color:white;
 border:none;
 border-radius:6px;
@@ -292,7 +336,7 @@ margin-bottom:10px;
 display:inline-block;
 margin:6px 0 12px;
 font-size:14px;
-color:#2b7cff;
+color:var(--main-color);
 text-decoration:none;
 font-weight:600;
 }
@@ -301,7 +345,7 @@ font-weight:600;
 
 #pay-content button{
 margin-top:10px;
-background:#2b7cff;
+background:var(--main-color);
 color:white;
 border:none;
 border-radius:6px;
@@ -393,8 +437,15 @@ font-size:14px
 
 <!-- QUICK CONTACT -->
 <div class="quick-contact">
-<a href="tel:0977727089" class="phone">📞</a>
-<a href="https://zalo.me/0977727089" target="_blank" class="zalo">💬</a>
+<a href="tel:0977727089" class="qc-btn phone" data-tooltip="Gọi ngay">
+<img src="icons/phone.png">
+</a>
+<a href="https://zalo.me/0977727089" target="_blank" class="qc-btn zalo" data-tooltip="Chat Zalo">
+<img src="icons/zalo.png">
+</a>
+<a href="https://m.me/baolongedu" target="_blank" class="qc-btn messenger" data-tooltip="Messenger">
+<img src="icons/messenger.png">
+</a>
 </div>
 
 <!-- CART -->
