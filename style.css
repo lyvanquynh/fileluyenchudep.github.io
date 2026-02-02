@@ -130,13 +130,12 @@ box-shadow:0 12px 28px rgba(0,0,0,.12);
 
 .product img{
   width:100%;
-  aspect-ratio:4/3;
-  object-fit:cover;
+  height:auto;
+  object-fit:contain;
   background:none;
   padding:0;
   display:block;
 }
-
 
 
 .product-content{
