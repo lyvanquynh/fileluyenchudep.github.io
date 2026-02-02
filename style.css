@@ -495,28 +495,37 @@ font-size:14px
 }
 
 .price-sale{
-  display:flex;
-  align-items:center;
-  gap:6px;
+  display:grid;
+  grid-template-columns:auto auto;
+  grid-template-rows:auto auto;
+  column-gap:6px;
+  row-gap:2px;
   margin:4px 0 10px;
+  align-items:center;
 }
 
 .price-sale .old{
+  grid-column:1;
+  grid-row:1;
   color:#999;
-  font-size:14px;
+  font-size:13px;
   text-decoration:line-through;
 }
 
-.price-sale .new{
-  color:#111;
-  font-size:18px;
-  font-weight:700;
-}
-
 .price-sale .percent{
+  grid-column:2;
+  grid-row:1;
   background:#ff3b3b;
   color:white;
   font-size:12px;
   padding:2px 6px;
   border-radius:6px;
+}
+
+.price-sale .new{
+  grid-column:1 / span 2;
+  grid-row:2;
+  color:#000;
+  font-size:20px;
+  font-weight:800;
 }
