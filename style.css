@@ -210,11 +210,12 @@ transition:.2s;
 
 .qc-btn:hover::after{opacity:1}
 
-@media(max-width:768px){
+@media (hover: none){
   .qc-btn::after{
-    display:none;
+    display:none !important;
   }
 }
+
 
 @keyframes shake{
 0%,90%,100%{transform:translateX(0)}
