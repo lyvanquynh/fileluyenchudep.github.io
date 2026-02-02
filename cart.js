@@ -9,6 +9,7 @@ cart.push({name, price})
 saveCart()
 updateCartCount()
 renderCart()
+showToast("Đã thêm " + name + " vào giỏ")
 }
 
 function removeItem(index){
@@ -69,3 +70,31 @@ document.getElementById("pay-modal").style.display="none"
 
 updateCartCount()
 renderCart()
+
+const searchInput = document.getElementById("searchInput");
+
+if(searchInput){
+  searchInput.addEventListener("input", function(){
+    const keyword = this.value.toLowerCase();
+    const products = document.querySelectorAll(".product");
+
+    products.forEach(product=>{
+      const text = product.innerText.toLowerCase();
+      if(text.includes(keyword)){
+        product.style.display = "flex";
+      }else{
+        product.style.display = "none";
+      }
+    });
+  });
+}
+
+function showToast(text){
+  const toast = document.getElementById("toast");
+  toast.innerText = text;
+  toast.classList.add("show");
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  },2000);
+}
+
