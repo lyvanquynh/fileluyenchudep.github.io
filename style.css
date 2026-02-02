@@ -415,3 +415,10 @@ font-size:14px
   opacity:1;
 }
 
+.backtop{
+  background:#ff9800;
+  color:white;
+  font-size:22px;
+  font-weight:bold;
+  display:none; /* mặc định ẩn */
+}
