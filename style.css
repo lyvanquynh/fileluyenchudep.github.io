@@ -133,8 +133,9 @@ box-shadow:0 12px 28px rgba(0,0,0,.12);
   aspect-ratio:4/3;
   object-fit:contain;
   background:#f7f9fc;
-  padding:2px;
+  padding:0;
 }
+
 
 
 .product-content{
