@@ -211,7 +211,9 @@ transition:.2s;
 .qc-btn:hover::after{opacity:1}
 
 @media(max-width:768px){
-  .qc-btn::after{opacity:1;}
+  .qc-btn::after{
+    display:none;
+  }
 }
 
 @keyframes shake{
