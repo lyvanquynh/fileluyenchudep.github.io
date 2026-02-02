@@ -105,7 +105,8 @@ overflow:hidden;
 box-shadow:0 6px 18px rgba(0,0,0,.08);
 display:flex;
 flex-direction:column;
-transition:.25s
+transition:.25s;
+position:relative;
 }
 
 .product:hover{
@@ -129,13 +130,6 @@ flex-direction:column
 }
 
 .product-content h3{margin-bottom:4px}
-
-.price{
-color:#e60000;
-font-size:18px;
-font-weight:bold;
-margin:2px 0 6px;
-}
 
 .product-content p{
 font-size:14px;
@@ -163,6 +157,65 @@ cursor:pointer;
 }
 
 .btn-cart{background:#9c27b0}
+
+/* PRICE STYLE */
+.price-sale{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin:4px 0 10px;
+}
+
+.price-sale .old{
+  color:#aaa;
+  font-size:13px;
+  text-decoration:line-through;
+}
+
+.price-sale .new{
+  color:#555;              /* xám đậm nhẹ */
+  font-size:16px;         /* nhỏ hơn trước */
+  font-weight:600;        /* không quá đậm */
+}
+
+.price-sale .percent{
+  background:#ff3b3b;
+  color:white;
+  font-size:12px;
+  padding:2px 6px;
+  border-radius:6px;
+  line-height:1;
+}
+
+
+/* BADGE */
+.badge{
+  position:absolute;
+  top:12px;
+  right:12px;
+  background:#e53935;
+  color:white;
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:bold;
+  box-shadow:0 2px 6px rgba(0,0,0,.2);
+}
+
+/* SEARCH */
+.search-box{
+  max-width:400px;
+  margin:20px auto;
+  text-align:center;
+}
+
+.search-box input{
+  width:100%;
+  padding:10px 14px;
+  border-radius:20px;
+  border:1px solid #ccc;
+  font-size:15px;
+}
 
 /* QUICK CONTACT */
 .quick-contact{
@@ -193,6 +246,7 @@ box-shadow:0 4px 12px rgba(0,0,0,.25);
 .phone{background:var(--phone)}
 .zalo{background:var(--zalo)}
 .messenger{background:var(--messenger)}
+.backtop{background:#ff9800;color:white;font-size:22px;font-weight:bold;display:none;cursor:pointer}
 
 .qc-btn::after{
 content:attr(data-tooltip);
@@ -211,11 +265,8 @@ transition:.2s;
 .qc-btn:hover::after{opacity:1}
 
 @media (hover: none){
-  .qc-btn::after{
-    display:none !important;
-  }
+  .qc-btn::after{display:none !important;}
 }
-
 
 @keyframes shake{
 0%,90%,100%{transform:translateX(0)}
@@ -385,20 +436,7 @@ padding:25px;
 font-size:14px
 }
 
-.search-box{
-  max-width:400px;
-  margin:20px auto;
-  text-align:center;
-}
-
-.search-box input{
-  width:100%;
-  padding:10px 14px;
-  border-radius:20px;
-  border:1px solid #ccc;
-  font-size:15px;
-}
-
+/* TOAST */
 #toast{
   position:fixed;
   bottom:90px;
@@ -414,118 +452,4 @@ font-size:14px
   font-size:14px;
 }
 
-#toast.show{
-  opacity:1;
-}
-
-.backtop{
-  background:#ff9800;
-  color:white;
-  font-size:22px;
-  font-weight:bold;
-  display:none;
-  cursor:pointer;
-}
-
-.badge{
-  position:absolute;
-  top:12px;
-  right:12px;
-  background:#e53935;
-  color:white;
-  padding:4px 10px;
-  border-radius:12px;
-  font-size:13px;
-  font-weight:bold;
-  box-shadow:0 2px 6px rgba(0,0,0,.2);
-}
-.product{
-  position:relative;
-}
-
-.price-box{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin:8px 0 12px;
-}
-
-.old-price{
-  text-decoration:line-through;
-  color:#999;
-  font-size:14px;
-}
-
-.new-price{
-  color:#e53935;
-  font-size:20px;
-  font-weight:bold;
-}
-
-.discount{
-  background:#ff5252;
-  color:white;
-  font-size:12px;
-  padding:2px 6px;
-  border-radius:6px;
-}
-
-.product-actions{
-  display:flex;
-  gap:10px;
-}
-
-.btn-detail{
-  background:#2b6cff;
-  color:white;
-  padding:8px 14px;
-  border-radius:18px;
-  text-decoration:none;
-  font-size:14px;
-}
-
-.btn-add{
-  background:#9c27b0;
-  color:white;
-  padding:8px 14px;
-  border-radius:18px;
-  border:none;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.price-sale{
-  display:grid;
-  grid-template-columns:auto auto;
-  grid-template-rows:auto auto;
-  column-gap:6px;
-  row-gap:2px;
-  margin:4px 0 10px;
-  align-items:center;
-}
-
-.price-sale .old{
-  grid-column:1;
-  grid-row:1;
-  color:#999;
-  font-size:13px;
-  text-decoration:line-through;
-}
-
-.price-sale .percent{
-  grid-column:2;
-  grid-row:1;
-  background:#ff3b3b;
-  color:white;
-  font-size:12px;
-  padding:2px 6px;
-  border-radius:6px;
-}
-
-.price-sale .new{
-  grid-column:1 / span 2;
-  grid-row:2;
-  color:#000;
-  font-size:20px;
-  font-weight:800;
-}
+#toast.show{opacity:1;}
