@@ -32,7 +32,10 @@ line-height:1.6
 }
 
 
-.header-inner img{height:64px}
+.header-inner img{
+  height:72px;
+}
+
 
 .header-text h1{
   margin:0;
@@ -605,7 +608,7 @@ cursor:pointer;
 }
 
 .logo-link img{
-  height:48px;
+  height:72px;
 }
 
 .header-nav{
