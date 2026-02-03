@@ -590,3 +590,41 @@ cursor:pointer;
 .footer-links a:hover{
   color:white;
 }
+
+
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo-link img{
+  height:48px;
+}
+
+.header-nav{
+  display:flex;
+  gap:20px;
+}
+
+.header-nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  padding:6px 12px;
+  border-radius:8px;
+}
+
+.header-nav a:hover{
+  background:rgba(255,255,255,.2);
+}
+
+.header-nav a.active{
+  background:rgba(255,255,255,.35);
+}
