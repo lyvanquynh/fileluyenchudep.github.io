@@ -58,19 +58,21 @@ function renderCart(){
   let total=0
 
   cart.forEach((item,i)=>{
-    total += item.price * item.qty
+    total += item.price
 
     const li=document.createElement("li")
     li.innerHTML=`
-  <span class="cart-item-name">${item.name}</span>
-  <span class="cart-price">${item.price.toLocaleString()}đ</span>
-  <button class="cart-remove" onclick="removeItem(${i})">🗑</button>
-`
+      <span class="cart-item-name">${item.name}</span>
+      <span class="cart-price">${item.price.toLocaleString()}đ</span>
+      <button class="cart-remove" onclick="removeItem(${i})">🗑</button>
+    `
     list.appendChild(li)
   })
 
-  totalEl.textContent=total.toLocaleString()
+  totalEl.textContent = total.toLocaleString()
 }
+
+
 
 
 function openPay(){
