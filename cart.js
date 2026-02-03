@@ -5,12 +5,18 @@ localStorage.setItem("cart", JSON.stringify(cart))
 }
 
 function addToCart(name, price){
-cart.push({name, price})
-saveCart()
-updateCartCount()
-renderCart()
-showToast("Đã thêm " + name + " vào giỏ")
+  const found = cart.find(i => i.name === name)
+  if(found){
+    found.qty++
+  }else{
+    cart.push({name, price, qty:1})
+  }
+  saveCart()
+  updateCartCount()
+  renderCart()
+  showToast("Đã thêm " + name + " vào giỏ")
 }
+
 
 function removeItem(index){
 cart.splice(index,1)
@@ -29,8 +35,16 @@ renderCart()
 }
 
 function updateCartCount(){
-document.getElementById("cart-count").textContent = cart.length
+  let count = 0
+  let total = 0
+  cart.forEach(i=>{
+    count += i.qty
+    total += i.price * i.qty
+  })
+  document.getElementById("cart-count").textContent = count
+  document.getElementById("cart-total-mini").textContent = total.toLocaleString()+"đ"
 }
+
 
 function openCart(){
 document.getElementById("cart-box").style.display="none"
@@ -43,18 +57,30 @@ document.getElementById("cart-box-full").style.display="none"
 }
 
 function renderCart(){
-const list=document.getElementById("cart-items")
-const totalEl=document.getElementById("cart-total")
-list.innerHTML=""
-let total=0
-cart.forEach((item,i)=>{
-total+=item.price
-const li=document.createElement("li")
-li.innerHTML=item.name+"<span>"+item.price.toLocaleString()+"đ</span><button onclick='removeItem("+i+")'>×</button>"
-list.appendChild(li)
-})
-totalEl.textContent=total.toLocaleString()
+  const list=document.getElementById("cart-items")
+  const totalEl=document.getElementById("cart-total")
+  list.innerHTML=""
+  let total=0
+
+  cart.forEach((item,i)=>{
+    total += item.price * item.qty
+
+    const li=document.createElement("li")
+    li.innerHTML=`
+      <span class="cart-item-name">${item.name}</span>
+      <div class="cart-qty">
+        <button onclick="changeQty(${i},-1)">-</button>
+        <span>${item.qty}</span>
+        <button onclick="changeQty(${i},1)">+</button>
+      </div>
+      <span class="cart-price">${(item.price*item.qty).toLocaleString()}đ</span>
+    `
+    list.appendChild(li)
+  })
+
+  totalEl.textContent=total.toLocaleString()
 }
+
 
 function openPay(){
 if(cart.length==0){alert("Giỏ hàng trống");return}
@@ -117,3 +143,12 @@ if(backToTop){
   });
 }
 
+function changeQty(index,delta){
+  cart[index].qty += delta
+  if(cart[index].qty <= 0){
+    cart.splice(index,1)
+  }
+  saveCart()
+  updateCartCount()
+  renderCart()
+}

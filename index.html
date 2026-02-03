@@ -349,16 +349,19 @@
 <a href="https://m.me/chipquantu.90" target="_blank" class="qc-btn messenger" data-tooltip="Messenger"><img src="icons/messenger.png"></a>
 </div>
 
-<div id="cart-box" onclick="openCart()"><div id="cart-count">0</div>🛒</div>
+<div id="cart-box" onclick="openCart()">
+  <span class="cart-icon">🛒</span>
+  <span id="cart-total-mini">0đ</span>
+  <span id="cart-count">0</span>
+</div>
+
 
 <div id="cart-box-full" style="display:none">
 <div id="cart-box-full-inner">
 <div id="cart-header"><b>🛒 Giỏ hàng</b><button onclick="toggleCart()">➖</button></div>
 <ul id="cart-items"></ul>
-<p><b>Tổng:</b> <span id="cart-total">0</span>đ</p>
-<div class="cart-buttons">
-<button onclick="clearCart()">Xóa</button>
-<button onclick="openPay()">Thanh toán</button>
+<p class="cart-sum">Tổng cộng: <span id="cart-total">0</span> đ</p>
+<button class="pay-btn" onclick="openPay()">Thanh toán ngay</button>
 </div>
 </div>
 </div>
