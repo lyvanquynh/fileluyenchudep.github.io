@@ -631,3 +631,47 @@ cursor:pointer;
 .header-nav a.active{
   background:rgba(255,255,255,.35);
 }
+
+/* ================= MOBILE HEADER ================= */
+@media (max-width: 768px){
+
+  .header-inner{
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
+  .header-left{
+    width: 100%;
+  }
+
+  .logo-link img{
+    height: 44px; /* thu nhỏ logo */
+  }
+
+  .header-text h1{
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .header-text p{
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .header-nav{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .header-nav a{
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+}
