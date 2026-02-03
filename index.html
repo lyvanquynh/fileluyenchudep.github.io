@@ -352,16 +352,23 @@
 <div id="cart-box" onclick="openCart()"><div id="cart-count">0</div>🛒</div>
 
 <div id="cart-box-full" style="display:none">
-<div id="cart-box-full-inner">
-<div id="cart-header"><b>🛒 Giỏ hàng</b><button onclick="toggleCart()">➖</button></div>
-<ul id="cart-items"></ul>
-<p><b>Tổng:</b> <span id="cart-total">0</span>đ</p>
-<div class="cart-buttons">
-<button onclick="clearCart()">Xóa</button>
-<button onclick="openPay()">Thanh toán</button>
+  <div class="cart-popup">
+    <div class="cart-popup-header">
+      <b>Giỏ hàng (<span id="cart-count-text">0</span>)</b>
+      <span class="cart-close" onclick="toggleCart()">×</span>
+    </div>
+
+    <div id="cart-items"></div>
+
+    <div class="cart-total-row">
+      <span>Tổng cộng:</span>
+      <span id="cart-total">0</span> đ
+    </div>
+
+    <button class="cart-pay-btn" onclick="openPay()">Thanh toán ngay</button>
+  </div>
 </div>
-</div>
-</div>
+
 
 <div id="pay-modal">
 <div id="pay-content">
