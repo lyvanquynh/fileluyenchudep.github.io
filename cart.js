@@ -88,12 +88,22 @@ function renderCart(){
 
 
 function openPay(){
-if(cart.length==0){alert("Giỏ hàng trống");return}
-let total=cart.reduce((s,i)=>s+i.price,0)
-document.getElementById("pay-amount").innerText="Số tiền cần thanh toán: "+total.toLocaleString()+"đ"
-document.getElementById("pay-text").innerText="Hãy chuyển khoản đúng số tiền ở trên.\nSau đó chụp lại bill thanh toán và gửi đến Zalo: 0977 727 089 để xác nhận đơn hàng."
-document.getElementById("pay-modal").style.display="flex"
+  if(cart.length==0){
+    alert("Giỏ hàng trống")
+    return
+  }
+
+  let total = cart.reduce((s,i)=> s + (i.price * i.qty), 0)
+
+  document.getElementById("pay-amount").innerText =
+    "Số tiền cần thanh toán: " + total.toLocaleString() + "đ"
+
+  document.getElementById("pay-text").innerText =
+    "Hãy chuyển khoản đúng số tiền ở trên.\nSau đó chụp lại bill thanh toán và gửi đến Zalo: 0977 727 089 để xác nhận đơn hàng."
+
+  document.getElementById("pay-modal").style.display="flex"
 }
+
 
 function closePay(){
 document.getElementById("pay-modal").style.display="none"
