@@ -17,6 +17,13 @@ function addToCart(name, price){
   showToast("Đã thêm " + name + " vào giỏ")
 }
 
+function removeItem(index){
+  cart.splice(index,1)
+  saveCart()
+  updateCartCount()
+  renderCart()
+}
+
 function changeQty(index, delta){
   cart[index].qty += delta
   if(cart[index].qty<=0){
@@ -30,7 +37,8 @@ function changeQty(index, delta){
 function updateCartCount(){
   let totalQty = cart.reduce((s,i)=>s+i.qty,0)
   document.getElementById("cart-count").textContent = totalQty
-  document.getElementById("cart-count-text").textContent = totalQty
+  const txt = document.getElementById("cart-count-text")
+  if(txt) txt.textContent = totalQty
 }
 
 function openCart(){
@@ -60,6 +68,7 @@ function renderCart(){
             <button onclick="changeQty(${i},-1)">-</button>
             <span>${item.qty}</span>
             <button onclick="changeQty(${i},1)">+</button>
+            <span class="cart-remove" onclick="removeItem(${i})">🗑</span>
           </div>
         </div>
         <div class="cart-price">${(item.price*item.qty).toLocaleString()} đ</div>
@@ -68,6 +77,27 @@ function renderCart(){
   })
 
   totalEl.textContent = total.toLocaleString()
+}
+
+function openPay(){
+  if(cart.length==0){alert("Giỏ hàng trống");return}
+  let total=cart.reduce((s,i)=>s+i.price*i.qty,0)
+  document.getElementById("pay-amount").innerText="Số tiền cần thanh toán: "+total.toLocaleString()+"đ"
+  document.getElementById("pay-text").innerText="Hãy chuyển khoản đúng số tiền ở trên.\nSau đó chụp lại bill thanh toán và gửi đến Zalo: 0977 727 089 để xác nhận đơn hàng."
+  document.getElementById("pay-modal").style.display="flex"
+}
+
+function closePay(){
+  document.getElementById("pay-modal").style.display="none"
+}
+
+function showToast(text){
+  const toast = document.getElementById("toast")
+  toast.innerText = text
+  toast.classList.add("show")
+  setTimeout(()=>{
+    toast.classList.remove("show")
+  },2000)
 }
 
 updateCartCount()
