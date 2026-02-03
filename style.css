@@ -554,9 +554,10 @@ cursor:pointer;
 }
 
 .cart-price{
-  color:red;
-  font-weight:bold;
+  color:#555;
+  font-weight:600;
 }
+
 
 .cart-sum{
   text-align:right;
@@ -607,13 +608,21 @@ cursor:pointer;
 }
 
 .cart-remove{
-  background:none;
-  border:none;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:1px solid #ccc;
+  background:#f2f2f2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   cursor:pointer;
-  font-size:16px;
-  color:#999;
+  font-size:15px;
+  color:#555;
 }
 
 .cart-remove:hover{
-  color:red;
+  background:#e0e0e0;
+  color:#333;
 }
+
