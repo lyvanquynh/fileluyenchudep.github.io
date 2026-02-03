@@ -5,17 +5,13 @@ localStorage.setItem("cart", JSON.stringify(cart))
 }
 
 function addToCart(name, price){
-  const found = cart.find(i => i.name === name)
-  if(found){
-    found.qty++
-  }else{
-    cart.push({name, price, qty:1})
-  }
+  cart.push({name, price})
   saveCart()
   updateCartCount()
   renderCart()
   showToast("Đã thêm " + name + " vào giỏ")
 }
+
 
 
 function removeItem(index){
@@ -35,15 +31,14 @@ renderCart()
 }
 
 function updateCartCount(){
-  let count = 0
   let total = 0
   cart.forEach(i=>{
-    count += i.qty
-    total += i.price * i.qty
+    total += i.price
   })
-  document.getElementById("cart-count").textContent = count
+  document.getElementById("cart-count").textContent = cart.length
   document.getElementById("cart-total-mini").textContent = total.toLocaleString()+"đ"
 }
+
 
 
 function openCart(){
@@ -68,18 +63,9 @@ function renderCart(){
     const li=document.createElement("li")
     li.innerHTML=`
   <span class="cart-item-name">${item.name}</span>
-
-  <div class="cart-qty-box">
-    <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
-    <span class="qty-num">${item.qty}</span>
-    <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
-  </div>
-
-  <span class="cart-price">${(item.price*item.qty).toLocaleString()}đ</span>
-
+  <span class="cart-price">${item.price.toLocaleString()}đ</span>
   <button class="cart-remove" onclick="removeItem(${i})">🗑</button>
 `
-
     list.appendChild(li)
   })
 
@@ -93,7 +79,7 @@ function openPay(){
     return
   }
 
-  let total = cart.reduce((s,i)=> s + (i.price * i.qty), 0)
+  let total = cart.reduce((s,i)=> s + i.price, 0)
 
   document.getElementById("pay-amount").innerText =
     "Số tiền cần thanh toán: " + total.toLocaleString() + "đ"
@@ -158,12 +144,3 @@ if(backToTop){
   });
 }
 
-function changeQty(index,delta){
-  cart[index].qty += delta
-  if(cart[index].qty <= 0){
-    cart.splice(index,1)
-  }
-  saveCart()
-  updateCartCount()
-  renderCart()
-}
