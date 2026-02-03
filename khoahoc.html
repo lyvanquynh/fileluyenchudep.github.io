@@ -2,40 +2,102 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Khóa học luyện chữ đẹp trên iPad – BaolongEdu</title>
+<title>Khóa học Procreate – BaolongEdu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Khóa học luyện chữ đẹp & thiết kế file vở in ấn trên iPad bằng Procreate.">
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* === STYLE RIÊNG CHO TRANG KHÓA HỌC === */
-.course-block{
-  background:#fff;
-  border-radius:20px;
-  padding:30px 20px;
-  margin-bottom:25px;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
+/* ===== STYLE RIÊNG CHO TRANG KHÓA HỌC ===== */
+.course-wrapper{
+  max-width:1200px;
+  margin:40px auto;
+  padding:0 15px;
+}
+
+.course-card{
+  background:white;
+  border-radius:24px;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  padding:30px 25px;
+  margin-bottom:40px;
+}
+
+.course-card.course2{
+  background:#f1f7ff;
+}
+
+.course-title{
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.course-title h2{
+  color:#2b7cff;
+  margin-bottom:6px;
+}
+
+.course-title p{
+  color:#555;
+  margin:0;
 }
 
 .course-image{
   text-align:center;
-  margin:15px 0 20px;
+  margin:20px 0;
 }
+
 .course-image img{
   max-width:100%;
-  border-radius:16px;
+  border-radius:18px;
   box-shadow:0 6px 20px rgba(0,0,0,.15);
 }
 
-/* chia 2 cột */
-.two-col{
+.course-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:20px;
+  gap:24px;
+  margin-top:20px;
+}
+
+.course-box{
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 4px 14px rgba(0,0,0,.08);
+}
+
+.course-box h3{
+  color:#2b7cff;
+  margin-top:0;
+  margin-bottom:12px;
+  text-align:center;
+}
+
+.course-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.course-list li{
+  margin:8px 0;
+  padding-left:22px;
+  position:relative;
+  line-height:1.5;
+}
+
+.course-list li::before{
+  content:"✔";
+  position:absolute;
+  left:0;
+  color:#2b7cff;
+  font-weight:bold;
 }
 
 @media(max-width:768px){
-  .two-col{grid-template-columns:1fr}
+  .course-grid{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -44,7 +106,6 @@
 
 <header class="main-header">
   <div class="header-inner">
-
     <div class="header-left">
       <a href="index.html" class="logo-link">
         <img src="logo.png" alt="Logo">
@@ -61,118 +122,95 @@
       <a href="khoahoc.html" class="active">Khóa học</a>
       <a href="contact.html">Liên hệ</a>
     </nav>
-
   </div>
 </header>
 
 <section class="hero">
-  <h2>Khóa học luyện chữ đẹp & thiết kế file vở in ấn trên iPad</h2>
-  <p>Học Procreate – áp dụng ngay vào luyện chữ, giảng dạy và thiết kế tài liệu</p>
+  <h2>Khóa học luyện chữ & thiết kế file vở trên iPad</h2>
+  <p>Học Procreate – áp dụng vào luyện chữ, giảng dạy và thiết kế tài liệu</p>
   <a href="https://zalo.me/0977727089" target="_blank">Đăng ký tư vấn</a>
 </section>
 
-<section class="section course-block">
-  <div class="block-title">
-    <h2>KHÓA 1 – Thực hành luyện viết chữ đẹp trên iPad</h2>
-    <p>Giúp học viên sử dụng thành thạo Procreate và ứng dụng hiệu quả vào luyện chữ và giảng dạy</p>
-  </div>
+<div class="course-wrapper">
 
-  <!-- ẢNH KHÓA 1 -->
-  <div class="course-image">
-    <img src="images/khoa1.png" alt="Khóa 1 Procreate">
-  </div>
-
-  <div class="features">
-    <div class="feature">✔ Sử dụng Procreate từ cơ bản đến ứng dụng</div>
-    <div class="feature">✔ Thực hành luyện viết chữ đẹp trên iPad</div>
-    <div class="feature">✔ Sửa bài, nhận xét bài học sinh trực tiếp trên iPad</div>
-    <div class="feature">✔ Tạo và tinh chỉnh Brush phục vụ luyện chữ</div>
-    <div class="feature">✔ Hoàn thiện bài viết, xuất ảnh và video luyện viết</div>
-  </div>
-
-  <div class="two-col" style="margin-top:20px">
-
-    <div>
-      <div class="block-title">
-        <h2>Tài nguyên tặng kèm khóa 1</h2>
-      </div>
-      <div class="features">
-        <div class="feature">🎁 300+ Brush độc quyền (nét thanh đậm, nhũ, kim tuyến, bảng, vân giấy)</div>
-        <div class="feature">📝 Bộ file luyện chữ chuẩn, chữ nhỡ, chữ nhỏ</div>
-        <div class="feature">✨ Bộ file luyện chữ sáng tạo</div>
-        <div class="feature">🖋 Bộ file luyện chữ Calligraphy</div>
-      </div>
+  <!-- ================= KHÓA 1 ================= -->
+  <div class="course-card">
+    <div class="course-title">
+      <h2>KHÓA 1 – Thực hành luyện viết chữ đẹp trên iPad</h2>
+      <p>Giúp học viên sử dụng thành thạo Procreate và ứng dụng hiệu quả vào luyện chữ và giảng dạy</p>
     </div>
 
-    <div>
-      <div class="block-title">
-        <h2>Quyền lợi khóa 1</h2>
+    <div class="course-image">
+      <img src="images/khoa1.png" alt="Khóa 1">
+    </div>
+
+    <div class="course-grid">
+
+      <div class="course-box">
+        <h3>Nội dung học</h3>
+        <ul class="course-list">
+          <li>Sử dụng Procreate từ cơ bản đến ứng dụng</li>
+          <li>Thực hành luyện viết chữ đẹp trên iPad</li>
+          <li>Sửa bài, nhận xét bài học sinh trực tiếp trên iPad</li>
+          <li>Tạo và tinh chỉnh Brush phục vụ luyện chữ</li>
+          <li>Hoàn thiện bài viết, xuất ảnh và video luyện viết</li>
+        </ul>
       </div>
-      <div class="features">
-        <div class="feature">✔ Học không giới hạn thời gian</div>
-        <div class="feature">✔ Lộ trình rõ ràng, dễ học</div>
-        <div class="feature">✔ Cập nhật tài nguyên mới miễn phí</div>
+
+      <div class="course-box">
+        <h3>Tài nguyên & Quyền lợi</h3>
+        <ul class="course-list">
+          <li>300+ Brush độc quyền (nét thanh đậm, nhũ, kim tuyến, bảng, vân giấy)</li>
+          <li>Bộ file luyện chữ chuẩn, chữ nhỡ, chữ nhỏ</li>
+          <li>Bộ file luyện chữ sáng tạo và Calligraphy</li>
+          <li>Học không giới hạn thời gian</li>
+          <li>Lộ trình rõ ràng, dễ học</li>
+          <li>Cập nhật tài nguyên mới miễn phí</li>
+        </ul>
       </div>
-    </div>
 
-  </div>
-</section>
-
-<section class="section course-block" style="background:#f0f7ff">
-  <div class="block-title">
-    <h2>KHÓA 2 – Thiết kế file vở in ấn trên iPad</h2>
-    <p>Nâng cao kỹ năng thiết kế phục vụ giảng dạy và kinh doanh tài liệu luyện chữ</p>
-  </div>
-
-  <!-- ẢNH KHÓA 2 -->
-  <div class="course-image">
-    <img src="images/khoa2.png" alt="Khóa 2 Procreate">
-  </div>
-
-  <div class="features">
-    <div class="feature">✔ Tạo ô li chuẩn, ô li sáng tạo, ô li Calligraphy</div>
-    <div class="feature">✔ Thiết kế file vở in nhiều trang chất lượng cao</div>
-    <div class="feature">✔ Dàn trang, bố cục khoa học, dễ học</div>
-    <div class="feature">✔ Xuất file in phục vụ giảng dạy và phát hành</div>
-  </div>
-
-  <div class="block-title" style="margin-top:20px">
-    <h2>Tài nguyên tặng kèm khóa 2</h2>
-  </div>
-
-  <div class="features">
-    <div class="feature">🎁 Bộ Brush bảng chữ chuẩn – sáng tạo – Calligraphy (không watermark)</div>
-    <div class="feature">📘 Bộ giáo án luyện chữ đẹp 32 tiết</div>
-    <div class="feature">📝 File giáo án gắn tên học viên, sẵn sàng sử dụng</div>
-  </div>
-
-  <div class="block-title" style="margin-top:20px">
-    <h2>Quyền lợi khóa 2</h2>
-  </div>
-
-  <div class="features">
-    <div class="feature">✔ Tham gia nhóm học viên riêng</div>
-    <div class="feature">✔ Vừa học vừa áp dụng ngay</div>
-    <div class="feature">✔ Cập nhật tài nguyên sớm nhất từ BaolongEdu</div>
-  </div>
-
-</section>
-
-<section class="section course-block">
-  <div class="block-title">
-    <h2>Đăng ký tham gia khóa học</h2>
-    <p>Nhận tư vấn chi tiết và ưu đãi học phí</p>
-  </div>
-
-  <div class="features">
-    <div class="feature">
-      👉 <a href="https://zalo.me/0977727089" target="_blank" style="color:#2b7cff;font-weight:bold;text-decoration:none;">Chat Zalo tư vấn ngay</a>
-    </div>
-    <div class="feature">
-      👉 <a href="https://m.me/chipquantu.90" target="_blank" style="color:#2b7cff;font-weight:bold;text-decoration:none;">Chat Messenger</a>
     </div>
   </div>
-</section>
+
+  <!-- ================= KHÓA 2 ================= -->
+  <div class="course-card course2">
+    <div class="course-title">
+      <h2>KHÓA 2 – Thiết kế file vở in ấn trên iPad</h2>
+      <p>Nâng cao kỹ năng thiết kế phục vụ giảng dạy và kinh doanh tài liệu luyện chữ</p>
+    </div>
+
+    <div class="course-image">
+      <img src="images/khoa2.png" alt="Khóa 2">
+    </div>
+
+    <div class="course-grid">
+
+      <div class="course-box">
+        <h3>Nội dung học</h3>
+        <ul class="course-list">
+          <li>Tạo ô li chuẩn, ô li sáng tạo, ô li Calligraphy</li>
+          <li>Thiết kế file vở in nhiều trang chất lượng cao</li>
+          <li>Dàn trang, bố cục khoa học, dễ học</li>
+          <li>Xuất file in phục vụ giảng dạy và phát hành</li>
+        </ul>
+      </div>
+
+      <div class="course-box">
+        <h3>Tài nguyên & Quyền lợi</h3>
+        <ul class="course-list">
+          <li>Bộ Brush bảng chữ chuẩn – sáng tạo – Calligraphy (không watermark)</li>
+          <li>Bộ giáo án luyện chữ đẹp 32 tiết</li>
+          <li>File giáo án gắn tên học viên, sẵn sàng sử dụng</li>
+          <li>Tham gia nhóm học viên riêng</li>
+          <li>Vừa học vừa áp dụng ngay</li>
+          <li>Cập nhật tài nguyên sớm nhất từ BaolongEdu</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
 
 <footer class="site-footer">
   <div class="footer-links">
@@ -181,7 +219,6 @@
     <a href="huongdan.html">Hướng dẫn mua hàng</a>
     <a href="contact.html">Liên hệ & Hỗ trợ</a>
   </div>
-
   <p><b>BaolongEdu – File Luyện Chữ Đẹp</b></p>
   <p>Hỗ trợ: Zalo 0977 727 089 | Messenger Facebook</p>
   <p>© 2026 fileluyenchudep.site – All rights reserved</p>
