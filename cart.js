@@ -67,14 +67,19 @@ function renderCart(){
 
     const li=document.createElement("li")
     li.innerHTML=`
-      <span class="cart-item-name">${item.name}</span>
-      <div class="cart-qty">
-        <button onclick="changeQty(${i},-1)">-</button>
-        <span>${item.qty}</span>
-        <button onclick="changeQty(${i},1)">+</button>
-      </div>
-      <span class="cart-price">${(item.price*item.qty).toLocaleString()}đ</span>
-    `
+  <span class="cart-item-name">${item.name}</span>
+
+  <div class="cart-qty-box">
+    <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+    <span class="qty-num">${item.qty}</span>
+    <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+  </div>
+
+  <span class="cart-price">${(item.price*item.qty).toLocaleString()}đ</span>
+
+  <button class="cart-remove" onclick="removeItem(${i})">🗑</button>
+`
+
     list.appendChild(li)
   })
 
