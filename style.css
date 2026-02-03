@@ -381,16 +381,6 @@ align-items:center;
 margin-bottom:4px;
 }
 
-#cart-items button{
-background:red;
-color:white;
-border:none;
-border-radius:50%;
-width:20px;
-height:20px;
-cursor:pointer;
-}
-
 .cart-buttons{
 display:flex;
 gap:6px;
