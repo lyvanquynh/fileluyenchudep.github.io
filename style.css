@@ -346,104 +346,65 @@ justify-content:center;
 }
 
 /* ================= CART FULL ================= */
-.cart-popup{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  width:360px;
-  background:white;
-  border-radius:18px;
-  box-shadow:0 8px 25px rgba(0,0,0,.25);
-  padding:14px;
-  z-index:999;
+#cart-box-full-inner{
+position:fixed;
+right:20px;
+bottom:20px;
+background:white;
+width:260px;
+box-shadow:0 4px 12px rgba(0,0,0,.2);
+border-radius:12px;
+padding:12px;
+z-index:999;
+font-size:14px;
 }
 
-.cart-popup-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:18px;
-  margin-bottom:10px;
+#cart-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:6px;
 }
 
-.cart-close{
-  cursor:pointer;
-  font-size:22px;
+#cart-items{
+list-style:none;
+padding:0;
+margin:0 0 10px;
+max-height:200px;
+overflow:auto;
 }
 
-.cart-item{
-  display:flex;
-  gap:10px;
-  margin-bottom:12px;
-  align-items:center;
+#cart-items li{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:4px;
 }
 
-.cart-item img{
-  width:50px;
-  height:50px;
-  object-fit:cover;
-  border-radius:8px;
-  background:#f2f2f2;
+#cart-items button{
+background:red;
+color:white;
+border:none;
+border-radius:50%;
+width:20px;
+height:20px;
+cursor:pointer;
 }
 
-.cart-item-info{
-  flex:1;
+.cart-buttons{
+display:flex;
+gap:6px;
 }
 
-.cart-item-name{
-  font-size:14px;
-  margin-bottom:4px;
+.cart-buttons button{
+flex:1;
+background:var(--main-color);
+color:white;
+border:none;
+border-radius:6px;
+padding:6px;
+cursor:pointer;
 }
-
-.cart-qty{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.cart-qty button{
-  width:26px;
-  height:26px;
-  border:none;
-  background:#eee;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.cart-remove{
-  cursor:pointer;
-  font-size:18px;
-  color:#999;
-  margin-left:6px;
-}
-
-.cart-price{
-  color:red;
-  font-weight:bold;
-  font-size:15px;
-}
-
-.cart-total-row{
-  display:flex;
-  justify-content:space-between;
-  font-weight:bold;
-  margin:12px 0;
-  font-size:16px;
-}
-
-.cart-pay-btn{
-  width:100%;
-  background:#ff3b30;
-  color:white;
-  border:none;
-  border-radius:12px;
-  padding:12px;
-  font-size:16px;
-  cursor:pointer;
-}
-
-
 
 /* ================= POPUP QR ================= */
 #pay-modal{
