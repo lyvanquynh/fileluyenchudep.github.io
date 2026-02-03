@@ -4,12 +4,12 @@ function saveCart(){
   localStorage.setItem("cart", JSON.stringify(cart))
 }
 
-function addToCart(name, price){
+function addToCart(name, price, img){
   let item = cart.find(i=>i.name===name)
   if(item){
     item.qty++
   }else{
-    cart.push({name, price, qty:1, img:"images/no-image.png"})
+    cart.push({name, price, qty:1, img:img})
   }
   saveCart()
   updateCartCount()
