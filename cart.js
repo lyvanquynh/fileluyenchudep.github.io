@@ -147,11 +147,51 @@ function openPay(){
     showToast("Đã copy nội dung đơn")
   }
 
-  document.getElementById("pay-modal").style.display="flex"
-}
+const cartBox = document.getElementById("cart-box")
+const payContent = document.getElementById("pay-content")
+
+const rect = cartBox.getBoundingClientRect()
+const centerX = window.innerWidth / 2
+const centerY = window.innerHeight / 2
+
+const startX = rect.left + rect.width / 2
+const startY = rect.top + rect.height / 2
+
+const dx = startX - centerX
+const dy = startY - centerY
+
+payContent.style.transform = `translate(${dx}px, ${dy}px) scale(0.1)`
+payContent.style.opacity = "0"
+
+document.getElementById("pay-modal").style.display="flex"
+
+requestAnimationFrame(()=>{
+  payContent.style.transform = "translate(0,0) scale(1)"
+  payContent.style.opacity = "1"
+})
 
 function closePay(){
-  document.getElementById("pay-modal").style.display="none"
+  const cartBox = document.getElementById("cart-box")
+  const payContent = document.getElementById("pay-content")
+
+  const rect = cartBox.getBoundingClientRect()
+  const centerX = window.innerWidth / 2
+  const centerY = window.innerHeight / 2
+
+  const endX = rect.left + rect.width / 2
+  const endY = rect.top + rect.height / 2
+
+  const dx = endX - centerX
+  const dy = endY - centerY
+
+  payContent.style.transform = `translate(${dx}px, ${dy}px) scale(0.1)`
+  payContent.style.opacity = "0"
+
+  setTimeout(()=>{
+    document.getElementById("pay-modal").style.display="none"
+    payContent.style.transform = "translate(0,0) scale(1)"
+    payContent.style.opacity = "1"
+  },300)
 }
 
 updateCartCount()
