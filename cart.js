@@ -106,14 +106,20 @@ function openPay(){
   let itemsHTML = ""
   let orderText = "Đơn hàng:\n"
 
-  cart.forEach(item=>{
+  cart.forEach((item,i)=>{
     const lineTotal = item.price * item.qty
     total += lineTotal
 
     itemsHTML += `
-      <li>
+      <li style="border-bottom:1px dashed #ddd;padding-bottom:6px;margin-bottom:6px">
         <div><b>${item.name}</b></div>
-        <div>${item.price.toLocaleString()}đ x ${item.qty} = <b>${lineTotal.toLocaleString()}đ</b></div>
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          <button onclick="changeQty(${i},-1)">➖</button>
+          <b>${item.qty}</b>
+          <button onclick="changeQty(${i},1)">➕</button>
+          <span>${item.price.toLocaleString()}đ x ${item.qty} = <b>${lineTotal.toLocaleString()}đ</b></span>
+          <button onclick="removeItemInPay(${i})" style="color:red">❌</button>
+        </div>
       </li>
     `
 
@@ -167,6 +173,27 @@ if(searchInput){
       }
     })
   })
+}
+
+function changeQty(index, delta){
+  cart[index].qty += delta
+
+  if(cart[index].qty <= 0){
+    cart.splice(index,1)
+  }
+
+  saveCart()
+  updateCartCount()
+  renderCart()
+  openPay() // render lại popup
+}
+
+function removeItemInPay(index){
+  cart.splice(index,1)
+  saveCart()
+  updateCartCount()
+  renderCart()
+  openPay()
 }
 
 function showToast(text){
