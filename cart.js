@@ -169,6 +169,9 @@ requestAnimationFrame(()=>{
   payContent.style.transform = "translate(0,0) scale(1)"
   payContent.style.opacity = "1"
 })
+}   // ← ĐÓNG openPay Ở ĐÂY
+
+function closePay(){
 
 function closePay(){
   const cartBox = document.getElementById("cart-box")
