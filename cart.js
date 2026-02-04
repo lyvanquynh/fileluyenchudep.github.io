@@ -147,30 +147,17 @@ function openPay(){
     showToast("Đã copy nội dung đơn")
   }
 
-const cartBox = document.getElementById("cart-box")
 const payContent = document.getElementById("pay-content")
 
-const rect = cartBox.getBoundingClientRect()
-const centerX = window.innerWidth / 2
-const centerY = window.innerHeight / 2
-
-const startX = rect.left + rect.width / 2
-const startY = rect.top + rect.height / 2
-
-const dx = startX - centerX
-const dy = startY - centerY
-
-payContent.style.transform = `translate(${dx}px, ${dy}px) scale(0.1)`
-payContent.style.opacity = "0"
-
-// chuẩn bị trạng thái ban đầu
+// trạng thái ban đầu: nhỏ
 payContent.classList.add("zoom-from-cart")
 
 document.getElementById("pay-modal").style.display="flex"
 
-// ép browser nhận trạng thái ban đầu
+// ép browser render trạng thái ban đầu
 payContent.getBoundingClientRect()
 
+// animate ra
 requestAnimationFrame(()=>{
   payContent.classList.remove("zoom-from-cart")
 })
