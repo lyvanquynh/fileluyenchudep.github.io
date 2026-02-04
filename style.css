@@ -760,6 +760,8 @@ cursor:pointer;
   display:grid;
   grid-template-columns:1.2fr 1fr;
   gap:16px;
+  max-height:60vh;
+  overflow:hidden;
 }
 
 .pay-left h4{
@@ -770,6 +772,8 @@ cursor:pointer;
   list-style:none;
   padding:0;
   margin:0 0 10px;
+  max-height:40vh;
+  overflow-y:auto;
 }
 
 #pay-items li{
@@ -823,5 +827,16 @@ cursor:pointer;
 @media(max-width:600px){
   .pay-body{
     grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+  #pay-content{
+    max-height:90vh;
+    overflow:hidden;
+  }
+
+  #pay-items{
+    max-height:35vh;
   }
 }
