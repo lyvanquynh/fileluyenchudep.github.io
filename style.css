@@ -748,6 +748,11 @@ cursor:pointer;
   transition: transform .35s ease, opacity .35s ease;
 }
 
+#pay-content.zoom-from-cart{
+  transform: scale(0.1);
+  opacity:0;
+}
+
 .pay-header{
   font-size:20px;
   font-weight:700;
@@ -910,12 +915,4 @@ cursor:pointer;
   background:#ffd6d6;
 }
 
-/* ===== ANIMATION POPUP FROM CART ===== */
-
-
-/* trạng thái trước khi zoom */
-#pay-content.zoom-from-cart{
-  transform: scale(0.1);
-  opacity:0;
-}
 }
