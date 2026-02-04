@@ -121,6 +121,35 @@
   </div>
 
 </section>
+<div id="cart-box" onclick="openCart()">
+  <span class="cart-icon">🛒</span>
+  <span id="cart-total-mini">0đ</span>
+  <span id="cart-count">0</span>
+</div>
+
+<div id="cart-box-full" style="display:none">
+  <div id="cart-box-full-inner">
+    <div id="cart-header">
+      <b>🛒 Giỏ hàng</b>
+      <button onclick="toggleCart()">➖</button>
+    </div>
+    <ul id="cart-items"></ul>
+    <p class="cart-sum">Tổng cộng: <span id="cart-total">0</span> đ</p>
+    <button class="pay-btn" onclick="openPay()">Thanh toán ngay</button>
+  </div>
+</div>
+
+<div id="pay-modal">
+  <div id="pay-content">
+    <img src="qr.jpg" loading="lazy">
+    <div class="pay-amount" id="pay-amount"></div>
+    <p class="pay-guide" id="pay-text"></p>
+    <a href="qr.jpg" target="_blank" class="download-qr">📥 Mở ảnh QR (nhấn giữ để lưu)</a>
+    <button onclick="closePay()">Đóng</button>
+  </div>
+</div>
+
+<div id="toast"></div>
 
 <footer class="site-footer">
 
@@ -136,6 +165,6 @@
   <p>© 2026 fileluyenchudep.site – All rights reserved</p>
 
 </footer>
-
+<script src="cart.js" defer></script>
 </body>
 </html>
