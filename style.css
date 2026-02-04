@@ -442,7 +442,7 @@ cursor:pointer;
   background:rgba(0,0,0,.4);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  display:flex;
+  display:none;
   justify-content:center;
   align-items:flex-start;   /* không center theo chiều dọc */
   padding-top: env(safe-area-inset-top);
