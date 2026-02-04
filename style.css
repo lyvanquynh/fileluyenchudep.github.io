@@ -850,8 +850,12 @@ cursor:pointer;
 
   /* giới hạn chiều cao khối QR */
   .pay-right img{
-    max-width:200px;
-  }
+  max-width:160px;
+}
+
+  .pay-guide{
+  font-size:13px;
+}
 
   .pay-right{
     margin-top:8px;
