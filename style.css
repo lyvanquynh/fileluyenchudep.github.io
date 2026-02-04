@@ -834,19 +834,31 @@ cursor:pointer;
 @media(max-width:600px){
   .pay-body{
     grid-template-columns:1fr;
-    height:70vh;
+    height:85vh;   /* tăng chiều cao vùng thân popup */
+  }
+
+  .pay-left{
+    min-height:0;
+  }
+
+  /* danh sách sản phẩm chiếm nhiều không gian hơn */
+  #pay-items{
+    flex:1;
+    overflow-y:auto;
+    margin-bottom:6px;
+  }
+
+  /* giới hạn chiều cao khối QR */
+  .pay-right img{
+    max-width:200px;
   }
 
   .pay-right{
-    margin-top:10px;
-  }
-
-  #pay-items{
-    max-height:35vh;
+    margin-top:8px;
   }
 
   #pay-content{
-    max-height:90vh;
+    max-height:95vh;
     overflow:hidden;
   }
 }
