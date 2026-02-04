@@ -479,14 +479,14 @@ text-decoration:none;
 font-weight:600;
 }
 
-#pay-content button{
-margin-top:10px;
-background:var(--main-color);
-color:white;
-border:none;
-border-radius:6px;
-padding:8px 16px;
-cursor:pointer;
+#pay-content > button{
+  margin-top:10px;
+  background:var(--main-color);
+  color:white;
+  border:none;
+  border-radius:6px;
+  padding:8px 16px;
+  cursor:pointer;
 }
 
 /* ================= FOOTER ================= */
@@ -839,42 +839,6 @@ cursor:pointer;
   cursor:pointer;
 }
 
-/* MOBILE */
-@media(max-width:600px){
-  .pay-body{
-  grid-template-columns:1fr;
-  height:auto;
-}
-
-  .pay-left{
-    min-height:0;
-  }
-
-  /* danh sách sản phẩm chiếm nhiều không gian hơn */
-  #pay-items{
-    flex:1;
-    overflow-y:auto;
-    margin-bottom:6px;
-  }
-
-  /* giới hạn chiều cao khối QR */
-  .pay-right img{
-  max-width:160px;
-}
-
-  .pay-guide{
-  font-size:13px;
-}
-
-  .pay-right{
-    margin-top:8px;
-  }
-
-  #pay-content{
-  max-height: calc(100vh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-  overflow:auto;
-}
-
 /* nút - + nhỏ gọn */
 #pay-items .qty-btn{
   width:22px;
@@ -915,6 +879,44 @@ cursor:pointer;
   justify-content:center;
   cursor:pointer;
 }
+
+/* MOBILE */
+@media(max-width:600px){
+  .pay-body{
+  grid-template-columns:1fr;
+  height:auto;
+}
+
+  .pay-left{
+    min-height:0;
+  }
+
+  /* danh sách sản phẩm chiếm nhiều không gian hơn */
+  #pay-items{
+    flex:1;
+    overflow-y:auto;
+    margin-bottom:6px;
+  }
+
+  /* giới hạn chiều cao khối QR */
+  .pay-right img{
+  max-width:160px;
+}
+
+  .pay-guide{
+  font-size:13px;
+}
+
+  .pay-right{
+    margin-top:8px;
+  }
+
+  #pay-content{
+  max-height: calc(100vh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  overflow:auto;
+}
+
+
 
 #pay-items .qty-btn:hover{
   background:#eaeaea;
