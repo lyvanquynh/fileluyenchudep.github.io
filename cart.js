@@ -134,7 +134,7 @@ function openPay(){
 
   const text =
     "Hãy chuyển khoản đúng số tiền.\n" +
-    "Nội dung chuyển khoản: " + orderId + "\n" +
+    "Nhấn Copy nội dung đơn hàng"\n" +
     "Sau đó chụp bill và gửi Zalo: 0977 727 089"
 
   document.getElementById("pay-text").innerText = text
