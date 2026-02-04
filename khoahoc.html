@@ -137,7 +137,7 @@
 <span class="percent">-38%</span>
 <span class="new">999.000đ</span>
 </div>
-<button class="btn-cart" onclick="addToCartCourse('Khóa 1 - Luyện chữ iPad',999000)">Thêm giỏ</button>
+<button class="btn-cart" onclick="addToCart('Khóa 1 - Luyện chữ iPad',999000)">Thêm giỏ</button>
 </div>
 </div>
 
@@ -180,7 +180,8 @@
 <span class="percent">-33%</span>
 <span class="new">1.999.000đ</span>
 </div>
-<button class="btn-cart" onclick="addToCartCourse('Khóa 2 - Thiết kế file vở',1999000)">Thêm giỏ</button>
+<button class="btn-cart" onclick="addToCart('Khóa 2 - Thiết kế file vở',1999000)">Thêm giỏ</button>
+
 </div>
 </div>
 
@@ -199,7 +200,7 @@
 <span class="percent">-20%</span>
 <span class="new">2.399.000đ</span>
 </div>
-<button class="btn-cart" onclick="addToCartCourse('Combo 2 khóa Procreate',2399000)">Thêm giỏ</button>
+<button class="btn-cart" onclick="addToCart('Combo 2 khóa Procreate',2399000)">Thêm giỏ</button>
 </div>
 </div>
 
@@ -213,7 +214,7 @@
 <a href="https://m.me/chipquantu.90" target="_blank" class="qc-btn messenger"><img src="icons/messenger.png"></a>
 </div>
 
-<div id="cart-box" onclick="openCartCourse()">
+<div id="cart-box" onclick="openCart()">
 <span class="cart-icon">🛒</span>
 <span id="cart-total-mini">0đ</span>
 <span id="cart-count">0</span>
@@ -221,10 +222,10 @@
 
 <div id="cart-box-full" style="display:none">
 <div id="cart-box-full-inner">
-<div id="cart-header"><b>🛒 Giỏ khóa học</b><button onclick="toggleCartCourse()">➖</button></div>
+<div id="cart-header"><b>🛒 Giỏ hàng</b><button onclick="toggleCart()">➖</button></div>
 <ul id="cart-items"></ul>
 <p class="cart-sum">Tổng cộng: <span id="cart-total">0</span> đ</p>
-<button class="pay-btn" onclick="openPayCourse()">Thanh toán ngay</button>
+<button class="pay-btn" onclick="openPay()">Thanh toán ngay</button>
 </div>
 </div>
 
@@ -237,95 +238,7 @@
 </div>
 </div>
 
-<script>
-let cartCourse = JSON.parse(localStorage.getItem("cart_course")) || [];
 
-function saveCartCourse(){
-  localStorage.setItem("cart_course", JSON.stringify(cartCourse));
-  renderCartCourse();
-  showToast("Đã thêm vào giỏ hàng");
-}
-
-function addToCartCourse(name, price){
-  cartCourse.push({name, price});
-  saveCartCourse();
-}
-
-function removeItemCourse(index){
-  cartCourse.splice(index, 1);
-  saveCartCourse();
-}
-
-function renderCartCourse(){
-  let list = document.getElementById("cart-items");
-  list.innerHTML = "";
-  let total = 0;
-
-  cartCourse.forEach((item, i) => {
-    total += item.price;
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <span class="cart-item-name">${item.name}</span>
-      <span class="cart-price">${item.price.toLocaleString()}đ</span>
-      <button class="cart-remove" onclick="removeItemCourse(${i})">🗑</button>
-    `;
-    list.appendChild(li);
-  });
-
-  document.getElementById("cart-total").innerText = total.toLocaleString();
-  document.getElementById("cart-total-mini").innerText = total.toLocaleString() + "đ";
-  document.getElementById("cart-count").innerText = cartCourse.length;
-}
-
-function openCartCourse(){
-  document.getElementById("cart-box").style.display = "none";
-  document.getElementById("cart-box-full").style.display = "block";
-}
-
-function toggleCartCourse(){
-  document.getElementById("cart-box").style.display = "flex";
-  document.getElementById("cart-box-full").style.display = "none";
-}
-
-function openPayCourse(){
-  if(cartCourse.length == 0){
-    alert("Giỏ hàng đang trống");
-    return;
-  }
-
-  let total = cartCourse.reduce((s, i) => s + i.price, 0);
-  document.getElementById("pay-amount").innerText = "Số tiền: " + total.toLocaleString() + "đ";
-  document.getElementById("pay-text").innerText = "Chuyển khoản và gửi bill về Zalo: 0977 727 089 Để kích hoạt khóa học";
-  document.getElementById("pay-modal").style.display = "flex";
-}
-
-
-function closePayCourse(){
-  document.getElementById("pay-modal").style.display = "none";
-}
-
-/* ===== TOAST THÔNG BÁO ===== */
-function showToast(text){
-  let toast = document.getElementById("toast");
-  if(!toast){
-    toast = document.createElement("div");
-    toast.id = "toast";
-    document.body.appendChild(toast);
-  }
-  toast.innerText = text;
-  toast.classList.add("show");
-  setTimeout(()=>toast.classList.remove("show"), 2000);
-}
-
-renderCartCourse();
-
-/* ===== BACK TO TOP ===== */
-const backToTop = document.getElementById("backToTop");
-window.addEventListener("scroll", ()=>{
-  backToTop.style.display = window.scrollY > 300 ? "flex" : "none";
-});
-backToTop.onclick = ()=>window.scrollTo({top:0, behavior:"smooth"});
-</script>
 
 <footer class="site-footer">
 
@@ -342,6 +255,6 @@ backToTop.onclick = ()=>window.scrollTo({top:0, behavior:"smooth"});
 
 </footer>
 
-<div id="toast"></div>
+<script src="cart.js" defer></script>
 </body>
 </html>
