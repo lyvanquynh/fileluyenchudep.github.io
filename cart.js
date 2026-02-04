@@ -185,7 +185,12 @@ function changeQty(index, delta){
   saveCart()
   updateCartCount()
   renderCart()
-  openPay() // render lại popup
+
+  if(cart.length === 0){
+    closePay()
+  }else{
+    openPay()
+  }
 }
 
 function removeItemInPay(index){
@@ -193,7 +198,12 @@ function removeItemInPay(index){
   saveCart()
   updateCartCount()
   renderCart()
-  openPay()
+
+  if(cart.length === 0){
+    closePay()
+  }else{
+    openPay()
+  }
 }
 
 function showToast(text){
