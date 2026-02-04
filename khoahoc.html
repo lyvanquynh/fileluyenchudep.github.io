@@ -52,6 +52,19 @@
   font-weight:900;
 }
 
+/* ===== NHÃN KHUYẾN MÃI COMBO ===== */
+.combo-badge{
+  display:inline-block;
+  background:#ff3b3b;
+  color:white;
+  font-weight:700;
+  font-size:14px;
+  padding:4px 12px;
+  border-radius:20px;
+  margin-top:6px;
+  box-shadow:0 3px 8px rgba(0,0,0,.2);
+}
+
 </style>
 </head>
 
@@ -173,9 +186,11 @@
 <!-- COMBO -->
 <div class="course-card">
 <div class="course-title">
-<h2>COMBO 2 KHÓA HỌC</h2>
-<p>Giảm thêm 30% khi mua trọn bộ</p>
+  <h2>COMBO 2 KHÓA HỌC</h2>
+  <p>Giảm thêm 30% khi mua trọn bộ</p>
+  <span class="combo-badge">🔥 Chỉ còn 3 suất</span>
 </div>
+
 
 <div class="price-box">
 <div class="price-sale">
@@ -224,18 +239,31 @@
 <script>
 let cartCourse = JSON.parse(localStorage.getItem("cart_course")) || [];
 
-function saveCartCourse(){localStorage.setItem("cart_course",JSON.stringify(cartCourse));renderCartCourse();}
-function addToCartCourse(name,price){cartCourse.push({name,price});saveCartCourse();}
+function saveCartCourse(){
+  localStorage.setItem("cart_course", JSON.stringify(cartCourse));
+  renderCartCourse();
+  showToast("Đã thêm vào giỏ hàng");
+}
+
+function addToCartCourse(name, price){
+  cartCourse.push({name, price});
+  saveCartCourse();
+}
+
+function removeItemCourse(index){
+  cartCourse.splice(index, 1);
+  saveCartCourse();
+}
+
 function renderCartCourse(){
-  let list=document.getElementById("cart-items");
-  list.innerHTML="";
-  let total=0;
+  let list = document.getElementById("cart-items");
+  list.innerHTML = "";
+  let total = 0;
 
-  cartCourse.forEach((item,i)=>{
+  cartCourse.forEach((item, i) => {
     total += item.price;
-
-    const li=document.createElement("li");
-    li.innerHTML=`
+    const li = document.createElement("li");
+    li.innerHTML = `
       <span class="cart-item-name">${item.name}</span>
       <span class="cart-price">${item.price.toLocaleString()}đ</span>
       <button class="cart-remove" onclick="removeItemCourse(${i})">🗑</button>
@@ -244,29 +272,54 @@ function renderCartCourse(){
   });
 
   document.getElementById("cart-total").innerText = total.toLocaleString();
-  document.getElementById("cart-total-mini").innerText = total.toLocaleString()+"đ";
+  document.getElementById("cart-total-mini").innerText = total.toLocaleString() + "đ";
   document.getElementById("cart-count").innerText = cartCourse.length;
 }
 
-document.getElementById("cart-total").innerText=total.toLocaleString();
-document.getElementById("cart-total-mini").innerText=total.toLocaleString()+"đ";
-document.getElementById("cart-count").innerText=cartCourse.length;
+function openCartCourse(){
+  document.getElementById("cart-box").style.display = "none";
+  document.getElementById("cart-box-full").style.display = "block";
 }
-function openCartCourse(){document.getElementById("cart-box").style.display="none";document.getElementById("cart-box-full").style.display="block";}
-function toggleCartCourse(){document.getElementById("cart-box").style.display="flex";document.getElementById("cart-box-full").style.display="none";}
+
+function toggleCartCourse(){
+  document.getElementById("cart-box").style.display = "flex";
+  document.getElementById("cart-box-full").style.display = "none";
+}
+
 function openPayCourse(){
-let total=cartCourse.reduce((s,i)=>s+i.price,0);
-document.getElementById("pay-amount").innerText="Số tiền: "+total.toLocaleString()+"đ";
-document.getElementById("pay-text").innerText="Chuyển khoản và gửi bill về Zalo: 0977 727 089";
-document.getElementById("pay-modal").style.display="flex";
+  let total = cartCourse.reduce((s, i) => s + i.price, 0);
+  document.getElementById("pay-amount").innerText = "Số tiền: " + total.toLocaleString() + "đ";
+  document.getElementById("pay-text").innerText = "Chuyển khoản và gửi bill về Zalo: 0977 727 089";
+  document.getElementById("pay-modal").style.display = "flex";
 }
-function closePayCourse(){document.getElementById("pay-modal").style.display="none";}
+
+function closePayCourse(){
+  document.getElementById("pay-modal").style.display = "none";
+}
+
+/* ===== TOAST THÔNG BÁO ===== */
+function showToast(text){
+  let toast = document.getElementById("toast");
+  if(!toast){
+    toast = document.createElement("div");
+    toast.id = "toast";
+    document.body.appendChild(toast);
+  }
+  toast.innerText = text;
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"), 2000);
+}
+
 renderCartCourse();
 
-const backToTop=document.getElementById("backToTop");
-window.addEventListener("scroll",()=>{backToTop.style.display=window.scrollY>300?"flex":"none"});
-backToTop.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+/* ===== BACK TO TOP ===== */
+const backToTop = document.getElementById("backToTop");
+window.addEventListener("scroll", ()=>{
+  backToTop.style.display = window.scrollY > 300 ? "flex" : "none";
+});
+backToTop.onclick = ()=>window.scrollTo({top:0, behavior:"smooth"});
 </script>
+
 
 </body>
 </html>
