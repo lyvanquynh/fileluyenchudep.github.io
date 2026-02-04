@@ -196,14 +196,27 @@ let cartCourse = JSON.parse(localStorage.getItem("cart_course")) || [];
 function saveCartCourse(){localStorage.setItem("cart_course",JSON.stringify(cartCourse));renderCartCourse();}
 function addToCartCourse(name,price){cartCourse.push({name,price});saveCartCourse();}
 function renderCartCourse(){
-let list=document.getElementById("cart-items");list.innerHTML="";
-let total=0;
-cartCourse.forEach((i,idx)=>{
-total+=i.price;
-let li=document.createElement("li");
-li.innerHTML=`<span>${i.name}</span><span>${i.price.toLocaleString()}đ</span>`;
-list.appendChild(li);
-});
+  let list=document.getElementById("cart-items");
+  list.innerHTML="";
+  let total=0;
+
+  cartCourse.forEach((item,i)=>{
+    total += item.price;
+
+    const li=document.createElement("li");
+    li.innerHTML=`
+      <span class="cart-item-name">${item.name}</span>
+      <span class="cart-price">${item.price.toLocaleString()}đ</span>
+      <button class="cart-remove" onclick="removeItemCourse(${i})">🗑</button>
+    `;
+    list.appendChild(li);
+  });
+
+  document.getElementById("cart-total").innerText = total.toLocaleString();
+  document.getElementById("cart-total-mini").innerText = total.toLocaleString()+"đ";
+  document.getElementById("cart-count").innerText = cartCourse.length;
+}
+
 document.getElementById("cart-total").innerText=total.toLocaleString();
 document.getElementById("cart-total-mini").innerText=total.toLocaleString()+"đ";
 document.getElementById("cart-count").innerText=cartCourse.length;
