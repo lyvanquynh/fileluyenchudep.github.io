@@ -875,15 +875,16 @@ cursor:pointer;
   overflow:auto;
 }
 
-/* nút - + */
+/* nút - + nhỏ gọn */
 #pay-items .qty-btn{
-  width:26px;
-  height:26px;
-  border-radius:6px;
-  border:1px solid #ddd;
-  background:#f7f7f7;
+  width:22px;
+  height:22px;
+  border:1px solid #ccc;
+  background:#fff;
   color:#333;
-  font-size:16px;
+  font-size:14px;
+  border-radius:4px;
+  padding:0;
   line-height:1;
   display:inline-flex;
   align-items:center;
@@ -891,15 +892,23 @@ cursor:pointer;
   cursor:pointer;
 }
 
+/* số lượng */
+#pay-items .qty-num{
+  min-width:20px;
+  text-align:center;
+  font-size:14px;
+}
+
 /* nút xóa */
 #pay-items .remove-btn{
-  width:26px;
-  height:26px;
-  border-radius:50%;
+  width:22px;
+  height:22px;
   border:1px solid #f44336;
-  background:#ffecec;
+  background:#fff;
   color:#f44336;
-  font-size:15px;
+  font-size:14px;
+  border-radius:4px;
+  padding:0;
   line-height:1;
   display:inline-flex;
   align-items:center;

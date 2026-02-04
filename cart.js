@@ -115,10 +115,10 @@ function openPay(){
     <div><b>${item.name}</b></div>
     <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
       <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
-      <b>${item.qty}</b>
-      <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
-      <span>${item.price.toLocaleString()}đ x ${item.qty} = <b>${lineTotal.toLocaleString()}đ</b></span>
-      <button class="remove-btn" onclick="removeItemInPay(${i})">✖</button>
+<span class="qty-num">${item.qty}</span>
+<button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+<span>${item.price.toLocaleString()}đ x ${item.qty} = <b>${lineTotal.toLocaleString()}đ</b></span>
+<button class="remove-btn" onclick="removeItemInPay(${i})">✖</button>
     </div>
   </li>
 `
