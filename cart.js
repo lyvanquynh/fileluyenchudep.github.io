@@ -172,8 +172,6 @@ requestAnimationFrame(()=>{
 }   // ← ĐÓNG openPay Ở ĐÂY
 
 function closePay(){
-
-function closePay(){
   const cartBox = document.getElementById("cart-box")
   const payContent = document.getElementById("pay-content")
 
