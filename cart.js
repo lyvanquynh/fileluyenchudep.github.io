@@ -1,5 +1,13 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 
+// Chuẩn hoá cart cũ (chưa có qty)
+cart = cart.map(item=>{
+  if(!item.qty){
+    item.qty = 1
+  }
+  return item
+})
+
 function saveCart(){
   localStorage.setItem("cart", JSON.stringify(cart))
 }
