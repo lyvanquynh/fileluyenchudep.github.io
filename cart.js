@@ -163,37 +163,32 @@ const dy = startY - centerY
 payContent.style.transform = `translate(${dx}px, ${dy}px) scale(0.1)`
 payContent.style.opacity = "0"
 
+// chuẩn bị trạng thái ban đầu
+payContent.classList.add("zoom-from-cart")
+
 document.getElementById("pay-modal").style.display="flex"
 
+// ép browser nhận trạng thái ban đầu
+payContent.getBoundingClientRect()
+
 requestAnimationFrame(()=>{
-  payContent.style.transform = "translate(0,0) scale(1)"
-  payContent.style.opacity = "1"
+  payContent.classList.remove("zoom-from-cart")
 })
 }   // ← ĐÓNG openPay Ở ĐÂY
 
 function closePay(){
-  const cartBox = document.getElementById("cart-box")
   const payContent = document.getElementById("pay-content")
 
-  const rect = cartBox.getBoundingClientRect()
-  const centerX = window.innerWidth / 2
-  const centerY = window.innerHeight / 2
+  // thêm class để zoom nhỏ
+  payContent.classList.add("zoom-from-cart")
 
-  const endX = rect.left + rect.width / 2
-  const endY = rect.top + rect.height / 2
-
-  const dx = endX - centerX
-  const dy = endY - centerY
-
-  payContent.style.transform = `translate(${dx}px, ${dy}px) scale(0.1)`
-  payContent.style.opacity = "0"
-
+  // sau 300ms mới ẩn popup
   setTimeout(()=>{
     document.getElementById("pay-modal").style.display="none"
-    payContent.style.transform = "translate(0,0) scale(1)"
-    payContent.style.opacity = "1"
+    payContent.classList.remove("zoom-from-cart")
   },300)
 }
+
 
 updateCartCount()
 renderCart()

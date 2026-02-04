@@ -865,3 +865,9 @@ cursor:pointer;
   opacity:0;
   transform: scale(0.1);
 }
+
+/* trạng thái trước khi zoom */
+#pay-content.zoom-from-cart{
+  transform: scale(0.1);
+  opacity:0;
+}
