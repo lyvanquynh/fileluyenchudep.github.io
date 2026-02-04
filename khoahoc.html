@@ -195,10 +195,10 @@
 <div class="price-box">
 <div class="price-sale">
 <span class="old">2.998.000đ</span>
-<span class="percent">-30%</span>
-<span class="new">2.098.000đ</span>
+<span class="percent">-Thêm 20%</span>
+<span class="new">2.399.000đ</span>
 </div>
-<button class="btn-cart" onclick="addToCartCourse('Combo 2 khóa Procreate',2098000)">Thêm giỏ</button>
+<button class="btn-cart" onclick="addToCartCourse('Combo 2 khóa Procreate',2399000)">Thêm giỏ</button>
 </div>
 </div>
 
@@ -289,7 +289,7 @@ function toggleCartCourse(){
 function openPayCourse(){
   let total = cartCourse.reduce((s, i) => s + i.price, 0);
   document.getElementById("pay-amount").innerText = "Số tiền: " + total.toLocaleString() + "đ";
-  document.getElementById("pay-text").innerText = "Chuyển khoản và gửi bill về Zalo: 0977 727 089";
+  document.getElementById("pay-text").innerText = "Chuyển khoản và gửi bill về Zalo: 0977 727 089 Để kích hoạt khóa học";
   document.getElementById("pay-modal").style.display = "flex";
 }
 
