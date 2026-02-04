@@ -7,222 +7,222 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* ===== STYLE RIÊNG CHO TRANG KHÓA HỌC ===== */
-.course-wrapper{
-  max-width:1200px;
-  margin:40px auto;
-  padding:0 15px;
-}
-
-.course-card{
-  background:white;
-  border-radius:24px;
-  box-shadow:0 8px 24px rgba(0,0,0,.08);
-  padding:30px 25px;
-  margin-bottom:40px;
-}
-
-.course-card.course2{
-  background:#f1f7ff;
-}
-
-.course-title{
-  text-align:center;
-  margin-bottom:15px;
-}
-
-.course-title h2{
-  color:#2b7cff;
-  margin-bottom:6px;
-}
-
-.course-title p{
-  color:#555;
-  margin:0;
-}
-
-.course-image{
-  text-align:center;
-  margin:20px 0;
-}
-
-.course-image img{
-  max-width:100%;
-  border-radius:18px;
-  box-shadow:0 6px 20px rgba(0,0,0,.15);
-}
-
-.course-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-  margin-top:20px;
-}
-
-.course-box{
-  background:white;
-  border-radius:18px;
-  padding:20px;
-  box-shadow:0 4px 14px rgba(0,0,0,.08);
-}
-
-.course-box h3{
-  color:#2b7cff;
-  margin-top:0;
-  margin-bottom:12px;
-  text-align:center;
-}
-
-.course-list{
-  list-style:none;
-  padding:0;
-  margin:0;
-}
-
-.course-list li{
-  margin:8px 0;
-  padding-left:22px;
-  position:relative;
-  line-height:1.5;
-}
-
-.course-list li::before{
-  content:"✔";
-  position:absolute;
-  left:0;
-  color:#2b7cff;
-  font-weight:bold;
-}
-
-@media(max-width:768px){
-  .course-grid{
-    grid-template-columns:1fr;
-  }
-}
+.course-wrapper{max-width:1200px;margin:40px auto;padding:0 15px}
+.course-card{background:white;border-radius:24px;box-shadow:0 8px 24px rgba(0,0,0,.08);padding:30px 25px;margin-bottom:40px}
+.course-card.course2{background:#f1f7ff}
+.course-title{text-align:center;margin-bottom:10px}
+.course-image{text-align:center;margin:15px 0}
+.course-image img{max-width:100%;border-radius:16px;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.course-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px}
+.course-box{background:white;border-radius:18px;padding:20px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.course-box h3{text-align:center;color:#2b7cff}
+.course-list{list-style:none;padding:0;margin:0}
+.course-list li{margin:8px 0;padding-left:22px;position:relative}
+.course-list li::before{content:"✔";position:absolute;left:0;color:#2b7cff}
+.price-box{text-align:center;margin-top:20px}
+@media(max-width:768px){.course-grid{grid-template-columns:1fr}}
 </style>
 </head>
 
 <body>
 
 <header class="main-header">
-  <div class="header-inner">
-    <div class="header-left">
-      <a href="index.html" class="logo-link">
-        <img src="logo.png" alt="Logo">
-      </a>
-      <div class="header-text">
-        <h1>File Luyện Chữ Đẹp</h1>
-        <p>Kho tài liệu luyện chữ cho giáo viên – học sinh – phụ huynh</p>
-      </div>
-    </div>
-
-    <nav class="header-nav">
-      <a href="index.html">Trang chủ</a>
-      <a href="huongdan.html">Hướng dẫn mua hàng</a>
-      <a href="khoahoc.html" class="active">Khóa học</a>
-      <a href="contact.html">Liên hệ</a>
-    </nav>
-  </div>
+<div class="header-inner">
+<div class="header-left">
+<a href="index.html" class="logo-link"><img src="logo.png"></a>
+<div class="header-text">
+<h1>File Luyện Chữ Đẹp</h1>
+<p>Kho tài liệu luyện chữ cho giáo viên – học sinh – phụ huynh</p>
+</div>
+</div>
+<nav class="header-nav">
+<a href="index.html">Trang chủ</a>
+<a href="huongdan.html">Hướng dẫn mua hàng</a>
+<a href="khoahoc.html" class="active">Khóa học</a>
+<a href="contact.html">Liên hệ</a>
+</nav>
+</div>
 </header>
 
 <section class="hero">
-  <h2>Khóa học luyện chữ & thiết kế file vở trên iPad</h2>
-  <p>Học Procreate – áp dụng vào luyện chữ, giảng dạy và thiết kế tài liệu</p>
-  <a href="https://zalo.me/0977727089" target="_blank">Đăng ký tư vấn</a>
+<h2>Khóa học luyện chữ & thiết kế file vở trên iPad</h2>
+<p>Học Procreate – áp dụng vào luyện chữ, giảng dạy và thiết kế tài liệu</p>
 </section>
 
 <div class="course-wrapper">
 
-  <!-- ================= KHÓA 1 ================= -->
-  <div class="course-card">
-    <div class="course-title">
-      <h2>KHÓA 1 – Thực hành luyện viết chữ đẹp trên iPad</h2>
-      <p>Giúp học viên sử dụng thành thạo Procreate và ứng dụng hiệu quả vào luyện chữ và giảng dạy</p>
-    </div>
+<!-- KHÓA 1 -->
+<div class="course-card">
+<div class="course-title">
+<h2>KHÓA 1 – Thực hành luyện viết chữ đẹp trên iPad</h2>
+<p>Giúp học viên sử dụng thành thạo Procreate và ứng dụng hiệu quả vào luyện chữ và giảng dạy</p>
+</div>
 
-    <div class="course-image">
-      <img src="images/khoa1.png" alt="Khóa 1">
-    </div>
+<div class="course-image">
+<img src="images/khoa1.png">
+</div>
 
-    <div class="course-grid">
+<div class="course-grid">
+<div class="course-box">
+<h3>Nội dung học</h3>
+<ul class="course-list">
+<li>Sử dụng Procreate từ cơ bản đến ứng dụng</li>
+<li>Thực hành luyện viết chữ đẹp trên iPad</li>
+<li>Sửa bài, nhận xét bài học sinh trực tiếp trên iPad</li>
+<li>Tạo và tinh chỉnh Brush phục vụ luyện chữ</li>
+<li>Hoàn thiện bài viết, xuất ảnh và video luyện viết</li>
+</ul>
+</div>
 
-      <div class="course-box">
-        <h3>Nội dung học</h3>
-        <ul class="course-list">
-          <li>Sử dụng Procreate từ cơ bản đến ứng dụng</li>
-          <li>Thực hành luyện viết chữ đẹp trên iPad</li>
-          <li>Sửa bài, nhận xét bài học sinh trực tiếp trên iPad</li>
-          <li>Tạo và tinh chỉnh Brush phục vụ luyện chữ</li>
-          <li>Hoàn thiện bài viết, xuất ảnh và video luyện viết</li>
-        </ul>
-      </div>
+<div class="course-box">
+<h3>Tài nguyên & Quyền lợi</h3>
+<ul class="course-list">
+<li>300+ Brush độc quyền</li>
+<li>Bộ file luyện chữ chuẩn, sáng tạo, Calligraphy</li>
+<li>Học không giới hạn thời gian</li>
+<li>Lộ trình rõ ràng</li>
+<li>Cập nhật tài nguyên miễn phí</li>
+</ul>
+</div>
+</div>
 
-      <div class="course-box">
-        <h3>Tài nguyên & Quyền lợi</h3>
-        <ul class="course-list">
-          <li>300+ Brush độc quyền (nét thanh đậm, nhũ, kim tuyến, bảng, vân giấy)</li>
-          <li>Bộ file luyện chữ chuẩn, chữ nhỡ, chữ nhỏ</li>
-          <li>Bộ file luyện chữ sáng tạo và Calligraphy</li>
-          <li>Học không giới hạn thời gian</li>
-          <li>Lộ trình rõ ràng, dễ học</li>
-          <li>Cập nhật tài nguyên mới miễn phí</li>
-        </ul>
-      </div>
+<div class="price-box">
+<div class="price-sale">
+<span class="old">1.600.000đ</span>
+<span class="percent">-38%</span>
+<span class="new">999.000đ</span>
+</div>
+<button class="btn-cart" onclick="addToCartCourse('Khóa 1 - Luyện chữ iPad',999000)">Thêm giỏ</button>
+</div>
+</div>
 
-    </div>
-  </div>
+<!-- KHÓA 2 -->
+<div class="course-card course2">
+<div class="course-title">
+<h2>KHÓA 2 – Thiết kế file vở in ấn trên iPad</h2>
+<p>Nâng cao kỹ năng thiết kế phục vụ giảng dạy và kinh doanh tài liệu luyện chữ</p>
+</div>
 
-  <!-- ================= KHÓA 2 ================= -->
-  <div class="course-card course2">
-    <div class="course-title">
-      <h2>KHÓA 2 – Thiết kế file vở in ấn trên iPad</h2>
-      <p>Nâng cao kỹ năng thiết kế phục vụ giảng dạy và kinh doanh tài liệu luyện chữ</p>
-    </div>
+<div class="course-image">
+<img src="images/khoa2.png">
+</div>
 
-    <div class="course-image">
-      <img src="images/khoa2.png" alt="Khóa 2">
-    </div>
+<div class="course-grid">
+<div class="course-box">
+<h3>Nội dung học</h3>
+<ul class="course-list">
+<li>Tạo ô li chuẩn, ô li sáng tạo, Calligraphy</li>
+<li>Thiết kế file vở in nhiều trang</li>
+<li>Dàn trang, bố cục khoa học</li>
+<li>Xuất file in chất lượng cao</li>
+</ul>
+</div>
 
-    <div class="course-grid">
+<div class="course-box">
+<h3>Tài nguyên & Quyền lợi</h3>
+<ul class="course-list">
+<li>Bộ Brush bảng chữ chuẩn</li>
+<li>Bộ giáo án 32 tiết</li>
+<li>Nhóm học viên riêng</li>
+<li>Áp dụng ngay</li>
+</ul>
+</div>
+</div>
 
-      <div class="course-box">
-        <h3>Nội dung học</h3>
-        <ul class="course-list">
-          <li>Tạo ô li chuẩn, ô li sáng tạo, ô li Calligraphy</li>
-          <li>Thiết kế file vở in nhiều trang chất lượng cao</li>
-          <li>Dàn trang, bố cục khoa học, dễ học</li>
-          <li>Xuất file in phục vụ giảng dạy và phát hành</li>
-        </ul>
-      </div>
+<div class="price-box">
+<div class="price-sale">
+<span class="old">3.000.000đ</span>
+<span class="percent">-33%</span>
+<span class="new">1.999.000đ</span>
+</div>
+<button class="btn-cart" onclick="addToCartCourse('Khóa 2 - Thiết kế file vở',1999000)">Thêm giỏ</button>
+</div>
+</div>
 
-      <div class="course-box">
-        <h3>Tài nguyên & Quyền lợi</h3>
-        <ul class="course-list">
-          <li>Bộ Brush bảng chữ chuẩn – sáng tạo – Calligraphy (không watermark)</li>
-          <li>Bộ giáo án luyện chữ đẹp 32 tiết</li>
-          <li>File giáo án gắn tên học viên, sẵn sàng sử dụng</li>
-          <li>Tham gia nhóm học viên riêng</li>
-          <li>Vừa học vừa áp dụng ngay</li>
-          <li>Cập nhật tài nguyên sớm nhất từ BaolongEdu</li>
-        </ul>
-      </div>
+<!-- COMBO -->
+<div class="course-card">
+<div class="course-title">
+<h2>COMBO 2 KHÓA HỌC</h2>
+<p>Giảm thêm 30% khi mua trọn bộ</p>
+</div>
 
-    </div>
-  </div>
+<div class="price-box">
+<div class="price-sale">
+<span class="old">2.998.000đ</span>
+<span class="percent">-30%</span>
+<span class="new">2.098.000đ</span>
+</div>
+<button class="btn-cart" onclick="addToCartCourse('Combo 2 khóa Procreate',2098000)">Thêm giỏ</button>
+</div>
+</div>
 
 </div>
 
-<footer class="site-footer">
-  <div class="footer-links">
-    <a href="index.html">Trang chủ</a>
-    <a href="khoahoc.html">Khóa học</a>
-    <a href="huongdan.html">Hướng dẫn mua hàng</a>
-    <a href="contact.html">Liên hệ & Hỗ trợ</a>
-  </div>
-  <p><b>BaolongEdu – File Luyện Chữ Đẹp</b></p>
-  <p>Hỗ trợ: Zalo 0977 727 089 | Messenger Facebook</p>
-  <p>© 2026 fileluyenchudep.site – All rights reserved</p>
-</footer>
+<!-- QUICK CONTACT -->
+<div class="quick-contact">
+<button id="backToTop" class="qc-btn backtop">↑</button>
+<a href="tel:0977727089" class="qc-btn phone"><img src="icons/phone.png"></a>
+<a href="https://zalo.me/0977727089" target="_blank" class="qc-btn zalo"><img src="icons/zalo.png"></a>
+<a href="https://m.me/chipquantu.90" target="_blank" class="qc-btn messenger"><img src="icons/messenger.png"></a>
+</div>
+
+<div id="cart-box" onclick="openCartCourse()">
+<span class="cart-icon">🛒</span>
+<span id="cart-total-mini">0đ</span>
+<span id="cart-count">0</span>
+</div>
+
+<div id="cart-box-full" style="display:none">
+<div id="cart-box-full-inner">
+<div id="cart-header"><b>🛒 Giỏ khóa học</b><button onclick="toggleCartCourse()">➖</button></div>
+<ul id="cart-items"></ul>
+<p class="cart-sum">Tổng cộng: <span id="cart-total">0</span> đ</p>
+<button class="pay-btn" onclick="openPayCourse()">Thanh toán ngay</button>
+</div>
+</div>
+
+<div id="pay-modal">
+<div id="pay-content">
+<img src="qr.jpg">
+<div class="pay-amount" id="pay-amount"></div>
+<p class="pay-guide" id="pay-text"></p>
+<button onclick="closePayCourse()">Đóng</button>
+</div>
+</div>
+
+<script>
+let cartCourse = JSON.parse(localStorage.getItem("cart_course")) || [];
+
+function saveCartCourse(){localStorage.setItem("cart_course",JSON.stringify(cartCourse));renderCartCourse();}
+function addToCartCourse(name,price){cartCourse.push({name,price});saveCartCourse();}
+function renderCartCourse(){
+let list=document.getElementById("cart-items");list.innerHTML="";
+let total=0;
+cartCourse.forEach((i,idx)=>{
+total+=i.price;
+let li=document.createElement("li");
+li.innerHTML=`<span>${i.name}</span><span>${i.price.toLocaleString()}đ</span>`;
+list.appendChild(li);
+});
+document.getElementById("cart-total").innerText=total.toLocaleString();
+document.getElementById("cart-total-mini").innerText=total.toLocaleString()+"đ";
+document.getElementById("cart-count").innerText=cartCourse.length;
+}
+function openCartCourse(){document.getElementById("cart-box").style.display="none";document.getElementById("cart-box-full").style.display="block";}
+function toggleCartCourse(){document.getElementById("cart-box").style.display="flex";document.getElementById("cart-box-full").style.display="none";}
+function openPayCourse(){
+let total=cartCourse.reduce((s,i)=>s+i.price,0);
+document.getElementById("pay-amount").innerText="Số tiền: "+total.toLocaleString()+"đ";
+document.getElementById("pay-text").innerText="Chuyển khoản và gửi bill về Zalo: 0977 727 089";
+document.getElementById("pay-modal").style.display="flex";
+}
+function closePayCourse(){document.getElementById("pay-modal").style.display="none";}
+renderCartCourse();
+
+const backToTop=document.getElementById("backToTop");
+window.addEventListener("scroll",()=>{backToTop.style.display=window.scrollY>300?"flex":"none"});
+backToTop.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+</script>
 
 </body>
 </html>
