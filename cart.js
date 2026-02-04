@@ -89,16 +89,39 @@ function openPay(){
     return
   }
 
-  let total = cart.reduce((s,i)=> s + i.price, 0)
+  let total = 0
+  let itemsHTML = ""
+  let orderText = "Đơn hàng:\n"
 
-  document.getElementById("pay-amount").innerText =
-    "Số tiền cần thanh toán: " + total.toLocaleString() + "đ"
+  cart.forEach(item=>{
+    total += item.price
+    itemsHTML += `<li>- ${item.name}</li>`
+    orderText += "- " + item.name + "\n"
+  })
 
-  document.getElementById("pay-text").innerText =
-    "Hãy chuyển khoản đúng số tiền ở trên.\nSau đó chụp lại bill thanh toán và gửi đến Zalo: 0977 727 089 để xác nhận đơn hàng."
+  const orderId = "HD" + Date.now()
+
+  document.getElementById("order-id").innerText = "Mã đơn: #" + orderId
+  document.getElementById("pay-items").innerHTML = itemsHTML
+  document.getElementById("pay-amount").innerText = total.toLocaleString() + "đ"
+
+  const text =
+    "Hãy chuyển khoản đúng số tiền.\n" +
+    "Sau đó chụp lại bill và gửi Zalo: 0977 727 089"
+
+  document.getElementById("pay-text").innerText = text
+
+  orderText += "Tổng tiền: " + total.toLocaleString() + "đ\n"
+  orderText += "Mã đơn: #" + orderId
+
+  document.getElementById("copy-order-btn").onclick = function(){
+    navigator.clipboard.writeText(orderText)
+    showToast("Đã copy nội dung đơn")
+  }
 
   document.getElementById("pay-modal").style.display="flex"
 }
+
 
 
 function closePay(){

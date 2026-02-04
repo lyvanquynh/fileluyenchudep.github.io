@@ -141,13 +141,41 @@
 
 <div id="pay-modal">
   <div id="pay-content">
-    <img src="qr.jpg" loading="lazy">
-    <div class="pay-amount" id="pay-amount"></div>
-    <p class="pay-guide" id="pay-text"></p>
-    <a href="qr.jpg" target="_blank" class="download-qr">📥 Mở ảnh QR (nhấn giữ để lưu)</a>
-    <button onclick="closePay()">Đóng</button>
+
+    <div class="pay-header">
+      🧾 XÁC NHẬN ĐƠN HÀNG
+      <div class="pay-order-id" id="order-id"></div>
+    </div>
+
+    <div class="pay-body">
+
+      <div class="pay-left">
+        <h4>📦 Sản phẩm</h4>
+        <ul id="pay-items"></ul>
+
+        <div class="pay-total">
+          Tổng tiền: <span id="pay-amount"></span>
+        </div>
+
+        <div class="pay-actions">
+          <button id="copy-order-btn">📋 Copy nội dung đơn</button>
+        </div>
+      </div>
+
+      <div class="pay-right">
+        <img src="qr.jpg" loading="lazy">
+        <a href="qr.jpg" target="_blank" class="download-qr">📥 Mở ảnh QR</a>
+
+        <div class="pay-guide" id="pay-text"></div>
+      </div>
+
+    </div>
+
+    <button class="pay-close" onclick="closePay()">Đóng</button>
+
   </div>
 </div>
+
 
 <div id="toast"></div>
 

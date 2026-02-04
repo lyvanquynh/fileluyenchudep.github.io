@@ -446,14 +446,6 @@ justify-content:center;
 z-index:1000;
 }
 
-#pay-content{
-background:white;
-padding:22px;
-border-radius:16px;
-max-width:380px;
-text-align:center;
-box-shadow:0 8px 25px rgba(0,0,0,.25);
-}
 
 #pay-content img{
 width:100%;
@@ -737,5 +729,99 @@ cursor:pointer;
   .cart-remove{
     width:32px;
     height:32px;
+  }
+}
+
+/* ===== POPUP THANH TOÁN KIỂU HÓA ĐƠN ===== */
+#pay-content{
+  background:white;
+  border-radius:20px;
+  max-width:720px;
+  width:95%;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.pay-header{
+  font-size:20px;
+  font-weight:700;
+  color:var(--main-color);
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.pay-order-id{
+  font-size:13px;
+  color:#666;
+  margin-top:4px;
+}
+
+.pay-body{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:16px;
+}
+
+.pay-left h4{
+  margin:6px 0;
+}
+
+#pay-items{
+  list-style:none;
+  padding:0;
+  margin:0 0 10px;
+}
+
+#pay-items li{
+  font-size:14px;
+  margin-bottom:4px;
+}
+
+.pay-total{
+  font-size:18px;
+  font-weight:700;
+  color:#e60000;
+  margin:10px 0;
+}
+
+.pay-actions button{
+  background:var(--main-color);
+  color:white;
+  border:none;
+  border-radius:8px;
+  padding:8px 14px;
+  cursor:pointer;
+}
+
+.pay-right img{
+  width:100%;
+  max-width:220px;
+  display:block;
+  margin:auto;
+}
+
+.pay-right{
+  text-align:center;
+}
+
+.pay-guide{
+  font-size:14px;
+  line-height:1.6;
+  margin-top:8px;
+}
+
+.pay-close{
+  margin-top:12px;
+  background:#ccc;
+  border:none;
+  border-radius:8px;
+  padding:8px 16px;
+  cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .pay-body{
+    grid-template-columns:1fr;
   }
 }
