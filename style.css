@@ -762,8 +762,13 @@ cursor:pointer;
   display:grid;
   grid-template-columns:1.2fr 1fr;
   gap:16px;
-  max-height:60vh;
-  overflow:hidden;
+  height:60vh;     /* cố định chiều cao */
+}
+
+.pay-left{
+  display:flex;
+  flex-direction:column;
+  min-height:0;   /* rất quan trọng để scroll hoạt động */
 }
 
 .pay-left h4{
@@ -774,8 +779,8 @@ cursor:pointer;
   list-style:none;
   padding:0;
   margin:0 0 10px;
-  max-height:40vh;
-  overflow-y:auto;
+  flex:1;               /* chiếm phần còn lại */
+  overflow-y:auto;     /* chỉ list được cuộn */
 }
 
 #pay-items li{
@@ -829,17 +834,20 @@ cursor:pointer;
 @media(max-width:600px){
   .pay-body{
     grid-template-columns:1fr;
+    height:70vh;
   }
-}
 
-@media(max-width:600px){
-  #pay-content{
-    max-height:90vh;
-    overflow:hidden;
+  .pay-right{
+    margin-top:10px;
   }
 
   #pay-items{
     max-height:35vh;
+  }
+
+  #pay-content{
+    max-height:90vh;
+    overflow:hidden;
   }
 }
 
