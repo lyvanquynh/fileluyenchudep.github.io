@@ -177,11 +177,14 @@ function openPay(){
     const emailInput = document.getElementById("customer-email")
     const email = emailInput?.value.trim()
 
-    if(!email || !email.includes("@")){
-      showToast("Vui lòng nhập email hợp lệ")
-      emailInput?.focus()
-      return
-    }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
+if(!emailPattern.test(email)){
+  showToast("Email không hợp lệ")
+  emailInput?.focus()
+  return
+}
+
 
     // ===== khóa 5 giây =====
     confirmBtn.disabled = true
