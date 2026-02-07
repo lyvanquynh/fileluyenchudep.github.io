@@ -158,16 +158,13 @@ function openPay(){
   }
 
   // gửi về Google Sheet webhook
-  fetch("https://script.google.com/macros/s/AKfycbwwNECNb7OWcyZ3oZuShoZ8OlQOe7hcpyT6wYYLxAQdWGMP1-vmal0XMXL7bBYyWJ8h/exec", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(orderData)
-  }).then(()=>{
-    showToast("Đã xác nhận & copy đơn")
-  }).catch(()=>{
-    showToast("Copy đơn OK — gửi log lỗi")
+  fetch("https://script.google.com/macros/s/AKfycbw6No4QUmXCg5HnpqA5uyE_8hZEfkU_Cmz0pnGVFnbgmrDq0d2tykbpVzxBU_lZev8J/exec", {
+  method: "POST",
+  body: JSON.stringify(orderData),
+  mode: "no-cors"
+})
+
+showToast("Đã xác nhận & copy đơn")
   })
 
 }
