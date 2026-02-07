@@ -1,4 +1,5 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || []
+let confirmBtnTimer = null   // ===== thêm =====
 
 // Chuẩn hoá cart cũ (chưa có qty)
 cart = cart.map(item=>{
@@ -32,6 +33,7 @@ function removeItem(index){
   saveCart()
   updateCartCount()
   renderCart()
+  unlockConfirmBtn()   // ===== thêm =====
 }
 
 function clearCart(){
@@ -40,6 +42,7 @@ function clearCart(){
     saveCart()
     updateCartCount()
     renderCart()
+    unlockConfirmBtn() // ===== thêm =====
   }
 }
 
@@ -98,11 +101,30 @@ function renderCart(){
   totalEl.textContent = total.toLocaleString()
 }
 
+
+// ================= UNLOCK NÚT XÁC NHẬN =================
+
+function unlockConfirmBtn(){
+  const btn = document.getElementById("copy-order-btn")
+  if(btn){
+    btn.disabled = false
+  }
+  if(confirmBtnTimer){
+    clearTimeout(confirmBtnTimer)
+    confirmBtnTimer = null
+  }
+}
+
+
+// ================= POPUP THANH TOÁN =================
+
 function openPay(){
   if(cart.length==0){
     alert("Giỏ hàng trống")
     return
   }
+
+  unlockConfirmBtn() // ===== thêm =====
 
   let total = 0
   let itemsHTML = ""
@@ -114,29 +136,24 @@ function openPay(){
     total += lineTotal
 
     itemsHTML += `
-  <li style="border-bottom:1px dashed #ddd;padding-bottom:6px;margin-bottom:6px">
-    <div><b>${item.name}</b></div>
-    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-      <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
-<span class="qty-num">${item.qty}</span>
-<button class="qty-btn" onclick="changeQty(${i},1)">+</button>
-<span>${item.price.toLocaleString()}đ x ${item.qty} = <b>${lineTotal.toLocaleString()}đ</b></span>
-<button class="remove-btn" onclick="removeItemInPay(${i})">✖</button>
-    </div>
-  </li>
+<li style="border-bottom:1px dashed #ddd;padding-bottom:6px;margin-bottom:6px">
+  <div><b>${item.name}</b></div>
+  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+    <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+    <span class="qty-num">${item.qty}</span>
+    <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+    <span>${item.price.toLocaleString()}đ x ${item.qty} = <b>${lineTotal.toLocaleString()}đ</b></span>
+    <button class="remove-btn" onclick="removeItemInPay(${i})">✖</button>
+  </div>
+</li>
 `
 
     const line =
-  `${item.name}: ${item.price.toLocaleString()}đ x ${item.qty} = ${lineTotal.toLocaleString()}đ`
+`${item.name}: ${item.price.toLocaleString()}đ x ${item.qty} = ${lineTotal.toLocaleString()}đ`
 
-orderText += line + "\n"
-
-if(i < cart.length - 1){
-  orderItemsText += line + "\n"
-}else {
-  orderItemsText += line
-}
-})
+    orderText += line + "\n"
+    orderItemsText += (i < cart.length-1) ? line+"\n" : line
+  })
 
   const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
 
@@ -144,43 +161,46 @@ if(i < cart.length - 1){
   document.getElementById("pay-items").innerHTML = itemsHTML
   document.getElementById("pay-amount").innerText = total.toLocaleString() + "đ"
 
-  const text =
-    "Hãy chuyển khoản đúng số tiền.\n" +
-    "Nhấn Copy nội dung đơn hàng\n" +
-    "Sau đó chụp bill và gửi Zalo: 0977 727 089"
-
-  document.getElementById("pay-text").innerText = text
+  document.getElementById("pay-text").innerText =
+    "Hãy chuyển khoản đúng số tiền.\nNhấn Copy nội dung đơn hàng\nSau đó chụp bill và gửi Zalo: 0977 727 089"
 
   orderText += "Tổng tiền: " + total.toLocaleString() + "đ\n"
   orderText += "Mã đơn: #" + orderId
 
-  document.getElementById("copy-order-btn").onclick = async function(){
+
+  // ================= NÚT XÁC NHẬN =================
+
+  const confirmBtn = document.getElementById("copy-order-btn")
+
+  confirmBtn.onclick = async function(){
+
+    const emailInput = document.getElementById("customer-email")
+    const email = emailInput?.value.trim()
+
+    if(!email || !email.includes("@")){
+      showToast("Vui lòng nhập email hợp lệ")
+      emailInput?.focus()
+      return
+    }
+
+    // ===== khóa 5 giây =====
+    confirmBtn.disabled = true
+    confirmBtnTimer = setTimeout(()=> confirmBtn.disabled=false, 5000)
 
     await navigator.clipboard.writeText(orderText)
 
     function formatTimeVN(){
-  const d = new Date()
+      const d = new Date()
+      return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')} - ${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`
+    }
 
-  const hh = d.getHours().toString().padStart(2,'0')
-  const mm = d.getMinutes().toString().padStart(2,'0')
-
-  const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-  const day = days[d.getDay()]
-
-  const dd = d.getDate().toString().padStart(2,'0')
-  const mo = (d.getMonth()+1).toString().padStart(2,'0')
-  const yyyy = d.getFullYear()
-
-  return `${hh}:${mm} - ${day} - ${dd}/${mo}/${yyyy}`
-}
-
-const orderData = {
-  order_id: orderId,
-  time: formatTimeVN(),
-  total: total,
-  text: orderItemsText,
-  email: document.getElementById("customer-email")?.value || ""
-}
+    const orderData = {
+      order_id: orderId,
+      time: formatTimeVN(),
+      total: total,
+      text: orderItemsText,
+      email: email
+    }
 
     fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
       method: "POST",
@@ -191,65 +211,42 @@ const orderData = {
     showToast("Đã xác nhận & copy đơn")
   }
 
-  const payContent = document.getElementById("pay-content")
+  // ===== mở khóa nếu sửa email =====
+  const emailInput = document.getElementById("customer-email")
+  if(emailInput){
+    emailInput.oninput = unlockConfirmBtn
+  }
 
+  const payContent = document.getElementById("pay-content")
   payContent.classList.add("zoom-from-cart")
   document.getElementById("pay-modal").style.display="flex"
   payContent.getBoundingClientRect()
-
-  requestAnimationFrame(()=>{
-    payContent.classList.remove("zoom-from-cart")
-  })
+  requestAnimationFrame(()=> payContent.classList.remove("zoom-from-cart"))
 }
+
+
+// ================= HÀM PHỤ =================
 
 function closePay(){
   const payContent = document.getElementById("pay-content")
-
   payContent.classList.add("zoom-from-cart")
-
   setTimeout(()=>{
     document.getElementById("pay-modal").style.display="none"
     payContent.classList.remove("zoom-from-cart")
   },300)
 }
 
-updateCartCount()
-renderCart()
-
-const searchInput = document.getElementById("searchInput")
-
-if(searchInput){
-  searchInput.addEventListener("input", function(){
-    const keyword = this.value.toLowerCase()
-    const products = document.querySelectorAll(".product")
-
-    products.forEach(product=>{
-      const text = product.innerText.toLowerCase()
-      if(text.includes(keyword)){
-        product.style.display = "flex"
-      }else{
-        product.style.display = "none"
-      }
-    })
-  })
-}
-
 function changeQty(index, delta){
   cart[index].qty += delta
-
-  if(cart[index].qty <= 0){
-    cart.splice(index,1)
-  }
+  if(cart[index].qty <= 0) cart.splice(index,1)
 
   saveCart()
   updateCartCount()
   renderCart()
+  unlockConfirmBtn()
 
-  if(cart.length === 0){
-    closePay()
-  }else{
-    openPay()
-  }
+  if(cart.length === 0) closePay()
+  else openPay()
 }
 
 function removeItemInPay(index){
@@ -257,12 +254,10 @@ function removeItemInPay(index){
   saveCart()
   updateCartCount()
   renderCart()
+  unlockConfirmBtn()
 
-  if(cart.length === 0){
-    closePay()
-  }else{
-    openPay()
-  }
+  if(cart.length === 0) closePay()
+  else openPay()
 }
 
 function showToast(text){
@@ -270,7 +265,21 @@ function showToast(text){
   if(!toast) return
   toast.innerText = text
   toast.classList.add("show")
-  setTimeout(()=>{
-    toast.classList.remove("show")
-  },2000)
+  setTimeout(()=> toast.classList.remove("show"),2000)
+}
+
+
+// ================= INIT =================
+
+updateCartCount()
+renderCart()
+
+const searchInput = document.getElementById("searchInput")
+if(searchInput){
+  searchInput.addEventListener("input", function(){
+    const keyword = this.value.toLowerCase()
+    document.querySelectorAll(".product").forEach(p=>{
+      p.style.display = p.innerText.toLowerCase().includes(keyword) ? "flex":"none"
+    })
+  })
 }
