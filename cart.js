@@ -133,8 +133,9 @@ orderText += line + "\n"
 
 if(i < cart.length - 1){
   orderItemsText += line + "\n"
-}else{
+}else {
   orderItemsText += line
+}
 })
 
   const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
