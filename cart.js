@@ -128,7 +128,7 @@ function openPay(){
     orderText += `${item.name}: ${item.price.toLocaleString()}đ x ${item.qty} = ${lineTotal.toLocaleString()}đ\n`
   })
 
-  const orderId = "HD" + Date.now()
+  const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
 
   document.getElementById("order-id").innerText = "Mã đơn: #" + orderId
   document.getElementById("pay-items").innerHTML = itemsHTML
