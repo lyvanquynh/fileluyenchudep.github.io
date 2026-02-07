@@ -178,7 +178,8 @@ const orderData = {
   order_id: orderId,
   time: formatTimeVN(),
   total: total,
-  text: orderItemsText
+  text: orderItemsText,
+  email: document.getElementById("customer-email")?.value || ""
 }
 
     fetch("https://script.google.com/macros/s/AKfycbxmcahk9MZoM9eIL7EkmUp3fQPsj-FEmpJyQttyjJk5bL8BRfbbJrERsI3qDDB63tA4/exec", {
