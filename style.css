@@ -852,6 +852,11 @@ font-weight:600;
 
 .pay-actions button{
   width:100%;
+  padding:12px 16px;
+  font-size:16px;
+  line-height:1.2;
+  height:auto;
+  min-height:44px;
 }
 
 /* nút - + nhỏ gọn */
