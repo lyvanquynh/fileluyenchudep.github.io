@@ -149,15 +149,13 @@ function openPay(){
     await navigator.clipboard.writeText(orderText)
 
     const orderData = {
-      order_id: orderId,
-      time: new Date().toISOString(),
-      items: cart,
-      total: total,
-      text: orderText,
-      userAgent: navigator.userAgent
-    }
+  order_id: orderId,
+  time: new Date().toISOString(),
+  total: total,
+  text: orderText
+}
 
-    fetch("https://script.google.com/macros/s/AKfycbw6No4QUmXCg5HnpqA5uyE_8hZEfkU_Cmz0pnGVFnbgmrDq0d2tykbpVzxBU_lZev8J/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxmcahk9MZoM9eIL7EkmUp3fQPsj-FEmpJyQttyjJk5bL8BRfbbJrERsI3qDDB63tA4/exec", {
       method: "POST",
       body: JSON.stringify(orderData),
       mode: "no-cors"
