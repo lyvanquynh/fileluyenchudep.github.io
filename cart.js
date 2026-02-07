@@ -142,10 +142,35 @@ function openPay(){
   orderText += "Tổng tiền: " + total.toLocaleString() + "đ\n"
   orderText += "Mã đơn: #" + orderId
 
-  document.getElementById("copy-order-btn").onclick = function(){
-    navigator.clipboard.writeText(orderText)
-    showToast("Đã copy nội dung đơn")
+  document.getElementById("copy-order-btn").onclick = async function(){
+
+  // copy trước
+  await navigator.clipboard.writeText(orderText)
+
+  // tạo dữ liệu đơn
+  const orderData = {
+    order_id: orderId,
+    time: new Date().toISOString(),
+    items: cart,
+    total: total,
+    text: orderText,
+    userAgent: navigator.userAgent
   }
+
+  // gửi về Google Sheet webhook
+  fetch("https://script.google.com/macros/s/AKfycbw6No4QUmXCg5HnpqA5uyE_8hZEfkU_Cmz0pnGVFnbgmrDq0d2tykbpVzxBU_lZev8J/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(orderData)
+  }).then(()=>{
+    showToast("Đã xác nhận & copy đơn")
+  }).catch(()=>{
+    showToast("Copy đơn OK — gửi log lỗi")
+  })
+
+}
 
 const payContent = document.getElementById("pay-content")
 
