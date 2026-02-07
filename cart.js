@@ -107,6 +107,7 @@ function openPay(){
   let total = 0
   let itemsHTML = ""
   let orderText = "Đơn hàng:\n"
+  let orderItemsText = ""
 
   cart.forEach((item,i)=>{
     const lineTotal = item.price * item.qty
@@ -125,7 +126,11 @@ function openPay(){
   </li>
 `
 
-    orderText += `${item.name}: ${item.price.toLocaleString()}đ x ${item.qty} = ${lineTotal.toLocaleString()}đ\n`
+    const line =
+  `${item.name}: ${item.price.toLocaleString()}đ x ${item.qty} = ${lineTotal.toLocaleString()}đ`
+
+orderText += line + "\n"
+orderItemsText += line + "\n"
   })
 
   const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
@@ -165,11 +170,11 @@ function openPay(){
 }
 
 const orderData = {
-    order_id: orderId,
-    time: formatTimeVN(),
-    total: total,
-    text: orderText
-  }
+  order_id: orderId,
+  time: formatTimeVN(),
+  total: total,
+  text: orderItemsText
+}
 
     fetch("https://script.google.com/macros/s/AKfycbxmcahk9MZoM9eIL7EkmUp3fQPsj-FEmpJyQttyjJk5bL8BRfbbJrERsI3qDDB63tA4/exec", {
       method: "POST",
