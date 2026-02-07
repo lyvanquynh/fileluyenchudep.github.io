@@ -148,12 +148,28 @@ function openPay(){
 
     await navigator.clipboard.writeText(orderText)
 
-    const orderData = {
-  order_id: orderId,
-  time: new Date().toISOString(),
-  total: total,
-  text: orderText
+    function formatTimeVN(){
+  const d = new Date()
+
+  const hh = d.getHours().toString().padStart(2,'0')
+  const mm = d.getMinutes().toString().padStart(2,'0')
+
+  const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+  const day = days[d.getDay()]
+
+  const dd = d.getDate().toString().padStart(2,'0')
+  const mo = (d.getMonth()+1).toString().padStart(2,'0')
+  const yyyy = d.getFullYear()
+
+  return `${hh}:${mm} - ${day} - ${dd}/${mo}/${yyyy}`
 }
+
+const orderData = {
+    order_id: orderId,
+    time: formatTimeVN(),
+    total: total,
+    text: orderText
+  }
 
     fetch("https://script.google.com/macros/s/AKfycbxmcahk9MZoM9eIL7EkmUp3fQPsj-FEmpJyQttyjJk5bL8BRfbbJrERsI3qDDB63tA4/exec", {
       method: "POST",
