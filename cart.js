@@ -77,6 +77,8 @@ function toggleCart(){
 function renderCart(){
   const list=document.getElementById("cart-items")
   const totalEl=document.getElementById("cart-total")
+  if(!list || !totalEl) return
+
   list.innerHTML=""
   let total=0
 
@@ -144,60 +146,47 @@ function openPay(){
 
   document.getElementById("copy-order-btn").onclick = async function(){
 
-  // copy trước
-  await navigator.clipboard.writeText(orderText)
+    await navigator.clipboard.writeText(orderText)
 
-  // tạo dữ liệu đơn
-  const orderData = {
-    order_id: orderId,
-    time: new Date().toISOString(),
-    items: cart,
-    total: total,
-    text: orderText,
-    userAgent: navigator.userAgent
+    const orderData = {
+      order_id: orderId,
+      time: new Date().toISOString(),
+      items: cart,
+      total: total,
+      text: orderText,
+      userAgent: navigator.userAgent
+    }
+
+    fetch("https://script.google.com/macros/s/AKfycbw6No4QUmXCg5HnpqA5uyE_8hZEfkU_Cmz0pnGVFnbgmrDq0d2tykbpVzxBU_lZev8J/exec", {
+      method: "POST",
+      body: JSON.stringify(orderData),
+      mode: "no-cors"
+    })
+
+    showToast("Đã xác nhận & copy đơn")
   }
 
-  // gửi về Google Sheet webhook
-  fetch("https://script.google.com/macros/s/AKfycbw6No4QUmXCg5HnpqA5uyE_8hZEfkU_Cmz0pnGVFnbgmrDq0d2tykbpVzxBU_lZev8J/exec", {
-  method: "POST",
-  body: JSON.stringify(orderData),
-  mode: "no-cors"
-})
+  const payContent = document.getElementById("pay-content")
 
-showToast("Đã xác nhận & copy đơn")
+  payContent.classList.add("zoom-from-cart")
+  document.getElementById("pay-modal").style.display="flex"
+  payContent.getBoundingClientRect()
+
+  requestAnimationFrame(()=>{
+    payContent.classList.remove("zoom-from-cart")
   })
-
 }
-
-const payContent = document.getElementById("pay-content")
-
-// trạng thái ban đầu: nhỏ
-payContent.classList.add("zoom-from-cart")
-
-document.getElementById("pay-modal").style.display="flex"
-
-// ép browser render trạng thái ban đầu
-payContent.getBoundingClientRect()
-
-// animate ra
-requestAnimationFrame(()=>{
-  payContent.classList.remove("zoom-from-cart")
-})
-}   // ← ĐÓNG openPay Ở ĐÂY
 
 function closePay(){
   const payContent = document.getElementById("pay-content")
 
-  // thêm class để zoom nhỏ
   payContent.classList.add("zoom-from-cart")
 
-  // sau 300ms mới ẩn popup
   setTimeout(()=>{
     document.getElementById("pay-modal").style.display="none"
     payContent.classList.remove("zoom-from-cart")
   },300)
 }
-
 
 updateCartCount()
 renderCart()
@@ -253,6 +242,7 @@ function removeItemInPay(index){
 
 function showToast(text){
   const toast = document.getElementById("toast")
+  if(!toast) return
   toast.innerText = text
   toast.classList.add("show")
   setTimeout(()=>{
