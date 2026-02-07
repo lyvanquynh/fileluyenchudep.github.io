@@ -182,7 +182,7 @@ const orderData = {
   email: document.getElementById("customer-email")?.value || ""
 }
 
-    fetch("https://script.google.com/macros/s/AKfycbzQws_lVOuK_Z3OBNqPrtHcj_q5oKZT6mzcub3nDOuQNJ00HIymfHNyXSZyo6iAOyMk/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxWbVsZPeoyVVIuiBhrGCldiacWjDdqTQ5wHFZe2fP34cSL9rnjFKTNnAs4oZSyQ1m3/exec", {
       method: "POST",
       body: JSON.stringify(orderData),
       mode: "no-cors"
