@@ -161,7 +161,7 @@ function openPay(){
   qty: item.qty,
   total: lineTotal
   })
-
+})   // ← DÒNG NÀY BẠN ĐANG THIẾU
   const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
 
   document.getElementById("order-id").innerText = "Mã đơn: #" + orderId
