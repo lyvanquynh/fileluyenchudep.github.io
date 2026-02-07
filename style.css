@@ -857,6 +857,7 @@ font-weight:600;
   line-height:1.2;
   height:auto;
   min-height:44px;
+  flex:0 0 auto;
 }
 
 /* nút - + nhỏ gọn */
@@ -967,9 +968,6 @@ font-weight:600;
 
 /* Khi màn hình nhỏ → xếp dọc */
 @media (max-width: 900px){
-  .pay-body{
-    flex-direction:column;
-  }
 
   .pay-close{
     position:static;
