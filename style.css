@@ -948,21 +948,11 @@ font-weight:600;
 
   /* ===== FIX NÚT POPUP THANH TOÁN KHÔNG ĐÈ NHAU ===== */
 
-  .pay-actions button{
-    flex:1 1 220px;
-    min-width:180px;
-  }
-
   .pay-close{
     width:100%;
   }
 }
 /* ===== FIX MODAL THANH TOÁN RESPONSIVE ===== */
-
-.pay-body{
-  display:flex;
-  gap:20px;
-}
 
 .pay-left,
 .pay-right{
