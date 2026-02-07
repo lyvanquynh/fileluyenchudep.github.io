@@ -926,4 +926,20 @@ font-weight:600;
   background:#ffd6d6;
 }
 
+  /* ===== FIX NÚT POPUP THANH TOÁN KHÔNG ĐÈ NHAU ===== */
+
+  .pay-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .pay-actions button{
+    flex:1 1 220px;
+    min-width:180px;
+  }
+
+  .pay-close{
+    width:100%;
+  }
 }
