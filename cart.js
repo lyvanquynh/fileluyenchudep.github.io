@@ -130,6 +130,7 @@ function openPay(){
   let itemsHTML = ""
   let orderText = "Đơn hàng:\n"
   let orderItemsText = ""
+  let orderItemsJson = []
 
   cart.forEach((item,i)=>{
     const lineTotal = item.price * item.qty
@@ -153,6 +154,12 @@ function openPay(){
 
     orderText += line + "\n"
     orderItemsText += (i < cart.length-1) ? line+"\n" : line
+
+    orderItemsJson.push({
+  name: item.name,
+  price: item.price,
+  qty: item.qty,
+  total: lineTotal
   })
 
   const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
@@ -202,6 +209,7 @@ if(!emailPattern.test(email)){
       time: formatTimeVN(),
       total: total,
       text: orderItemsText,
+      items: orderItemsJson,
       email: email
     }
 
