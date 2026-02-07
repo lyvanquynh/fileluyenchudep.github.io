@@ -839,6 +839,20 @@ font-weight:600;
   cursor:pointer;
 }
 
+/* ===== FIX NÚT POPUP — RESPONSIVE MỌI KÍCH THƯỚC ===== */
+
+.pay-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:10px;
+}
+
+.pay-actions button{
+  flex:1 1 240px;
+  min-width:200px;
+}
+
 /* nút - + nhỏ gọn */
 #pay-items .qty-btn{
   width:22px;
