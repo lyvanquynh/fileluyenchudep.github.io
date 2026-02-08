@@ -1,6 +1,11 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 let confirmBtnTimer = null   // ===== thêm =====
 
+// ===== CẤU HÌNH QR NGÂN HÀNG =====
+const BANK_CODE = "ICB"              // Vietinbank
+const BANK_ACC  = "104867081363"
+const BANK_NAME = "Ly Van Quynh"
+
 // Chuẩn hoá cart cũ (chưa có qty)
 cart = cart.map(item=>{
   if(!item.qty){
@@ -167,6 +172,19 @@ function openPay(){
   document.getElementById("order-id").innerText = "Mã đơn: #" + orderId
   document.getElementById("pay-items").innerHTML = itemsHTML
   document.getElementById("pay-amount").innerText = total.toLocaleString() + "đ"
+
+// ===== SINH QR ĐỘNG =====
+const qrUrl =
+  `https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
+  `?amount=${total}` +
+  `&addInfo=${orderId}` +
+  `&accountName=${encodeURIComponent(BANK_NAME)}`
+
+const qrImg = document.getElementById("qr-img")
+const qrLink = document.getElementById("qr-link")
+
+if(qrImg) qrImg.src = qrUrl
+if(qrLink) qrLink.href = qrUrl
 
   document.getElementById("pay-text").innerText =
     "Hãy chuyển khoản đúng số tiền.\nNhấn Copy nội dung đơn hàng\nSau đó chụp bill và gửi Zalo: 0977 727 089"
