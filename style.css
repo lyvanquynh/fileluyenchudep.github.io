@@ -975,3 +975,13 @@ font-weight:600;
     width:100%;
   }
 }
+.pay-guide{
+  margin:10px 0 18px;
+  padding:12px 14px;
+  background:#f5f7ff;
+  border-left:4px solid #2b7cff;
+  border-radius:8px;
+  text-align:left;
+  font-size:14px;
+  line-height:1.6;
+}

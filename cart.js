@@ -186,11 +186,12 @@ const qrLink = document.getElementById("qr-link")
 if(qrImg) qrImg.src = qrUrl
 if(qrLink) qrLink.href = qrUrl
 
-  document.getElementById("pay-text").innerText =
-  "Hướng dẫn thanh toán:\n" +
-  "Bước 1. Kiểm tra thanh toán đúng số tiền\n" +
-  "Bước 2. Nhập Email nhận file và bấm \"Xác nhận & Copy nội dung đơn\"\n" +
-  "(Tài liệu sẽ được gửi tự động qua email trong thời gian 1 - 3 phút)"
+  document.getElementById("pay-text").innerHTML = `
+<b>Hướng dẫn thanh toán:</b><br>
+<b>Bước 1:</b> Kiểm tra thanh toán đúng số tiền<br>
+<b>Bước 2:</b> Nhập Email nhận file và bấm "Xác nhận & Copy nội dung đơn"<br>
+<i>(Tài liệu sẽ được gửi tự động qua email trong thời gian 1 - 3 phút)</i>
+`
 
   orderText += "Tổng tiền: " + total.toLocaleString() + "đ\n"
   orderText += "Mã đơn: #" + orderId
