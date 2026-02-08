@@ -187,7 +187,10 @@ if(qrImg) qrImg.src = qrUrl
 if(qrLink) qrLink.href = qrUrl
 
   document.getElementById("pay-text").innerText =
-    "Hãy chuyển khoản đúng số tiền.\nNhấn Copy nội dung đơn hàng\nSau đó chụp bill và gửi Zalo: 0977 727 089"
+  "Hướng dẫn thanh toán:\n" +
+  "Bước 1. Kiểm tra thanh toán đúng số tiền\n" +
+  "Bước 2. Nhập Email nhận file và bấm \"Xác nhận & Copy nội dung đơn\"\n" +
+  "(Tài liệu sẽ được gửi tự động qua email trong thời gian 1 - 3 phút)"
 
   orderText += "Tổng tiền: " + total.toLocaleString() + "đ\n"
   orderText += "Mã đơn: #" + orderId
