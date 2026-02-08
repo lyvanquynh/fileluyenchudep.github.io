@@ -1,0 +1,91 @@
+[
+  {
+    "id": "COMBO_ALL",
+    "name": "Combo Trọn bộ (All in One)",
+    "price": 899000
+  },
+  {
+    "id": "COMBO_GV",
+    "name": "Combo Giáo viên Tiểu học",
+    "price": 699000
+  },
+  {
+    "id": "COMBO_CB",
+    "name": "Combo Luyện chữ cơ bản",
+    "price": 129000
+  },
+  {
+    "id": "COMBO_CT",
+    "name": "Combo Chữ sáng tạo",
+    "price": 199000
+  },
+
+  {
+    "id": "A1",
+    "name": "A1 - Giáo trình kỹ thuật LCĐ",
+    "price": 600000
+  },
+  {
+    "id": "A2",
+    "name": "A2 - Giáo án dạy chữ nhỡ - TTH",
+    "price": 150000
+  },
+  {
+    "id": "A3",
+    "name": "A3 - Giáo án dạy chữ nhỏ - TH",
+    "price": 150000
+  },
+  {
+    "id": "A4",
+    "name": "A4 – Hạ cỡ chữ tròn li",
+    "price": 69000
+  },
+  {
+    "id": "A5",
+    "name": "A5 – Hạ cỡ nhỏ chữ chuẩn BGD",
+    "price": 89000
+  },
+
+  {
+    "id": "E1",
+    "name": "E1 – Chữ sáng tạo (Cơ bản)",
+    "price": 69000
+  },
+  {
+    "id": "E2",
+    "name": "E2 - Copperplate Calligraphy",
+    "price": 89000
+  },
+  {
+    "id": "E3",
+    "name": "E3 - Modern Calligraphy",
+    "price": 89000
+  },
+  {
+    "id": "E4",
+    "name": "E4 - Unical Calligraphy",
+    "price": 59000
+  },
+
+  {
+    "id": "G1",
+    "name": "G1 - Luyện viết nhanh/Tốc ký",
+    "price": 99000
+  },
+
+  {
+    "id": "COURSE1",
+    "name": "KHÓA 1 – Thực hành luyện viết chữ đẹp trên iPad",
+    "price": 999000
+  },
+  {
+    "id": "COURSE2",
+    "name": "KHÓA 2 – Thiết kế file vở in ấn trên iPad",
+    "price": 1999000
+  },
+  {
+    "id": "COURSE_COMBO",
+    "name": "COMBO 2 KHÓA HỌC",
+    "price": 2399000
+  }
+]
