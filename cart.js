@@ -3,8 +3,8 @@ let confirmBtnTimer = null   // ===== thêm =====
 
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
-const BANK_ACC  = "104867081363"
-const BANK_NAME = "Ly Van Quynh"
+const BANK_ACC  = "100867092003"
+const BANK_NAME = "Dinh Thi Hong"
 
 // Chuẩn hoá cart cũ (chưa có qty)
 cart = cart.map(item=>{
