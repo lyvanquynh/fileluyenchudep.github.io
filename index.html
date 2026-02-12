@@ -158,7 +158,13 @@
 
 <div class="product">
 <span class="badge">Bán chạy</span>
-<img src="A1-Giaotrinhkythuat/thumb.jpg" loading="lazy">
+
+<img src="A1-Giaotrinhkythuat/thumb.jpg"
+     loading="lazy"
+     data-gallery="A1"
+     style="cursor:pointer">
+
+
 <div class="product-content">
 <h3>A1 - Giáo trình kỹ thuật LCĐ</h3>
 <p>Hướng dẫn kỹ thuật viết chữ đẹp</p>
@@ -168,7 +174,10 @@
 <span class="new">600.000đ</span>
 </div>
 <div class="product-actions">
-<a href="A1-Giaotrinhkythuat/" target="_blank">Xem chi tiết</a>
+
+<button data-gallery="A1">Xem chi tiết</button>
+
+
 <button class="btn-cart" onclick="addToCart('A1 - Giáo trình kỹ thuật LCĐ',600000)">Thêm giỏ</button>
 </div>
 </div>
@@ -444,5 +453,23 @@
 
 <div id="toast"></div>
 <script src="cart.js" defer></script>
+
+<!-- ===== PRODUCT GALLERY POPUP ===== -->
+<div id="gallery-modal">
+  <div class="gallery-overlay"></div>
+
+  <div class="gallery-box">
+    <button class="gallery-close">✕</button>
+
+    <button class="gallery-nav prev">‹</button>
+    <img id="gallery-main" src="">
+    <button class="gallery-nav next">›</button>
+
+    <div id="gallery-thumbs"></div>
+  </div>
+</div>
+
+<script src="gallery.js"></script>
+
 </body>
 </html>
