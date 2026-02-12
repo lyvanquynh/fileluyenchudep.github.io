@@ -30,7 +30,7 @@ function addToCart(name, price){
   saveCart()
   updateCartCount()
   renderCart()
-  showToast("Đã thêm " + name + " vào giỏ")
+    showToast("Đã thêm " + name + " vào giỏ", "success")
 }
 
 function removeItem(index){
@@ -125,9 +125,9 @@ function unlockConfirmBtn(){
 
 function openPay(){
   if(cart.length==0){
-    alert("Giỏ hàng trống")
-    return
-  }
+  showToast("Giỏ hàng trống", "warn")
+  return
+}
 
   unlockConfirmBtn() // ===== thêm =====
 
@@ -209,7 +209,7 @@ if(qrLink) qrLink.href = qrUrl
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 if(!emailPattern.test(email)){
-  showToast("Email không hợp lệ")
+  showToast("Email không hợp lệ", "error")
   emailInput?.focus()
   return
 }
@@ -241,7 +241,7 @@ if(!emailPattern.test(email)){
       mode: "no-cors"
     })
 
-    showToast("Đã xác nhận & copy đơn")
+    showToast("Đã xác nhận & copy đơn", "success")
   }
 
   // ===== mở khóa nếu sửa email =====
@@ -249,6 +249,7 @@ if(!emailPattern.test(email)){
   if(emailInput){
     emailInput.oninput = unlockConfirmBtn
   }
+
 
   const payContent = document.getElementById("pay-content")
   payContent.classList.add("zoom-from-cart")
@@ -293,13 +294,50 @@ function removeItemInPay(index){
   else openPay()
 }
 
-function showToast(text){
-  const toast = document.getElementById("toast")
-  if(!toast) return
-  toast.innerText = text
-  toast.classList.add("show")
-  setTimeout(()=> toast.classList.remove("show"),2000)
+// ===== TOAST PRO SYSTEM =====
+
+const toastQueue = []
+let toastBusy = false
+
+function showToast(msg, type="success"){
+  toastQueue.push({msg,type})
+  if(!toastBusy) runNextToast()
 }
+
+function runNextToast(){
+  if(!toastQueue.length){
+    toastBusy = false
+    return
+  }
+
+  toastBusy = true
+
+  const {msg,type} = toastQueue.shift()
+  const el = document.getElementById("toast")
+  if(!el) return
+
+  // reset class
+  el.className = ""
+  el.id = "toast"
+  el.classList.add(type)
+
+  const icon =
+    type==="success" ? "✅" :
+    type==="error"   ? "❌" :
+                       "⚠️"
+
+  el.innerHTML = `<span class="toast-icon">${icon}</span>${msg}`
+  el.classList.add("show")
+
+  // rung nhẹ mobile
+  if(navigator.vibrate) navigator.vibrate(25)
+
+  setTimeout(()=>{
+    el.classList.remove("show")
+    setTimeout(runNextToast, 250)
+  }, 1800)
+}
+
 
 
 // ================= INIT =================
