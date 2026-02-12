@@ -1,4 +1,3 @@
-```javascript
 // ===== PRODUCT GALLERY CONFIG =====
 // path = thư mục CHỨA ảnh (có /images theo cấu trúc repo của bạn)
 // count = số ảnh
@@ -157,16 +156,29 @@ document.addEventListener("click", e=>{
 
 // ===== SWIPE MOBILE =====
 
-let touchX = 0
+document.addEventListener("DOMContentLoaded", ()=>{
 
-mainImg.addEventListener("touchstart", e=>{
-  touchX = e.changedTouches[0].screenX
-})
+  const modal      = document.getElementById("gallery-modal")
+  const mainImg    = document.getElementById("gallery-main")
+  const thumbsBox  = document.getElementById("gallery-thumbs")
 
-mainImg.addEventListener("touchend", e=>{
-  const dx = e.changedTouches[0].screenX - touchX
-  if(Math.abs(dx) > 40){
-    dx < 0 ? nextImg() : prevImg()
+  if(!modal || !mainImg || !thumbsBox){
+    console.warn("Gallery modal elements not found")
+    return
   }
+
+  let touchX = 0
+
+  mainImg.addEventListener("touchstart", e=>{
+    touchX = e.changedTouches[0].screenX
+  })
+
+  mainImg.addEventListener("touchend", e=>{
+    const dx = e.changedTouches[0].screenX - touchX
+    if(Math.abs(dx) > 40){
+      dx < 0 ? nextImg() : prevImg()
+    }
+  })
+
 })
-```
+
