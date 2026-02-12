@@ -14,7 +14,7 @@ const PRODUCT_GALLERY = {
   "E1": { path:"E1-SangtaoQuyen1Coban/images", count:20, ext:"jpg" },
   "E2": { path:"E2-SangtaoQuyen2Nangcao/images", count:20, ext:"jpg" },
   "E3": { path:"E3-SangtaoModernCalligraphy/images", count:20, ext:"jpg" },
-  "E4": { path:"E4-Chuvietnghethuat/images", count:20, ext:"jpg" }
+  "E4": { path:"E4-Chuvietnghethuat/images", count:20, ext:"jpg" },
   "G1": { path:"G1-Luyenviettocky/images", count:20, ext:"jpg" }
 }
 
