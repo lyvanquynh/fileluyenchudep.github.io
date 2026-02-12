@@ -6,15 +6,16 @@
 const PRODUCT_GALLERY = {
   "A1": { path:"A1-Giaotrinhkythuat/images", count:20, ext:"jpg" },
 
-  "A2": { path:"A2-Thuc hanhTTH5mm/images", count:12, ext:"jpg" },
-  "A3": { path:"A3-ThuchanhTH2.5mm/images", count:12, ext:"jpg" },
-  "A4": { path:"A4-Hacotronli/images", count:10, ext:"jpg" },
-  "A5": { path:"A5-HaCoChuNho-ChuChuan-TieuHoc/images", count:10, ext:"jpg" },
+  "A2": { path:"A2-Thuc hanhTTH5mm/images", count:20, ext:"jpg" },
+  "A3": { path:"A3-ThuchanhTH2.5mm/images", count:20, ext:"jpg" },
+  "A4": { path:"A4-Hacotronli/images", count:20, ext:"jpg" },
+  "A5": { path:"A5-HaCoChuNho-ChuChuan-TieuHoc/images", count:20, ext:"jpg" },
 
-  "E1": { path:"E1-SangtaoQuyen1Coban/images", count:8, ext:"jpg" },
-  "E2": { path:"E2-SangtaoQuyen2Nangcao/images", count:8, ext:"jpg" },
-  "E3": { path:"E3-SangtaoModernCalligraphy/images", count:8, ext:"jpg" },
-  "E4": { path:"E4-Chuvietnghethuat/images", count:8, ext:"jpg" }
+  "E1": { path:"E1-SangtaoQuyen1Coban/images", count:20, ext:"jpg" },
+  "E2": { path:"E2-SangtaoQuyen2Nangcao/images", count:20, ext:"jpg" },
+  "E3": { path:"E3-SangtaoModernCalligraphy/images", count:20, ext:"jpg" },
+  "E4": { path:"E4-Chuvietnghethuat/images", count:20, ext:"jpg" }
+  "G1": { path:"G1-Luyenviettocky/images", count:20, ext:"jpg" }
 }
 
 
