@@ -1104,3 +1104,23 @@ font-weight:600;
     height:54px;
   }
 }
+
+#gallery-counter{
+  position:absolute;
+  top:10px;
+  left:14px;
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:13px;
+}
+
+.gallery-cart-row{
+  margin-top:10px;
+  text-align:center;
+}
+
+#gallery-main{
+  transition:opacity .15s;
+}
