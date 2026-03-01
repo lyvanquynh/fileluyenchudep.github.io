@@ -390,10 +390,6 @@ fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79C
   mode: "no-cors"
 })
 
-showToast(
-  "Đã thanh toán, vui lòng đợi 1-3 phút, sản phẩm sẽ được gửi qua email của quý khách. Nếu có thắc mắc vui lòng liên hệ Zalo: 0977 727 089",
-  "success"
-)
 
 cart = []
 saveCart()
