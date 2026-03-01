@@ -1,227 +1,229 @@
-// ===== PRODUCT GALLERY CONFIG =====
-// path = thư mục CHỨA ảnh (có /images theo cấu trúc repo của bạn)
-// count = số ảnh
-// ext = đuôi file (mặc định jpg nếu không khai báo)
+// ======================
+// GALLERY PRO VERSION
+// ======================
 
-const PRODUCT_INFO = {
-  A1:{name:"A1 - Giáo trình kỹ thuật LCĐ", price:600000},
-  A2:{name:"A2 - Giáo án dạy chữ nhỡ - TTH", price:150000},
-  A3:{name:"A3 - Giáo án dạy chữ nhỏ - TH", price:150000},
-  A4:{name:"A4 – Hạ cỡ chữ tròn li", price:69000},
-  A5:{name:"A5 – Hạ cỡ nhỏ chữ chuẩn BGD", price:89000},
-
-  E1:{name:"E1 – Chữ sáng tạo (Cơ bản)", price:69000},
-  E2:{name:"E2 - Copperplate Calligraphy", price:89000},
-  E3:{name:"E3 - Modern Calligraphy", price:89000},
-  E4:{name:"E4 - Unical Calligraphy", price:59000},
-
-  G1:{name:"G1 - Luyện viết nhanh/Tốc ký", price:99000}
-}
-
-const PRODUCT_GALLERY = {
-  "A1": { path:"A1-Giaotrinhkythuat/images", count:20, ext:"jpg" },
-
-  "A2": { path:"A2-Thuc hanhTTH5mm/images", count:20, ext:"jpg" },
-  "A3": { path:"A3-ThuchanhTH2.5mm/images", count:20, ext:"jpg" },
-  "A4": { path:"A4-Hacotronli/images", count:20, ext:"jpg" },
-  "A5": { path:"A5-HaCoChuNho-ChuChuan-TieuHoc/images", count:20, ext:"jpg" },
-
-  "E1": { path:"E1-SangtaoQuyen1Coban/images", count:20, ext:"jpg" },
-  "E2": { path:"E2-SangtaoQuyen2Nangcao/images", count:20, ext:"jpg" },
-  "E3": { path:"E3-SangtaoModernCalligraphy/images", count:20, ext:"jpg" },
-  "E4": { path:"E4-Chuvietnghethuat/images", count:20, ext:"jpg" },
-  "G1": { path:"G1-Luyenviettocky/images", count:20, ext:"jpg" }
+const galleryState = {
+  key: null,
+  images: [],
+  index: 0,
+  overlay: null,
+  mainImg: null,
+  thumbsWrap: null,
+  spinner: null
 }
 
 
-// ===== STATE =====
+// ======================
+// CẤU HÌNH SẢN PHẨM
+// ======================
 
-let gKey = null
-let gImages = []
-let gIndex = 0
-
-const modal      = document.getElementById("gallery-modal")
-const mainImg    = document.getElementById("gallery-main")
-const thumbsBox  = document.getElementById("gallery-thumbs")
-
-if(!modal || !mainImg || !thumbsBox){
-  console.warn("Gallery modal elements not found")
+const galleryConfig = {
+  tronbo: { prefix: "images/tronbo_", count: 20 },
+  giaovien: { prefix: "images/giaovien_", count: 20 },
+  hocsinh: { prefix: "images/hocsinh_", count: 20 },
+  sangtao: { prefix: "images/sangtao_", count: 20 }
 }
 
 
-// ===== BUILD IMAGE LIST =====
+// ======================
+// BUILD IMAGE LIST
+// ======================
 
 function buildImages(key){
-  const cfg = PRODUCT_GALLERY[key]
+  const cfg = galleryConfig[key]
   if(!cfg) return []
 
-  const ext = cfg.ext || "jpg"
   const arr = []
-
   for(let i=1;i<=cfg.count;i++){
-    const num = i.toString().padStart(2,"0")   // 01,02,03
-    arr.push(`${cfg.path}/${num}.${ext}`)
+    const num = String(i).padStart(2,"0")
+    arr.push(`${cfg.prefix}${num}.webp`)
   }
-
   return arr
 }
 
 
-// ===== OPEN / CLOSE =====
+// ======================
+// OPEN GALLERY
+// ======================
 
 function openGallery(key){
-  gKey = key
-  gImages = buildImages(key)
-  if(!gImages.length) return
 
-  gIndex = 0
+  // RESET STATE
+  galleryState.key = key
+  galleryState.images = buildImages(key)
+  galleryState.index = 0
+
+  if(!galleryState.images.length) return
+
+  createOverlay()
   renderMain()
   renderThumbs()
 
-  modal.classList.add("show")
-  document.body.style.overflow = "hidden"
+  galleryState.overlay.style.display = "flex"
 }
+
+
+// ======================
+// CREATE OVERLAY
+// ======================
+
+function createOverlay(){
+
+  if(galleryState.overlay) return
+
+  const overlay = document.createElement("div")
+  overlay.className = "gallery-overlay"
+
+  overlay.innerHTML = `
+    <div class="gallery-box">
+      <span class="gallery-close">✕</span>
+      <div class="gallery-main">
+        <div class="gallery-spinner"></div>
+        <img>
+      </div>
+      <div class="gallery-thumbs"></div>
+    </div>
+  `
+
+  document.body.appendChild(overlay)
+
+  galleryState.overlay = overlay
+  galleryState.mainImg = overlay.querySelector("img")
+  galleryState.thumbsWrap = overlay.querySelector(".gallery-thumbs")
+  galleryState.spinner = overlay.querySelector(".gallery-spinner")
+
+  overlay.querySelector(".gallery-close").onclick = closeGallery
+
+  enableSwipe()
+}
+
+
+// ======================
+// CLOSE
+// ======================
 
 function closeGallery(){
-  modal.classList.remove("show")
-  document.body.style.overflow = ""
+  galleryState.overlay.style.display = "none"
 }
 
 
-// ===== RENDER =====
+// ======================
+// RENDER MAIN IMAGE
+// ======================
 
 function renderMain(){
-  mainImg.style.opacity = 0
 
-  setTimeout(()=>{
-    mainImg.src = gImages[gIndex]
-    mainImg.style.opacity = 1
-  },120)
+  const src = galleryState.images[galleryState.index]
+  if(!src) return
 
-  const next = new Image()
-  next.src = gImages[(gIndex+1)%gImages.length]
+  galleryState.spinner.style.display = "block"
+  galleryState.mainImg.style.opacity = 0
 
+  const img = new Image()
+  img.src = src
+
+  img.onload = ()=>{
+    galleryState.mainImg.src = src
+    galleryState.spinner.style.display = "none"
+    galleryState.mainImg.style.opacity = 1
+  }
+
+  preloadNext()
   updateThumbActive()
 }
+
+
+// ======================
+// PRELOAD NEXT
+// ======================
+
+function preloadNext(){
+  const nextIndex = (galleryState.index + 1) % galleryState.images.length
+  const preload = new Image()
+  preload.src = galleryState.images[nextIndex]
+}
+
+
+// ======================
+// RENDER THUMBS
+// ======================
 
 function renderThumbs(){
-  thumbsBox.innerHTML = ""
 
-  gImages.forEach((src,i)=>{
-    const im = document.createElement("img")
-    im.loading = "lazy"
-    im.src = src
-    im.onclick = ()=>{
-      gIndex = i
+  galleryState.thumbsWrap.innerHTML = ""
+
+  galleryState.images.forEach((src,i)=>{
+
+    const thumb = document.createElement("img")
+    thumb.src = src
+    thumb.loading = "lazy"
+
+    thumb.onclick = ()=>{
+      galleryState.index = i
       renderMain()
     }
-    thumbsBox.appendChild(im)
-  })
 
-  updateThumbActive()
+    galleryState.thumbsWrap.appendChild(thumb)
+  })
 }
+
+
+// ======================
+// UPDATE ACTIVE THUMB
+// ======================
 
 function updateThumbActive(){
-  const list = thumbsBox.querySelectorAll("img")
 
-  list.forEach((im,i)=>{
-    im.classList.toggle("active", i === gIndex)
+  const thumbs = galleryState.thumbsWrap.querySelectorAll("img")
 
-    if(i === gIndex){
-      im.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest"
-      })
-    }
+  thumbs.forEach((img,i)=>{
+    img.classList.toggle("active", i===galleryState.index)
+  })
+}
+
+
+// ======================
+// SWIPE SUPPORT
+// ======================
+
+function enableSwipe(){
+
+  let startX = 0
+
+  galleryState.mainImg.addEventListener("touchstart", e=>{
+    startX = e.touches[0].clientX
   })
 
-  updateCounter()
+  galleryState.mainImg.addEventListener("touchend", e=>{
+    const diff = e.changedTouches[0].clientX - startX
+
+    if(diff > 50){
+      prevImage()
+    }else if(diff < -50){
+      nextImage()
+    }
+  })
 }
 
-function updateCounter(){
-  const el = document.getElementById("gallery-counter")
-  if(!el) return
-  el.textContent = `${gIndex+1}/${gImages.length}`
-}
 
-
-// ===== NAVIGATION =====
-
-function nextImg(){
-  gIndex = (gIndex + 1) % gImages.length
+function nextImage(){
+  galleryState.index = (galleryState.index + 1) % galleryState.images.length
   renderMain()
 }
 
-function prevImg(){
-  gIndex = (gIndex - 1 + gImages.length) % gImages.length
+function prevImage(){
+  galleryState.index =
+    (galleryState.index - 1 + galleryState.images.length) % galleryState.images.length
   renderMain()
 }
 
 
-// ===== BUTTON EVENTS =====
-
-document.querySelector(".gallery-close")?.addEventListener("click", closeGallery)
-document.querySelector(".gallery-overlay")?.addEventListener("click", closeGallery)
-document.querySelector(".gallery-nav.next")?.addEventListener("click", nextImg)
-document.querySelector(".gallery-nav.prev")?.addEventListener("click", prevImg)
-
-
-// ===== KEYBOARD =====
-
-document.addEventListener("keydown", e=>{
-  if(!modal.classList.contains("show")) return
-
-  if(e.key === "Escape")     closeGallery()
-  if(e.key === "ArrowRight") nextImg()
-  if(e.key === "ArrowLeft")  prevImg()
-})
-
-
-// ===== CLICK BIND data-gallery =====
+// ======================
+// CLICK DELEGATION
+// ======================
 
 document.addEventListener("click", e=>{
   const el = e.target.closest("[data-gallery]")
   if(!el) return
-
-  e.preventDefault()
-  const key = el.dataset.gallery
-  openGallery(key)
-})
-
-
-// ===== SWIPE MOBILE =====
-
-document.addEventListener("DOMContentLoaded", ()=>{
-
-  const modal      = document.getElementById("gallery-modal")
-  const mainImg    = document.getElementById("gallery-main")
-  const thumbsBox  = document.getElementById("gallery-thumbs")
-
-  if(!modal || !mainImg || !thumbsBox){
-    console.warn("Gallery modal elements not found")
-    return
-  }
-
-  let touchX = 0
-
-  mainImg.addEventListener("touchstart", e=>{
-    touchX = e.changedTouches[0].screenX
-  })
-
-  mainImg.addEventListener("touchend", e=>{
-    const dx = e.changedTouches[0].screenX - touchX
-    if(Math.abs(dx) > 40){
-      dx < 0 ? nextImg() : prevImg()
-    }
-  })
-
-})
-
-document.getElementById("gallery-add-cart")?.addEventListener("click", ()=>{
-  if(!gKey) return
-  const p = PRODUCT_INFO[gKey]
-  if(!p) return
-
-  addToCart(p.name, p.price)
+  openGallery(el.dataset.gallery)
 })
