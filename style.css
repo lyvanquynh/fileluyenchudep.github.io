@@ -1153,3 +1153,8 @@ font-weight:600;
 #gallery-main{
   transition:opacity .15s;
 }
+
+/* ===== FIX IOS ZOOM INPUT EMAIL ===== */
+#customer-email{
+  font-size:16px;
+}
