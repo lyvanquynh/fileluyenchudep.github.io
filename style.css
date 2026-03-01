@@ -1158,3 +1158,50 @@ font-weight:600;
 #customer-email{
   font-size:16px;
 }
+
+/* ===== POPUP STEP 1 FIX GIAO DIỆN PC ===== */
+
+#pay-content{
+  max-width:600px;   /* popup rộng hơn chút */
+}
+
+#customer-email{
+  width:100%;
+  font-size:16px;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  box-sizing:border-box;
+}
+
+#copy-order-btn{
+  width:100%;
+  background:linear-gradient(90deg,#1e88e5,#1565c0);
+  color:white;
+  border:none;
+  padding:14px;
+  font-size:16px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+#copy-order-btn:hover{
+  background:linear-gradient(90deg,#1976d2,#0d47a1);
+}
+
+.pay-close{
+  width:100%;
+  margin-top:10px;
+  background:#e53935;
+  color:white;
+  border:none;
+  padding:12px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.pay-close:hover{
+  background:#b71c1c;
+}
