@@ -797,10 +797,9 @@ font-weight:600;
 }
 
 .pay-body{
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
+  display:flex;
+  flex-direction:column;
   gap:16px;
-  height:60vh;     /* cố định chiều cao */
 }
 
 .pay-left{
