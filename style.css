@@ -797,9 +797,10 @@ font-weight:600;
 }
 
 .pay-body{
-  display:flex;
-  flex-direction:column;
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
   gap:16px;
+  height:60vh;     /* cố định chiều cao */
 }
 
 .pay-left{
@@ -1014,6 +1015,144 @@ font-weight:600;
   line-height:1.6;
 }
 
+/* ===== GALLERY POPUP ===== */
+
+#gallery-modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  z-index:3000;
+}
+
+#gallery-modal.show{
+  display:block;
+}
+
+.gallery-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.75);
+}
+
+.gallery-box{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:min(1000px,95vw);
+  background:#111;
+  border-radius:14px;
+  padding:14px 14px 10px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+#gallery-main{
+  width:100%;
+  max-height:70vh;
+  object-fit:contain;
+  display:block;
+  border-radius:10px;
+  background:#000;
+}
+
+/* nav buttons */
+
+.gallery-nav{
+  position:absolute;
+  top:45%;
+  transform:translateY(-50%);
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,255,255,.15);
+  color:white;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.gallery-nav.prev{ left:10px }
+.gallery-nav.next{ right:10px }
+
+.gallery-nav:hover{
+  background:rgba(255,255,255,.3);
+}
+
+/* close */
+
+.gallery-close{
+  position:absolute;
+  top:6px;
+  right:8px;
+  border:none;
+  background:transparent;
+  color:white;
+  font-size:26px;
+  cursor:pointer;
+}
+
+/* thumbs */
+
+#gallery-thumbs{
+  margin-top:10px;
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:4px;
+}
+
+#gallery-thumbs img{
+  width:84px;
+  height:64px;
+  object-fit:cover;
+  border-radius:6px;
+  opacity:.6;
+  cursor:pointer;
+  border:2px solid transparent;
+  flex:0 0 auto;
+}
+
+#gallery-thumbs img.active{
+  opacity:1;
+  border-color:#2b7cff;
+}
+
+/* mobile */
+
+@media(max-width:600px){
+  .gallery-box{
+    padding:10px;
+  }
+
+  #gallery-main{
+    max-height:60vh;
+  }
+
+  #gallery-thumbs img{
+    width:70px;
+    height:54px;
+  }
+}
+
+#gallery-counter{
+  position:absolute;
+  top:10px;
+  left:14px;
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:13px;
+}
+
+.gallery-cart-row{
+  margin-top:10px;
+  text-align:center;
+}
+
+#gallery-main{
+  transition:opacity .15s;
+}
 
 /* ===== FIX IOS ZOOM INPUT EMAIL ===== */
 #customer-email{
@@ -1065,333 +1204,4 @@ font-weight:600;
 
 .pay-close:hover{
   background:#b71c1c;
-}
-
-/* ===== NÚT ĐÓNG STEP 1 MÀU XÁM ===== */
-#pay-modal .pay-close{
-  width:100%;
-  margin-top:10px;
-  background:#9e9e9e !important;
-  color:white;
-  border:none;
-  padding:12px;
-  border-radius:8px;
-  cursor:pointer;
-  transition:0.2s;
-}
-
-#pay-modal .pay-close:hover{
-  background:#757575 !important;
-}
-
-/* ===== FIX NÚT XÁC NHẬN ĐÃ THANH TOÁN STEP 2 ===== */
-#pay-step2-modal .pay-btn{
-  background:linear-gradient(90deg,#1e88e5,#1565c0) !important;
-  font-size:16px;
-  padding:14px;
-}
-
-#pay-step2-modal .pay-btn:hover{
-  background:linear-gradient(90deg,#1976d2,#0d47a1) !important;
-}
-
-/* ===== STEP 3 CLOSE BUTTON ===== */
-#pay-step3-modal .step3-close{
-  width:100%;
-  background:#9e9e9e;
-  color:white;
-  border:none;
-  padding:12px;
-  border-radius:8px;
-  cursor:pointer;
-  transition:0.2s;
-}
-
-#pay-step3-modal .step3-close:hover{
-  background:#757575;
-}
-
-/* ================= STEP 3 POPUP – UPGRADE ================= */
-
-.step3-overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(6px);
-  justify-content:center;
-  align-items:center;
-  z-index:1000;
-  animation:fadeIn .3s ease;
-}
-
-.step3-box{
-  background:white;
-  width:95%;
-  max-width:460px;
-  border-radius:20px;
-  padding:28px;
-  text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,.3);
-  animation:scaleIn .3s ease;
-}
-
-.step3-icon{
-  width:70px;
-  height:70px;
-  margin:0 auto 16px;
-  background:#4caf50;
-  color:white;
-  font-size:32px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 6px 20px rgba(76,175,80,.4);
-}
-
-.step3-title{
-  font-size:20px;
-  font-weight:bold;
-  color:#2e7d32;
-  margin-bottom:10px;
-}
-
-.step3-message{
-  margin-bottom:12px;
-  line-height:1.6;
-}
-
-.step3-note{
-  background:#f5f5f5;
-  padding:12px;
-  border-radius:10px;
-  font-size:14px;
-  margin-bottom:16px;
-}
-
-.step3-close{
-  width:100%;
-  background:#9e9e9e;
-  color:white;
-  border:none;
-  padding:12px;
-  border-radius:8px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.step3-close:hover{
-  background:#757575;
-}
-
-/* Animation */
-@keyframes scaleIn{
-  from{
-    transform:scale(.9);
-    opacity:0;
-  }
-  to{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-
-@keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
-}
-
-/* ===== STEP 2 CONFIRM BUTTON GREEN ===== */
-#pay-step2-modal .step2-confirm{
-  width:100%;
-  background:linear-gradient(90deg,#1e88e5,#1565c0);
-  color:white;
-  border:none;
-  padding:14px;
-  border-radius:8px;
-  font-size:16px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-#pay-step2-modal .step2-confirm:hover{
-  background:linear-gradient(90deg,#1976d2,#0d47a1);
-}
-
-.gallery-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.9);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-
-.gallery-box{
-  width:95%;
-  max-width:900px;
-  color:white;
-}
-
-.gallery-close{
-  position:absolute;
-  top:20px;
-  right:30px;
-  font-size:28px;
-  cursor:pointer;
-}
-
-.gallery-main{
-  position:relative;
-  text-align:center;
-}
-
-.gallery-main img{
-  max-width:100%;
-  max-height:80vh;
-  transition:opacity .3s;
-}
-
-.gallery-spinner{
-  width:40px;
-  height:40px;
-  border:4px solid #ccc;
-  border-top:4px solid #1e88e5;
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-}
-
-@keyframes spin{
-  to{ transform:translate(-50%,-50%) rotate(360deg); }
-}
-
-.gallery-thumbs{
-  display:flex;
-  overflow-x:auto;
-  margin-top:12px;
-  gap:6px;
-}
-
-.gallery-thumbs img{
-  width:70px;
-  height:70px;
-  object-fit:cover;
-  opacity:.6;
-  cursor:pointer;
-}
-
-.gallery-thumbs img.active{
-  opacity:1;
-  border:2px solid #1e88e5;
-}
-
-/* ================= GALLERY MODAL ================= */
-
-#gallery-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:3000;
-}
-
-#gallery-modal.show{
-  display:flex;
-}
-
-.gallery-overlay{
-  position:absolute;
-  inset:0;
-}
-
-.gallery-box{
-  position:relative;
-  background:white;
-  width:95%;
-  max-width:1000px;
-  max-height:90vh;
-  border-radius:20px;
-  padding:20px;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-}
-
-#gallery-main{
-  width:100%;
-  max-height:60vh;
-  object-fit:contain;
-  transition:opacity .25s ease;
-}
-
-.gallery-nav{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,.5);
-  color:white;
-  border:none;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  font-size:22px;
-  cursor:pointer;
-}
-
-.gallery-nav.prev{ left:10px }
-.gallery-nav.next{ right:10px }
-
-.gallery-close{
-  position:absolute;
-  top:10px;
-  right:10px;
-  background:#ff3b3b;
-  color:white;
-  border:none;
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  font-size:20px;
-  cursor:pointer;
-}
-
-#gallery-thumbs{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  margin-top:12px;
-}
-
-#gallery-thumbs img{
-  height:60px;
-  cursor:pointer;
-  border-radius:6px;
-  opacity:.6;
-}
-
-#gallery-thumbs img.active{
-  opacity:1;
-  border:2px solid var(--main-color);
-}
-
-.gallery-cart-row{
-  margin-top:12px;
-  text-align:center;
-}
-
-#gallery-add-cart{
-  background:var(--main-color);
-  color:white;
-  border:none;
-  padding:10px 20px;
-  border-radius:20px;
-  cursor:pointer;
 }
