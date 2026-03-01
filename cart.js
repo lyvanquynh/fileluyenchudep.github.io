@@ -1,5 +1,6 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 let confirmBtnTimer = null   // ===== thêm =====
+let tempOrderData = null     // ===== thêm bước 2 =====
 
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
@@ -188,9 +189,8 @@ if(qrLink) qrLink.href = qrUrl
 
   document.getElementById("pay-text").innerHTML = `
 <b>Hướng dẫn thanh toán:</b><br>
-<b>Bước 1:</b> Kiểm tra thanh toán đúng số tiền<br>
-<b>Bước 2:</b> Nhập Email nhận file và bấm "Xác nhận & Copy nội dung đơn"<br>
-<i>(Tài liệu sẽ được gửi tự động qua email trong thời gian 1 - 3 phút)</i>
+<b>Bước 1:</b> Kiểm tra đơn hàng và nhập email vào ô nhận file.
+Sau đó bấm "Xác nhận Email & Copy nội dung đơn".
 `
 
   orderText += "Tổng tiền: " + total.toLocaleString() + "đ\n"
@@ -226,22 +226,18 @@ if(!emailPattern.test(email)){
       return `${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')} - ${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`
     }
 
-    const orderData = {
-      order_id: orderId,
-      time: formatTimeVN(),
-      total: total,
-      text: orderItemsText,
-      items: orderItemsJson,
-      email: email
-    }
+    // Lưu đơn tạm để bước 2 gửi
+tempOrderData = {
+  order_id: orderId,
+  time: formatTimeVN(),
+  total: total,
+  text: orderItemsText,
+  items: orderItemsJson,
+  email: email
+}
 
-    fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
-      method: "POST",
-      body: JSON.stringify(orderData),
-      mode: "no-cors"
-    })
+showToast("Đã xác nhận email & copy đơn", "success")
 
-    showToast("Đã xác nhận & copy đơn", "success")
   }
 
   // ===== mở khóa nếu sửa email =====
@@ -252,22 +248,38 @@ if(!emailPattern.test(email)){
 
 
   const payContent = document.getElementById("pay-content")
+const modal = document.getElementById("pay-modal")
+
+if(payContent && modal){
+
   payContent.classList.add("zoom-from-cart")
-  document.getElementById("pay-modal").style.display="flex"
+
+  modal.style.display="flex"
+
   payContent.getBoundingClientRect()
-  requestAnimationFrame(()=> payContent.classList.remove("zoom-from-cart"))
+
+  requestAnimationFrame(()=>{
+    payContent.classList.remove("zoom-from-cart")
+  })
 }
 
 
 // ================= HÀM PHỤ =================
 
 function closePay(){
+
   const payContent = document.getElementById("pay-content")
-  payContent.classList.add("zoom-from-cart")
-  setTimeout(()=>{
-    document.getElementById("pay-modal").style.display="none"
-    payContent.classList.remove("zoom-from-cart")
-  },300)
+  const modal = document.getElementById("pay-modal")
+
+  if(payContent && modal){
+
+    payContent.classList.add("zoom-from-cart")
+
+    setTimeout(()=>{
+      modal.style.display="none"
+      payContent.classList.remove("zoom-from-cart")
+    },300)
+  }
 }
 
 function changeQty(index, delta){
@@ -338,7 +350,34 @@ function runNextToast(){
   }, 1800)
 }
 
+// ================= XÁC NHẬN ĐÃ THANH TOÁN =================
 
+function confirmPaid(){
+
+  if(!tempOrderData){
+    showToast("Lỗi dữ liệu đơn hàng", "error")
+    return
+  }
+
+  fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
+    method: "POST",
+    body: JSON.stringify(tempOrderData),
+    mode: "no-cors"
+  })
+
+  showToast(
+    "Đã thanh toán, vui lòng đợi 1-3 phút, sản phẩm sẽ được gửi qua email của quý khách. Nếu có thắc mắc vui lòng liên hệ Zalo: 0977 727 089",
+    "success"
+  )
+
+  // Xóa giỏ hàng không hỏi lại
+  cart = []
+  saveCart()
+  updateCartCount()
+  renderCart()
+
+  tempOrderData = null
+}
 
 // ================= INIT =================
 
