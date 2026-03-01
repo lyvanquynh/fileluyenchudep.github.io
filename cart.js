@@ -390,22 +390,20 @@ fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79C
   mode: "no-cors"
 })
 
+showToast(
+  "Đã thanh toán, vui lòng đợi 1-3 phút, sản phẩm sẽ được gửi qua email của quý khách. Nếu có thắc mắc vui lòng liên hệ Zalo: 0977 727 089",
+  "success"
+)
 
 cart = []
 saveCart()
 updateCartCount()
 renderCart()
 
-// Đóng Step 2
+// ĐÓNG STEP 2
 const modal2 = document.getElementById("pay-step2-modal")
 if(modal2){
   modal2.style.display = "none"
-}
-
-// MỞ STEP 3
-const modal3 = document.getElementById("pay-step3-modal")
-if(modal3){
-  modal3.style.display = "flex"
 }
 
 tempOrderData = null
