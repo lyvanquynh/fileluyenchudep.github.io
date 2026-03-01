@@ -167,7 +167,7 @@ function openPay(){
   qty: item.qty,
   total: lineTotal
   })
-})   // ← DÒNG NÀY BẠN ĐANG THIẾU
+})
   const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
 
   document.getElementById("order-id").innerText = "Mã đơn: #" + orderId
@@ -175,17 +175,17 @@ function openPay(){
   document.getElementById("pay-amount").innerText = total.toLocaleString() + "đ"
 
 // ===== SINH QR ĐỘNG =====
+// ===== SINH QR ĐỘNG =====
 const qrUrl =
   `https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
   `?amount=${total}` +
   `&addInfo=${orderId}` +
   `&accountName=${encodeURIComponent(BANK_NAME)}`
 
-const qrImg = document.getElementById("qr-img")
-const qrLink = document.getElementById("qr-link")
-
-if(qrImg) qrImg.src = qrUrl
-if(qrLink) qrLink.href = qrUrl
+// LƯU QR để dùng cho step 2
+window._currentQrUrl = qrUrl
+window._currentOrderId = orderId
+window._currentTotal = total
 
   document.getElementById("pay-text").innerHTML = `
 <b>Hướng dẫn thanh toán:</b><br>
@@ -227,6 +227,7 @@ if(!emailPattern.test(email)){
     }
 
     // Lưu đơn tạm để bước 2 gửi
+// Lưu đơn tạm để bước 2 gửi
 tempOrderData = {
   order_id: orderId,
   time: formatTimeVN(),
@@ -237,6 +238,29 @@ tempOrderData = {
 }
 
 showToast("Đã xác nhận email & copy đơn", "success")
+
+// ===== ĐÓNG STEP 1 =====
+const modal1 = document.getElementById("pay-modal")
+if(modal1){
+  modal1.style.display = "none"
+}
+
+// ===== MỞ STEP 2 =====
+const modal2 = document.getElementById("pay-step2-modal")
+if(modal2){
+  modal2.style.display = "flex"
+}
+
+// ===== GÁN QR CHO STEP 2 =====
+const qrImg2 = document.getElementById("qr-img-step2")
+const qrLink2 = document.getElementById("qr-link-step2")
+const orderIdEl = document.getElementById("order-id-step2")
+const totalEl = document.getElementById("pay-amount-step2")
+
+if(qrImg2) qrImg2.src = window._currentQrUrl
+if(qrLink2) qrLink2.href = window._currentQrUrl
+if(orderIdEl) orderIdEl.innerText = "Mã đơn: #" + window._currentOrderId
+if(totalEl) totalEl.innerText = window._currentTotal.toLocaleString() + "đ"
 
   }
 
@@ -359,24 +383,30 @@ function confirmPaid(){
     return
   }
 
-  fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
-    method: "POST",
-    body: JSON.stringify(tempOrderData),
-    mode: "no-cors"
-  })
 
-  showToast(
-    "Đã thanh toán, vui lòng đợi 1-3 phút, sản phẩm sẽ được gửi qua email của quý khách. Nếu có thắc mắc vui lòng liên hệ Zalo: 0977 727 089",
-    "success"
-  )
+fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
+  method: "POST",
+  body: JSON.stringify(tempOrderData),
+  mode: "no-cors"
+})
 
-  // Xóa giỏ hàng không hỏi lại
-  cart = []
-  saveCart()
-  updateCartCount()
-  renderCart()
+showToast(
+  "Đã thanh toán, vui lòng đợi 1-3 phút, sản phẩm sẽ được gửi qua email của quý khách. Nếu có thắc mắc vui lòng liên hệ Zalo: 0977 727 089",
+  "success"
+)
 
-  tempOrderData = null
+cart = []
+saveCart()
+updateCartCount()
+renderCart()
+
+// ĐÓNG STEP 2
+const modal2 = document.getElementById("pay-step2-modal")
+if(modal2){
+  modal2.style.display = "none"
+}
+
+tempOrderData = null
 }
 
 // ================= INIT =================
