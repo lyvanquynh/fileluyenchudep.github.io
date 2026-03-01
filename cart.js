@@ -91,13 +91,20 @@ function renderCart(){
 ================================= */
 
 function openCart(){
-  document.getElementById("cart-box").style.display="none"
-  document.getElementById("cart-box-full").style.display="block"
+  document.getElementById("cart-box").style.display = "none"
+  const full = document.getElementById("cart-box-full")
+  full.style.display = "block"
+  full.classList.add("show")
 }
 
 function toggleCart(){
-  document.getElementById("cart-box-full").style.display="none"
-  document.getElementById("cart-box").style.display="flex"
+  const full = document.getElementById("cart-box-full")
+  full.classList.remove("show")
+
+  setTimeout(()=>{
+    full.style.display = "none"
+    document.getElementById("cart-box").style.display = "flex"
+  },300)
 }
 
 /* ===============================
