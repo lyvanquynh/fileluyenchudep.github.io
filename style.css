@@ -444,10 +444,8 @@ cursor:pointer;
   -webkit-backdrop-filter: blur(6px);
   display:none;
   justify-content:center;
-  align-items:flex-start;   /* không center theo chiều dọc */
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  z-index:999;
+  align-items:center; /* sửa dòng này */
+  z-index:9999;
 }
 
 

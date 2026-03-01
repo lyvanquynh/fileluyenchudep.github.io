@@ -107,8 +107,8 @@
 <section class="section">
 
   <div class="block-title">
-    <h2>Bước 4: Chuyển khoản và gửi bill xác nhận</h2>
-    <p>Thanh toán đúng số tiền theo mã QR và gửi ảnh bill qua Zalo để xác nhận đơn hàng</p>
+    <h2>Bước 4: Nhập email và thanh toán</h2>
+<p>Nhập email nhận file, chuyển khoản theo mã QR hiển thị và hệ thống sẽ gửi tài liệu tự động trong 1–3 phút</p>
   </div>
 
   <div class="products">
@@ -139,50 +139,7 @@
   </div>
 </div>
 
-<div id="pay-modal">
-  <div id="pay-content">
-
-    <div class="pay-header">
-      🧾 XÁC NHẬN ĐƠN HÀNG
-      <div class="pay-order-id" id="order-id"></div>
-    </div>
-
-        <div class="pay-guide" id="pay-text"></div>
-
-
-
-
-    <div class="pay-body">
-
-      <div class="pay-left">
-        <h4>📦 Sản phẩm</h4>
-        <ul id="pay-items"></ul>
-
-        <div class="pay-total">
-          Tổng tiền: <span id="pay-amount"></span>
-        </div>
-
-        <input id="customer-email"
-       placeholder="Nhập email nhận file"
-       style="width:100%;padding:8px;margin:8px 0">
-
-
-        <div class="pay-actions">
-          <button id="copy-order-btn">✅ Xác nhận & Copy nội dung đơn</button>
-        </div>
-      </div>
-
-      <div class="pay-right">
-        <img id="qr-img" loading="lazy">
-<a id="qr-link" target="_blank" class="download-qr">📥 Mở ảnh QR</a>
-      </div>
-
-    </div>
-
-    <button class="pay-close" onclick="closePay()">Đóng</button>
-
-  </div>
-</div>
+<div id="pay-modal" style="display:none;"></div>
 
 
 <div id="toast"></div>
