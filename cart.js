@@ -136,6 +136,24 @@ document.addEventListener("click",async function(e){
   }
 })
 
+/* =============================
+   CART TOGGLE FIX
+============================= */
+
+function openCart(){
+  const box = document.getElementById("cart-box-full")
+  if(!box) return
+  box.style.display = "block"
+  box.classList.add("show")
+}
+
+function toggleCart(){
+  const box = document.getElementById("cart-box-full")
+  if(!box) return
+  box.classList.remove("show")
+  setTimeout(()=> box.style.display="none",300)
+}
+
 function closeConfirm(){
   document.getElementById("confirm-modal").style.display="none"
 }
