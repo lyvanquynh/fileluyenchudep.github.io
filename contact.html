@@ -313,14 +313,44 @@
   </div>
 </div>
 
-<!-- POPUP 1 -->
-<div id="confirm-modal" class="modal-overlay">
-...
-</div>
+<div id="pay-modal">
+  <div id="pay-content">
 
-<!-- POPUP 2 -->
-<div id="payment-modal" class="modal-overlay dark">
-...
+    <div class="pay-header">
+      🧾 XÁC NHẬN ĐƠN HÀNG
+      <div class="pay-order-id" id="order-id"></div>
+    </div>
+        <div class="pay-guide" id="pay-text"></div>
+
+    <div class="pay-body">
+
+      <div class="pay-left">
+        <h4>📦 Sản phẩm</h4>
+        <ul id="pay-items"></ul>
+
+        <div class="pay-total">
+          Tổng tiền: <span id="pay-amount"></span>
+        </div>
+
+        <input id="customer-email"
+       placeholder="Nhập email nhận file"
+       style="width:100%;padding:8px;margin:8px 0">
+
+        <div class="pay-actions">
+          <button id="copy-order-btn">✅ Xác nhận & Copy nội dung đơn</button>
+        </div>
+      </div>
+
+      <div class="pay-right">
+        <img id="qr-img" loading="lazy">
+<a id="qr-link" target="_blank" class="download-qr">📥 Mở ảnh QR</a>
+      </div>
+
+    </div>
+
+    <button class="pay-close" onclick="closePay()">Đóng</button>
+
+  </div>
 </div>
 
 
