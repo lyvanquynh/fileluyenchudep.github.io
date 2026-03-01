@@ -1193,8 +1193,8 @@ font-weight:600;
 .pay-close{
   width:100%;
   margin-top:10px;
-  background:#e53935;
-  color:white;
+  background:#ccc;
+  color:#333;
   border:none;
   padding:12px;
   border-radius:8px;
@@ -1203,7 +1203,7 @@ font-weight:600;
 }
 
 .pay-close:hover{
-  background:#b71c1c;
+  background:#bbb;
 }
 .confirm-paid-btn{
   background:#2e7d32;
