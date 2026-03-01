@@ -114,3 +114,41 @@
 
   </div>
 </div>
+
+<!-- ================= POPUP STEP 3 ================= -->
+
+<div id="pay-step3-modal"
+     style="display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.4);
+            backdrop-filter:blur(6px);
+            justify-content:center;
+            align-items:center;
+            z-index:1000;">
+
+  <div style="background:white;
+              width:95%;
+              max-width:480px;
+              border-radius:18px;
+              padding:24px;
+              box-shadow:0 12px 30px rgba(0,0,0,.3);
+              text-align:center;">
+
+    <div style="font-size:20px;font-weight:bold;color:#2e7d32;margin-bottom:12px;">
+      ✅ Đã thanh toán thành công
+    </div>
+
+    <div style="margin-bottom:16px;line-height:1.6;">
+      Vui lòng đợi 1 - 3 phút, sản phẩm sẽ được gửi qua email của quý khách.<br><br>
+      Nếu chưa nhận được email hoặc có thắc mắc, vui lòng liên hệ:
+      <b>Zalo: 0977 727 089</b>
+    </div>
+
+    <button class="step3-close"
+            onclick="document.getElementById('pay-step3-modal').style.display='none'">
+      Đóng
+    </button>
+
+  </div>
+</div>

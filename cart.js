@@ -400,10 +400,16 @@ saveCart()
 updateCartCount()
 renderCart()
 
-// ĐÓNG STEP 2
+// Đóng Step 2
 const modal2 = document.getElementById("pay-step2-modal")
 if(modal2){
   modal2.style.display = "none"
+}
+
+// MỞ STEP 3
+const modal3 = document.getElementById("pay-step3-modal")
+if(modal3){
+  modal3.style.display = "flex"
 }
 
 tempOrderData = null
