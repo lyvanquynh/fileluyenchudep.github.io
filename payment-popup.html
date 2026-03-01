@@ -109,62 +109,33 @@
   </div>
 </div>
 
-<!-- ================= POPUP STEP 3 ================= -->
+<!-- ================= POPUP STEP 3 – UPGRADE ================= -->
 
 <div id="pay-step3-modal"
-     style="display:none;
-            position:fixed;
-            inset:0;
-            background:rgba(0,0,0,.45);
-            backdrop-filter:blur(6px);
-            justify-content:center;
-            align-items:center;
-            z-index:999;">
+     class="step3-overlay">
 
-  <div style="background:white;
-              width:95%;
-              max-width:440px;
-              border-radius:20px;
-              padding:28px 25px;
-              text-align:center;
-              box-shadow:0 15px 40px rgba(0,0,0,.35);">
+  <div class="step3-box">
 
-    <div style="font-size:48px;margin-bottom:10px">
-      🎉
+    <div class="step3-icon">✔</div>
+
+    <div class="step3-title">
+      Thanh toán thành công!
     </div>
 
-    <div style="font-size:22px;
-                font-weight:700;
-                color:#2e7d32;
-                margin-bottom:12px">
-      Thanh toán thành công
+    <div class="step3-message">
+      Cảm ơn quý khách đã tin tưởng và ủng hộ.<br>
+      Hệ thống đang xử lý đơn hàng của bạn.
     </div>
 
-    <div style="font-size:15px;
-                line-height:1.7;
-                color:#444;
-                margin-bottom:20px">
-
-      Cảm ơn quý khách đã tin tưởng File Luyện Chữ Đẹp 💙<br><br>
-
-      Tài liệu sẽ được gửi qua email trong vòng
-      <b>1 – 3 phút</b>.<br>
-
-      Nếu chưa nhận được, vui lòng liên hệ:<br>
-      <b>Zalo: 0977 727 089</b>
+    <div class="step3-note">
+      📩 Vui lòng đợi 1 – 3 phút, tài liệu sẽ được gửi qua email.<br>
+      📞 Nếu cần hỗ trợ, vui lòng liên hệ Zalo: <b>0977 727 089</b>
     </div>
 
-    <button onclick="closeStep3()"
-            style="background:#ccc;
-                   color:#333;
-                   border:none;
-                   padding:10px 22px;
-                   border-radius:8px;
-                   cursor:pointer;
-                   font-size:15px;">
+    <button class="step3-close"
+            onclick="document.getElementById('pay-step3-modal').style.display='none'">
       Đóng
     </button>
 
   </div>
 </div>
-
