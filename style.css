@@ -1204,3 +1204,19 @@ font-weight:600;
 .pay-close:hover{
   background:#b71c1c;
 }
+
+/* ===== NÚT ĐÓNG POPUP STEP 1 MÀU ĐỎ ===== */
+#pay-modal .pay-close{
+  width:100%;
+  background:#e53935 !important;
+  color:white;
+  border:none;
+  padding:12px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+#pay-modal .pay-close:hover{
+  background:#b71c1c !important;
+}
