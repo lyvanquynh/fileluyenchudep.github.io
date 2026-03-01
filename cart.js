@@ -215,9 +215,7 @@ if(!emailPattern.test(email)){
 }
 
 
-    // ===== khóa 5 giây =====
-    confirmBtn.disabled = true
-    confirmBtnTimer = setTimeout(()=> confirmBtn.disabled=false, 5000)
+
 
     await navigator.clipboard.writeText(orderText)
 
@@ -383,30 +381,32 @@ function confirmPaid(){
     return
   }
 
+  // Gửi Google Sheet
+  fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
+    method: "POST",
+    body: JSON.stringify(tempOrderData),
+    mode: "no-cors"
+  })
 
-fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
-  method: "POST",
-  body: JSON.stringify(tempOrderData),
-  mode: "no-cors"
-})
+  // Đóng step 2
+  const modal2 = document.getElementById("pay-step2-modal")
+  if(modal2){
+    modal2.style.display = "none"
+  }
 
-showToast(
-  "Đã thanh toán, vui lòng đợi 1-3 phút, sản phẩm sẽ được gửi qua email của quý khách. Nếu có thắc mắc vui lòng liên hệ Zalo: 0977 727 089",
-  "success"
-)
+  // Mở step 3
+  const modal3 = document.getElementById("pay-step3-modal")
+  if(modal3){
+    modal3.style.display = "flex"
+  }
 
-cart = []
-saveCart()
-updateCartCount()
-renderCart()
+  // Xóa giỏ hàng
+  cart = []
+  saveCart()
+  updateCartCount()
+  renderCart()
 
-// ĐÓNG STEP 2
-const modal2 = document.getElementById("pay-step2-modal")
-if(modal2){
-  modal2.style.display = "none"
-}
-
-tempOrderData = null
+  tempOrderData = null
 }
 
 // ================= INIT =================
@@ -443,4 +443,9 @@ if(backBtn){
     })
   })
 
+}
+
+
+function closeStep3(){
+  document.getElementById("pay-step3-modal").style.display = "none"
 }
