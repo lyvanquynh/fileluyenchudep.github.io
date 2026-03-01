@@ -96,7 +96,79 @@
 </div>
 
 <!-- PAYMENT POPUP -->
-<div id="pay-modal" style="display:none;"></div>
+<!-- POPUP 1: XÁC NHẬN ĐƠN HÀNG -->
+<div id="confirm-modal" class="modal-overlay">
+  <div class="modal-box confirm-box">
+
+    <div class="modal-header">
+      <span>🧾 XÁC NHẬN ĐƠN HÀNG</span>
+      <button onclick="closeConfirm()">✖</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="confirm-left">
+        <div id="order-id"></div>
+        <ul id="pay-items"></ul>
+        <div class="confirm-total">
+          Tổng tiền: <span id="pay-amount"></span>
+        </div>
+      </div>
+
+      <div class="confirm-right">
+        <div id="pay-text" class="pay-guide"></div>
+
+        <input type="email" id="customer-email"
+          placeholder="Nhập email nhận file">
+
+        <div id="email-error" class="email-error"></div>
+
+        <button class="btn-primary"
+          onclick="goToPayment()">
+          Tiếp tục thanh toán
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- POPUP 2: THANH TOÁN -->
+<div id="payment-modal" class="modal-overlay dark">
+
+  <div class="modal-box payment-box">
+
+    <div class="modal-header">
+      <span>💳 THANH TOÁN</span>
+      <button onclick="closePayment()">✖</button>
+    </div>
+
+    <div class="payment-body">
+
+      <div class="payment-left">
+        <h3 id="payment-total"></h3>
+        <img id="qr-img">
+      </div>
+
+      <div class="payment-right">
+        <div class="payment-guide">
+          <b>Bước 2:</b> Chuyển khoản đúng số tiền và bấm nút xác nhận.
+          <br><i>(Tài liệu sẽ gửi trong 1–3 phút)</i>
+        </div>
+
+        <button class="btn-danger"
+          onclick="confirmPayment()">
+          Xác nhận đã thanh toán
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
 
 <!-- TOAST -->
 <div id="toast"></div>

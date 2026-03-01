@@ -1,7 +1,6 @@
-/* ===============================
-   CART SYSTEM – 2 STEP CHECKOUT
-   BaoLongEdu
-================================= */
+/* ======================================
+   CART SYSTEM – 2 POPUP PRO VERSION
+====================================== */
 
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 let currentOrder = null
@@ -10,9 +9,12 @@ const BANK_CODE = "ICB"
 const BANK_ACC  = "100867092003"
 const BANK_NAME = "Dinh Thi Hong"
 
-/* ===============================
-   CART CORE
-================================= */
+cart = cart.map(i=>{
+  if(!i.qty) i.qty = 1
+  return i
+})
+
+/* ================= CORE ================= */
 
 function saveCart(){
   localStorage.setItem("cart", JSON.stringify(cart))
@@ -36,6 +38,7 @@ function updateCartCount(){
 
 function addToCart(name, price){
   const found = cart.find(i=>i.name===name)
+
   if(found){
     found.qty += 1
   }else{
@@ -45,7 +48,7 @@ function addToCart(name, price){
   saveCart()
   updateCartCount()
   renderCart()
-  showToast("Đã thêm vào giỏ hàng", "success")
+  showToast("Đã thêm vào giỏ hàng","success")
 }
 
 function removeItem(index){
@@ -55,30 +58,51 @@ function removeItem(index){
   renderCart()
 }
 
-function clearCart(){
-  cart = []
+function changeQty(index, delta){
+  cart[index].qty += delta
+  if(cart[index].qty <= 0){
+    cart.splice(index,1)
+  }
   saveCart()
   updateCartCount()
   renderCart()
 }
 
+/* ================= CART PANEL ================= */
+
+function openCart(){
+  document.getElementById("cart-box").style.display="none"
+  const box = document.getElementById("cart-box-full")
+  box.style.display="block"
+  setTimeout(()=> box.classList.add("show"),10)
+}
+
+function toggleCart(){
+  const box = document.getElementById("cart-box-full")
+  box.classList.remove("show")
+  setTimeout(()=>{
+    box.style.display="none"
+    document.getElementById("cart-box").style.display="flex"
+  },300)
+}
+
 function renderCart(){
-  const list = document.getElementById("cart-items")
-  const totalEl = document.getElementById("cart-total")
+  const list=document.getElementById("cart-items")
+  const totalEl=document.getElementById("cart-total")
   if(!list || !totalEl) return
 
-  list.innerHTML = ""
-  let total = 0
+  list.innerHTML=""
+  let total=0
 
   cart.forEach((item,i)=>{
     const lineTotal = item.price * item.qty
     total += lineTotal
 
-    const li = document.createElement("li")
-    li.innerHTML = `
-      <span>${item.name} x${item.qty}</span>
-      <span>${lineTotal.toLocaleString()}đ</span>
-      <button onclick="removeItem(${i})">✖</button>
+    const li=document.createElement("li")
+    li.innerHTML=`
+      <span class="cart-item-name">${item.name} x${item.qty}</span>
+      <span class="cart-price">${lineTotal.toLocaleString()}đ</span>
+      <button class="cart-remove" onclick="removeItem(${i})">🗑</button>
     `
     list.appendChild(li)
   })
@@ -86,101 +110,69 @@ function renderCart(){
   totalEl.textContent = total.toLocaleString()
 }
 
-/* ===============================
-   CART PANEL
-================================= */
-
-function openCart(){
-  document.getElementById("cart-box").style.display = "none"
-  const full = document.getElementById("cart-box-full")
-  full.style.display = "block"
-  full.classList.add("show")
-}
-
-function toggleCart(){
-  const full = document.getElementById("cart-box-full")
-  full.classList.remove("show")
-
-  setTimeout(()=>{
-    full.style.display = "none"
-    document.getElementById("cart-box").style.display = "flex"
-  },300)
-}
-
-/* ===============================
-   STEP 1 – EMAIL CONFIRM
-================================= */
+/* ================= POPUP 1 ================= */
 
 function openPay(){
 
   if(cart.length===0){
-    showToast("Giỏ hàng trống", "warn")
+    showToast("Giỏ hàng trống","warn")
     return
   }
-
-  const modal = document.getElementById("pay-modal")
-  modal.style.display = "flex"
 
   let total = 0
   let itemsHTML = ""
 
-  cart.forEach(item=>{
+  cart.forEach((item,i)=>{
     const lineTotal = item.price * item.qty
     total += lineTotal
 
     itemsHTML += `
-      <li>${item.name} x${item.qty} – ${lineTotal.toLocaleString()}đ</li>
-    `
+<li style="border-bottom:1px dashed #ddd;padding-bottom:8px;margin-bottom:8px">
+  <div><b>${item.name}</b></div>
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <button onclick="changeQty(${i},-1)">−</button>
+    <span>${item.qty}</span>
+    <button onclick="changeQty(${i},1)">+</button>
+    <span>${item.price.toLocaleString()}đ x ${item.qty} =
+    <b>${lineTotal.toLocaleString()}đ</b></span>
+  </div>
+</li>`
   })
 
-  modal.innerHTML = `
-  <div id="pay-content">
-    <h3>🧾 XÁC NHẬN ĐƠN HÀNG</h3>
+  document.getElementById("order-id").innerText =
+    "Mã đơn: #" + Math.floor(100000 + Math.random()*900000)
 
-    <ul>${itemsHTML}</ul>
-    <h4>Tổng tiền: ${total.toLocaleString()}đ</h4>
+  document.getElementById("pay-items").innerHTML = itemsHTML
+  document.getElementById("pay-amount").innerText = total.toLocaleString()+"đ"
 
-    <p><b>Bước 1:</b> Kiểm tra đơn hàng và nhập email nhận file</p>
+  document.getElementById("pay-text").innerHTML = `
+<b>Bước 1:</b> Kiểm tra đơn hàng và nhập email nhận file
+`
 
-    <input type="email" id="customer-email" placeholder="Nhập email nhận file" style="width:100%;padding:8px;margin:10px 0">
-
-    <button onclick="confirmEmail()" style="width:100%;padding:10px;background:#2b7cff;color:white;border:none;border-radius:6px">
-      Xác nhận Email & Tiếp tục thanh toán
-    </button>
-  </div>
-  `
+  document.getElementById("confirm-modal").style.display="flex"
 }
 
-/* ===============================
-   STEP 2 – SHOW QR
-================================= */
+/* ================= CHUYỂN SANG POPUP 2 ================= */
 
-function confirmEmail(){
+function goToPayment(){
 
-  const email = document.getElementById("customer-email").value.trim()
+  const emailInput = document.getElementById("customer-email")
+  const emailError = document.getElementById("email-error")
+  const email = emailInput.value.trim()
+
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
   if(!emailPattern.test(email)){
-    showToast("Email không hợp lệ", "error")
+    emailError.innerText = "Email không hợp lệ"
+    emailInput.focus()
     return
   }
 
+  emailError.innerText = ""
+
   let total = 0
-  let itemsJson = []
-  let orderText = ""
-
   cart.forEach(item=>{
-    const lineTotal = item.price * item.qty
-    total += lineTotal
-
-    itemsJson.push({
-      name:item.name,
-      price:item.price,
-      qty:item.qty,
-      total:lineTotal
-    })
-
-    orderText += `${item.name} x${item.qty} = ${lineTotal}\n`
+    total += item.price * item.qty
   })
 
   const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
@@ -189,8 +181,7 @@ function confirmEmail(){
     order_id: orderId,
     total: total,
     email: email,
-    items: itemsJson,
-    text: orderText
+    items: cart
   }
 
   const qrUrl =
@@ -199,87 +190,66 @@ function confirmEmail(){
     `&addInfo=${orderId}` +
     `&accountName=${encodeURIComponent(BANK_NAME)}`
 
-  const modal = document.getElementById("pay-modal")
+  document.getElementById("payment-total").innerText =
+    total.toLocaleString()+"đ"
 
-  modal.innerHTML = `
-  <div id="pay-content" style="text-align:center">
+  document.getElementById("qr-img").src = qrUrl
 
-    <h3>💳 THANH TOÁN</h3>
-    <h4>${total.toLocaleString()}đ</h4>
-
-    <img src="${qrUrl}" style="max-width:280px;margin:10px auto">
-
-    <p>
-      <b>Bước 2:</b> Chuyển khoản đúng số tiền và bấm nút bên dưới<br>
-      <i>(Tài liệu sẽ gửi trong 1–3 phút)</i>
-    </p>
-
-    <button onclick="confirmPayment()" style="width:100%;padding:10px;background:#ff3b3b;color:white;border:none;border-radius:6px;margin-top:10px">
-      Xác nhận đã thanh toán
-    </button>
-
-  </div>
-  `
+  document.getElementById("confirm-modal").style.display="none"
+  document.getElementById("payment-modal").style.display="flex"
 }
 
-/* ===============================
-   FINAL CONFIRM
-================================= */
+/* ================= THANH TOÁN ================= */
 
 async function confirmPayment(){
 
   if(!currentOrder) return
 
-  await fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
+  await fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec",{
     method:"POST",
     body:JSON.stringify(currentOrder),
     mode:"no-cors"
   })
 
-  clearCart()
+  cart=[]
+  saveCart()
+  updateCartCount()
+  renderCart()
 
-  const modal = document.getElementById("pay-modal")
-
-  modal.innerHTML = `
-  <div id="pay-content" style="text-align:center">
-
-    <h3>✅ Đã thanh toán</h3>
-
-    <p>
-      Vui lòng đợi 1–3 phút, sản phẩm sẽ được gửi qua email.<br>
-      Nếu cần hỗ trợ: Zalo 0977 727 089
-    </p>
-
-    <button onclick="backToShop()" style="padding:10px 20px;background:#2b7cff;color:white;border:none;border-radius:6px">
-      Thêm sản phẩm
-    </button>
-
+  document.getElementById("payment-modal").innerHTML=`
+  <div class="modal-box payment-box" style="text-align:center;padding:40px">
+    <h2>✅ Đã thanh toán</h2>
+    <p>Vui lòng đợi 1–3 phút, sản phẩm sẽ được gửi qua email.</p>
+    <button class="btn-primary" onclick="backToShop()">Thêm sản phẩm</button>
   </div>
   `
 }
 
-/* ===============================
-   BACK TO SHOP
-================================= */
+/* ================= CLOSE ================= */
 
-function backToShop(){
-  window.location.href = "index.html"
+function closeConfirm(){
+  document.getElementById("confirm-modal").style.display="none"
 }
 
-/* ===============================
-   TOAST
-================================= */
+function closePayment(){
+  document.getElementById("payment-modal").style.display="none"
+}
+
+function backToShop(){
+  window.location.href="index.html"
+}
+
+/* ================= TOAST ================= */
 
 function showToast(msg,type="success"){
-  const toast = document.getElementById("toast")
+  const toast=document.getElementById("toast")
   if(!toast) return
 
-  toast.textContent = msg
-  toast.className = ""
-  toast.classList.add(type)
+  toast.textContent=msg
+  toast.className=""
   toast.classList.add("show")
 
-  setTimeout(()=>toast.classList.remove("show"),3000)
+  setTimeout(()=> toast.classList.remove("show"),3000)
 }
 
 /* INIT */
