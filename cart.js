@@ -285,8 +285,8 @@ if(payContent && modal){
   requestAnimationFrame(()=>{
     payContent.classList.remove("zoom-from-cart")
   })
-}
-
+}  // ← đóng if
+}  // ← đóng openPay
 
 // ================= HÀM PHỤ =================
 
