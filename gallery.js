@@ -102,7 +102,7 @@ html:`
 <div class="pswp-product-price">${product.price.toLocaleString()}đ</div>
 <button class="pswp-add-cart">🛒 Thêm giỏ</button>
 </div>
-`
+`,
 
 onInit:(el)=>{
 
