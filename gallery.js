@@ -109,10 +109,25 @@ html:`
 onInit:(el)=>{
 
 el.querySelector(".pswp-add-cart")
-.onclick=()=>{
+onclick=()=>{
 
 addToCart(product.name,product.price)
 
+// hiệu ứng nút
+const btn=el.querySelector(".pswp-add-cart")
+
+btn.classList.add("added")
+
+setTimeout(()=>{
+btn.classList.remove("added")
+},400)
+
+
+// rung icon giỏ
+const cart=document.querySelector("#cart-box")
+if(cart){
+cart.classList.add("cart-bounce")
+setTimeout(()=>cart.classList.remove("cart-bounce"),500)
 }
 
 }
