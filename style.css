@@ -1327,3 +1327,37 @@ font-weight:600;
 #pay-modal .pay-close:hover{
   background:#757575 !important;
 }
+
+.pswp-product-box{
+position:absolute;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,.6);
+color:white;
+padding:14px 20px;
+border-radius:12px;
+text-align:center;
+}
+
+.pswp-product-title{
+font-size:16px;
+font-weight:700;
+margin-bottom:4px;
+}
+
+.pswp-product-price{
+font-size:18px;
+color:#ffcc00;
+margin-bottom:8px;
+}
+
+.pswp-add-cart{
+background:#ff3b3b;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:20px;
+cursor:pointer;
+font-weight:700;
+}
