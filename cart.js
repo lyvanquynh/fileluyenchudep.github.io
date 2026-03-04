@@ -35,7 +35,6 @@ function addToCart(name, price){
 
   showToast("Đã thêm " + name + " vào giỏ", "success")
 
-  // ===== rung icon giỏ =====
   const cartIcon = document.querySelector("#cart-box")
 
   if(cartIcon){
@@ -48,11 +47,6 @@ function addToCart(name, price){
 
 }
 
-  saveCart()
-  updateCartCount()
-  renderCart()
-    showToast("Đã thêm " + name + " vào giỏ", "success")
-}
 
 function removeItem(index){
   cart.splice(index,1)
