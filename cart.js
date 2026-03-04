@@ -20,6 +20,7 @@ function saveCart(){
 }
 
 function addToCart(name, price){
+
   const found = cart.find(item => item.name === name)
 
   if(found){
@@ -27,6 +28,25 @@ function addToCart(name, price){
   }else{
     cart.push({name, price, qty:1})
   }
+
+  saveCart()
+  updateCartCount()
+  renderCart()
+
+  showToast("Đã thêm " + name + " vào giỏ", "success")
+
+  // ===== rung icon giỏ =====
+  const cartIcon = document.querySelector("#cart-box")
+
+  if(cartIcon){
+    cartIcon.classList.add("cart-bounce")
+
+    setTimeout(()=>{
+      cartIcon.classList.remove("cart-bounce")
+    },500)
+  }
+
+}
 
   saveCart()
   updateCartCount()

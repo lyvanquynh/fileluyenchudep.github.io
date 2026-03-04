@@ -121,12 +121,6 @@ setTimeout(()=>{
 btn.classList.remove("added")
 },400)
 
-const cart=document.querySelector("#cart-box")
-if(cart){
-cart.classList.add("cart-bounce")
-setTimeout(()=>cart.classList.remove("cart-bounce"),500)
-}
-
 }
 }
 
