@@ -108,8 +108,7 @@ html:`
 
 onInit:(el)=>{
 
-el.querySelector(".pswp-add-cart")
-onclick=()=>{
+el.querySelector(".pswp-add-cart").onclick=()=>{
 
 addToCart(product.name,product.price)
 
@@ -122,14 +121,13 @@ setTimeout(()=>{
 btn.classList.remove("added")
 },400)
 
-
-// rung icon giỏ
 const cart=document.querySelector("#cart-box")
 if(cart){
 cart.classList.add("cart-bounce")
 setTimeout(()=>cart.classList.remove("cart-bounce"),500)
 }
 
+}
 }
 
 })
