@@ -50,9 +50,7 @@ for(let i=1;i<=cfg.count;i++){
 const num=i.toString().padStart(2,"0")
 
 arr.push({
-src:`${cfg.path}/${num}.jpg`,
-width:1600,
-height:1200
+src:`${cfg.path}/${num}.jpg`
 })
 
 }
@@ -104,7 +102,7 @@ html:`
 <div class="pswp-product-price">${product.price.toLocaleString()}đ</div>
 <button class="pswp-add-cart">🛒 Thêm giỏ</button>
 </div>
-`,
+`
 
 onInit:(el)=>{
 
@@ -141,6 +139,21 @@ e.preventDefault()
 const key=el.dataset.gallery
 
 openGallery(key)
+
+})
+
+
+// preload ảnh khi hover
+el.addEventListener("mouseenter",()=>{
+
+const key = el.dataset.gallery
+const cfg = PRODUCT_GALLERY[key]
+
+if(!cfg) return
+
+const img = new Image()
+
+img.src = `${cfg.path}/01.jpg`
 
 })
 

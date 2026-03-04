@@ -1329,35 +1329,43 @@ font-weight:600;
 }
 
 .pswp-product-box{
+
 position:absolute;
-bottom:30px;
-left:50%;
-transform:translateX(-50%);
-background:rgba(0,0,0,.6);
+bottom:0;
+left:0;
+width:100%;
+
+background:#111;
 color:white;
-padding:14px 20px;
-border-radius:12px;
+
+padding:14px;
 text-align:center;
+
 }
 
 .pswp-product-title{
 font-size:16px;
-font-weight:700;
+font-weight:600;
 margin-bottom:4px;
 }
 
 .pswp-product-price{
 font-size:18px;
 color:#ffcc00;
-margin-bottom:8px;
+margin-bottom:10px;
 }
 
 .pswp-add-cart{
+
 background:#ff3b3b;
 color:white;
+
 border:none;
-padding:8px 14px;
-border-radius:20px;
-cursor:pointer;
+padding:10px 18px;
+
+border-radius:30px;
 font-weight:700;
+
+cursor:pointer;
+
 }
