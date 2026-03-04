@@ -50,7 +50,9 @@ for(let i=1;i<=cfg.count;i++){
 const num=i.toString().padStart(2,"0")
 
 arr.push({
-src:`${cfg.path}/${num}.jpg`
+src:`${cfg.path}/${num}.jpg`,
+width:1600,
+height:2400
 })
 
 }
