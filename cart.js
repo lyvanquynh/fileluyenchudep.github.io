@@ -193,17 +193,18 @@ function openPay(){
   document.getElementById("pay-amount").innerText = total.toLocaleString() + "đ"
 
 // ===== SINH QR ĐỘNG =====
-// ===== SINH QR ĐỘNG =====
+const finalTotal = total - couponDiscount
+
 const qrUrl =
   `https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
-  `?amount=${total}` +
+  `?amount=${finalTotal}` +
   `&addInfo=${orderId}` +
   `&accountName=${encodeURIComponent(BANK_NAME)}`
 
 // LƯU QR để dùng cho step 2
 window._currentQrUrl = qrUrl
 window._currentOrderId = orderId
-window._currentTotal = total
+window._currentTotal = total - couponDiscount
 
   document.getElementById("pay-text").innerHTML = `
 <b>Hướng dẫn thanh toán:</b><br>
