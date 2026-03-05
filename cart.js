@@ -184,20 +184,23 @@ cart.forEach((item,i)=>{
   })
 })
 
+let discountAmount = 0
+
 if(couponData){
 
-if(couponData.type==="percent"){
-total = total - total * couponData.value / 100
+if(couponData.type === "percent"){
+discountAmount = Math.round(total * couponData.value / 100)
 }
 
-if(couponData.type==="money"){
-total = total - couponData.value
+if(couponData.type === "money"){
+discountAmount = couponData.value
 }
 
-if(total < 0){
-total = 0
+if(discountAmount > total){
+discountAmount = total
 }
 
+total = total - discountAmount
 }
 
   const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
