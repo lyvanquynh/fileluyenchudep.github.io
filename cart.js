@@ -438,6 +438,12 @@ function applyCoupon(){
 
   if(!input) return
 
+  // ===== CHỐNG ÁP DỤNG NHIỀU LẦN =====
+  if(appliedCoupon){
+    showToast("Mã đã được áp dụng","warn")
+    return
+  }
+
   const code = input.value.trim().toUpperCase()
 
   if(!code){
@@ -445,7 +451,11 @@ function applyCoupon(){
     return
   }
 
-  const total = window._currentTotal || 0
+  let total = 0
+
+cart.forEach(item=>{
+  total += item.price * item.qty
+})
 
   let discount = 0
 
