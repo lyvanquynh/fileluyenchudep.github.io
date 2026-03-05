@@ -628,6 +628,11 @@ document
 .trim()
 .toUpperCase()
 
+if(!code){
+showToast("Vui lòng nhập mã giảm giá","warn")
+return
+}
+
 const res = await fetch(
 "https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec",
 {
