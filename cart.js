@@ -204,7 +204,41 @@ total = 0
 
   document.getElementById("order-id").innerText = "Mã đơn: #" + orderId
   document.getElementById("pay-items").innerHTML = itemsHTML
-  document.getElementById("pay-amount").innerText = total.toLocaleString() + "đ"
+  const amountBox = document.getElementById("pay-amount")
+
+let originalTotal = 0
+
+cart.forEach(item=>{
+originalTotal += item.price * item.qty
+})
+
+let discount = originalTotal - total
+
+if(discount > 0){
+
+amountBox.innerHTML = `
+<div style="font-size:14px;color:#666">
+Tổng tiền: ${originalTotal.toLocaleString()}đ
+</div>
+
+<div style="font-size:14px;color:#e60000">
+Giảm giá: -${discount.toLocaleString()}đ
+</div>
+
+<div style="font-size:20px;font-weight:700;color:#e60000">
+Thanh toán: ${total.toLocaleString()}đ
+</div>
+`
+
+}else{
+
+amountBox.innerHTML = `
+<div style="font-size:20px;font-weight:700;color:#e60000">
+Tổng tiền: ${total.toLocaleString()}đ
+</div>
+`
+
+}
 
 // ===== SINH QR ĐỘNG =====
 // ===== SINH QR ĐỘNG =====
@@ -665,7 +699,11 @@ showToast("Mã đã tắt","error")
 return
 }
 
-couponData = data
+couponData = {
+type: data.type,
+value: data.value,
+row: data.row
+}
 
 showToast("Áp dụng mã thành công","success")
 
