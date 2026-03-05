@@ -441,10 +441,25 @@ function applyCoupon(){
 
   const code = input.value.trim().toUpperCase()
 
-  if(!code){
-    showToast("Nhập mã giảm giá","warn")
-    return
+// ===== nếu xóa mã giảm giá → trả về giá gốc =====
+if(!code){
+
+  let total = 0
+  cart.forEach(item=>{
+    total += item.price * item.qty
+  })
+
+  appliedCoupon = null
+  couponDiscount = 0
+
+  const totalEl = document.getElementById("pay-amount")
+  if(totalEl){
+    totalEl.innerText = total.toLocaleString() + "đ"
   }
+
+  msg.innerHTML = ""
+  return
+}
 
   let total = 0
 
