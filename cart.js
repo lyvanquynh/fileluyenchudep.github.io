@@ -707,6 +707,7 @@ row: data.row
 
 showToast("Áp dụng mã thành công","success")
 
+// refresh popup
+setTimeout(()=>{
 openPay()
-
-}
+},100)
