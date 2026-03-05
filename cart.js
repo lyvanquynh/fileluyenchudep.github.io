@@ -438,11 +438,6 @@ function applyCoupon(){
 
   if(!input) return
 
-  // ===== CHỐNG ÁP DỤNG NHIỀU LẦN =====
-  if(appliedCoupon){
-    showToast("Mã đã được áp dụng","warn")
-    return
-  }
 
   const code = input.value.trim().toUpperCase()
 
