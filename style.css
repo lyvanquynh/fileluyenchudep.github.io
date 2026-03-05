@@ -17,9 +17,15 @@ line-height:1.6
 
 /* ================= HEADER ================= */
 .main-header{
-  background:var(--main-color);
-  color:white;
-  box-shadow:0 3px 10px rgba(0,0,0,.15);
+position:sticky;
+top:0;
+z-index:9999;
+
+background:var(--main-color);
+color:white;
+
+box-shadow:0 4px 14px rgba(0,0,0,.15);
+border-bottom:1px solid rgba(255,255,255,.2);
 }
 
 .header-inner{
@@ -1437,16 +1443,6 @@ transform:translate(var(--x),var(--y)) scale(.3);
 opacity:0;
 }
 
-}
-
-/* ================= STICKY HEADER ================= */
-
-.main-header{
-position:sticky;
-top:0;
-z-index:999;
-background:white;
-box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
 /* ===== TOP ===== */
