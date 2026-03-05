@@ -2,6 +2,10 @@ let cart = JSON.parse(localStorage.getItem("cart")) || []
 let confirmBtnTimer = null   // ===== thêm =====
 let tempOrderData = null     // ===== thêm bước 2 =====
 
+// ===== COUPON =====
+let appliedCoupon = null
+let couponDiscount = 0
+
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
 const BANK_ACC  = "100867092003"
@@ -423,6 +427,56 @@ function confirmPaid(){
   tempOrderData = null
 }
 
+
+// ================= APPLY COUPON =================
+
+function applyCoupon(){
+
+  const input = document.getElementById("coupon-code")
+  const msg   = document.getElementById("coupon-msg")
+
+  if(!input) return
+
+  const code = input.value.trim().toUpperCase()
+
+  if(!code){
+    showToast("Nhập mã giảm giá","warn")
+    return
+  }
+
+  const total = window._currentTotal || 0
+
+  let discount = 0
+
+  // ===== TEST COUPON LOCAL =====
+  if(code === "SALE10"){
+    discount = total * 0.10
+  }
+  else if(code === "GIAM50K"){
+    discount = 50000
+  }
+  else{
+    msg.innerText = "Mã không hợp lệ"
+    showToast("Mã không hợp lệ","error")
+    return
+  }
+
+  appliedCoupon = code
+  couponDiscount = Math.min(discount,total)
+
+  const finalTotal = total - couponDiscount
+
+  // hiển thị thông báo
+  msg.innerHTML =
+  `Đã áp dụng mã <b>${code}</b> - giảm <b>${couponDiscount.toLocaleString()}đ</b>`
+
+  // cập nhật tổng tiền
+  const totalEl = document.getElementById("pay-amount")
+  if(totalEl){
+    totalEl.innerText = finalTotal.toLocaleString() + "đ"
+  }
+
+}
 // ================= INIT =================
 
 updateCartCount()

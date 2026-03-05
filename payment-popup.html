@@ -17,8 +17,26 @@
         <ul id="pay-items"></ul>
 
         <div class="pay-total">
-          Tổng tiền: <span id="pay-amount"></span>
-        </div>
+  Tổng tiền: <span id="pay-amount"></span>
+</div>
+
+<!-- COUPON -->
+<div class="coupon-box">
+
+<input
+  id="coupon-code"
+  placeholder="Nhập mã giảm giá"
+  style="flex:1;padding:8px;border-radius:6px;border:1px solid #ccc">
+
+<button onclick="applyCoupon()"
+        style="background:#ff9800;border:none;color:white;padding:8px 12px;border-radius:6px;cursor:pointer">
+  Áp dụng mã giảm giá
+</button>
+
+</div>
+
+<div id="coupon-msg"
+     style="color:#e60000;font-size:14px;margin-top:4px"></div>
 
         <input id="customer-email"
                placeholder="Nhập email nhận file"
