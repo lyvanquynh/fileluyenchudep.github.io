@@ -1388,3 +1388,21 @@ animation:cartBounce .45s;
 60%{transform:scale(.9)}
 100%{transform:scale(1)}
 }
+
+
+/* ===== FLY TO CART EFFECT ===== */
+
+.fly-img{
+position:fixed;
+z-index:20000;
+pointer-events:none;
+
+width:120px;
+border-radius:10px;
+
+transition:
+transform .8s cubic-bezier(.2,.8,.2,1),
+opacity .8s ease;
+
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+}

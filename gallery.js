@@ -112,6 +112,11 @@ el.querySelector(".pswp-add-cart").onclick=()=>{
 
 addToCart(product.name,product.price)
 
+const img = document.querySelector(".pswp__img")
+if(img){
+flyToCart(img.src, img)
+}
+
 // hiệu ứng nút
 const btn=el.querySelector(".pswp-add-cart")
 

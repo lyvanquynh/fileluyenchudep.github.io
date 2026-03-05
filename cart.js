@@ -463,3 +463,53 @@ if(backBtn){
 function closeStep3(){
   document.getElementById("pay-step3-modal").style.display = "none"
 }
+
+
+
+
+function flyToCart(imgSrc, startElement){
+
+const cart = document.getElementById("cart-box")
+if(!cart) return
+
+const img = document.createElement("img")
+img.src = imgSrc
+img.className = "fly-img"
+
+document.body.appendChild(img)
+
+const rectStart = startElement.getBoundingClientRect()
+const rectEnd = cart.getBoundingClientRect()
+
+img.style.left = rectStart.left + "px"
+img.style.top = rectStart.top + "px"
+
+requestAnimationFrame(()=>{
+
+const dx = rectEnd.left - rectStart.left
+const dy = rectEnd.top - rectStart.top
+
+img.style.transform = `translate(${dx}px, ${dy}px) scale(.2)`
+img.style.opacity = "0.2"
+
+})
+
+setTimeout(()=>{
+img.remove()
+},800)
+
+}
+
+
+
+function flyProduct(btn){
+
+const card = btn.closest(".product")
+if(!card) return
+
+const img = card.querySelector("img")
+if(!img) return
+
+flyToCart(img.src, img)
+
+}
