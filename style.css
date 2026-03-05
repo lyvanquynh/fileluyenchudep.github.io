@@ -516,7 +516,7 @@ font-weight:600;
   font-weight:600;
   text-align:center;
   opacity:0;
-  z-index:20000;
+  z-index:999999;
   pointer-events:none;
   transition:.25s;
   box-shadow:0 12px 30px rgba(0,0,0,.35);
@@ -1405,4 +1405,36 @@ transform .8s cubic-bezier(.2,.8,.2,1),
 opacity .8s ease;
 
 box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+/* ===== CART SPARKLE EFFECT ===== */
+
+.cart-sparkle{
+position:fixed;
+width:6px;
+height:6px;
+background:#ffd700;
+border-radius:50%;
+pointer-events:none;
+z-index:20000;
+
+box-shadow:
+0 0 6px #ffd700,
+0 0 12px #ff9800;
+
+animation:sparkleFly .6s ease forwards;
+}
+
+@keyframes sparkleFly{
+
+0%{
+transform:translate(0,0) scale(1);
+opacity:1;
+}
+
+100%{
+transform:translate(var(--x),var(--y)) scale(.3);
+opacity:0;
+}
+
 }

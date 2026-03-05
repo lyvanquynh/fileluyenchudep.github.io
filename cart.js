@@ -467,36 +467,85 @@ function closeStep3(){
 
 
 
-function flyToCart(imgSrc, startElement){
+function flyToCart(imgSrc, startEl){
 
 const cart = document.getElementById("cart-box")
-if(!cart) return
+if(!cart || !startEl) return
+
+const start = startEl.getBoundingClientRect()
+const end = cart.getBoundingClientRect()
 
 const img = document.createElement("img")
 img.src = imgSrc
 img.className = "fly-img"
 
+img.style.left = start.left + "px"
+img.style.top = start.top + "px"
+img.style.width = start.width + "px"
+img.style.height = start.height + "px"
+
 document.body.appendChild(img)
 
-const rectStart = startElement.getBoundingClientRect()
-const rectEnd = cart.getBoundingClientRect()
+// ===== tính đường bay cong =====
 
-img.style.left = rectStart.left + "px"
-img.style.top = rectStart.top + "px"
+const midX = (start.left + end.left) / 2
+const midY = start.top - 150
 
-requestAnimationFrame(()=>{
+let startTime = null
+const duration = 700
 
-const dx = rectEnd.left - rectStart.left
-const dy = rectEnd.top - rectStart.top
+function animate(time){
 
-img.style.transform = `translate(${dx}px, ${dy}px) scale(.2)`
-img.style.opacity = "0.2"
+if(!startTime) startTime = time
 
-})
+const progress = Math.min((time - startTime)/duration,1)
+
+// cubic ease
+const t = progress
+const curve = 1 - Math.pow(1-t,3)
+
+// Bezier
+const x =
+(1-t)*(1-t)*start.left +
+2*(1-t)*t*midX +
+t*t*end.left
+
+const y =
+(1-t)*(1-t)*start.top +
+2*(1-t)*t*midY +
+t*t*end.top
+
+img.style.left = x + "px"
+img.style.top = y + "px"
+
+const scale = 1 - curve*0.85
+img.style.transform = `scale(${scale}) rotate(${curve*25}deg)`
+img.style.opacity = 1 - curve*0.7
+
+if(progress < 1){
+requestAnimationFrame(animate)
+}else{
+
+img.remove()
+
+const rect = cart.getBoundingClientRect()
+
+cartSparkle(
+rect.left + rect.width/2,
+rect.top + rect.height/2
+)
+
+cart.classList.add("cart-bounce")
 
 setTimeout(()=>{
-img.remove()
-},800)
+cart.classList.remove("cart-bounce")
+},400)
+
+}
+
+}
+
+requestAnimationFrame(animate)
 
 }
 
@@ -511,5 +560,31 @@ const img = card.querySelector("img")
 if(!img) return
 
 flyToCart(img.src, img)
+
+}
+
+function cartSparkle(x,y){
+
+for(let i=0;i<8;i++){
+
+const p = document.createElement("div")
+p.className = "cart-sparkle"
+
+p.style.left = x + "px"
+p.style.top = y + "px"
+
+const dx = (Math.random()*120-60)+"px"
+const dy = (Math.random()*120-60)+"px"
+
+p.style.setProperty("--x",dx)
+p.style.setProperty("--y",dy)
+
+document.body.appendChild(p)
+
+setTimeout(()=>{
+p.remove()
+},600)
+
+}
 
 }

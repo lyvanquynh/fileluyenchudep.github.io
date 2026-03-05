@@ -113,8 +113,27 @@ el.querySelector(".pswp-add-cart").onclick=()=>{
 addToCart(product.name,product.price)
 
 const img = document.querySelector(".pswp__img")
+
 if(img){
-flyToCart(img.src, img)
+
+const rect = img.getBoundingClientRect()
+
+const fake = document.createElement("div")
+
+fake.style.position = "fixed"
+fake.style.left = rect.left + "px"
+fake.style.top = rect.top + "px"
+fake.style.width = rect.width + "px"
+fake.style.height = rect.height + "px"
+
+document.body.appendChild(fake)
+
+flyToCart(img.src,fake)
+
+setTimeout(()=>{
+fake.remove()
+},900)
+
 }
 
 // hiệu ứng nút
