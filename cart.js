@@ -1,6 +1,7 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 let confirmBtnTimer = null   // ===== thêm =====
 let tempOrderData = null     // ===== thêm bước 2 =====
+let couponData = null
 
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
@@ -152,11 +153,12 @@ function openPay(){
   let orderItemsText = ""
   let orderItemsJson = []
 
-  cart.forEach((item,i)=>{
-    const lineTotal = item.price * item.qty
-    total += lineTotal
+cart.forEach((item,i)=>{
 
-    itemsHTML += `
+  const lineTotal = item.price * item.qty
+  total += lineTotal
+
+  itemsHTML += `
 <li style="border-bottom:1px dashed #ddd;padding-bottom:6px;margin-bottom:6px">
   <div><b>${item.name}</b></div>
   <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
@@ -168,7 +170,6 @@ function openPay(){
   </div>
 </li>
 `
-
     const line =
 `${item.name}: ${item.price.toLocaleString()}đ x ${item.qty} = ${lineTotal.toLocaleString()}đ`
 
@@ -182,6 +183,23 @@ function openPay(){
   total: lineTotal
   })
 })
+
+if(couponData){
+
+if(couponData.type==="percent"){
+total = total - total * couponData.value / 100
+}
+
+if(couponData.type==="money"){
+total = total - couponData.value
+}
+
+if(total < 0){
+total = 0
+}
+
+}
+
   const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
 
   document.getElementById("order-id").innerText = "Mã đơn: #" + orderId
@@ -390,6 +408,18 @@ function runNextToast(){
 
 function confirmPaid(){
 
+  if(couponData){
+
+fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec",{
+method:"POST",
+body:JSON.stringify({
+action:"useCoupon",
+row:couponData.row
+})
+})
+
+}
+
   if(!tempOrderData){
     showToast("Lỗi dữ liệu đơn hàng", "error")
     return
@@ -586,5 +616,54 @@ p.remove()
 },600)
 
 }
+
+}
+
+async function applyCoupon(){
+
+const code =
+document
+.getElementById("coupon-input")
+.value
+.trim()
+.toUpperCase()
+
+const res = await fetch(
+"https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec",
+{
+method:"POST",
+body:JSON.stringify({
+action:"checkCoupon",
+code:code
+})
+})
+
+const data = await res.json()
+
+if(data.status==="invalid"){
+showToast("Mã không tồn tại","error")
+return
+}
+
+if(data.status==="expired"){
+showToast("Mã đã hết hạn","error")
+return
+}
+
+if(data.status==="limit"){
+showToast("Mã đã hết lượt","error")
+return
+}
+
+if(data.status==="disabled"){
+showToast("Mã đã tắt","error")
+return
+}
+
+couponData = data
+
+showToast("Áp dụng mã thành công","success")
+
+openPay()
 
 }
