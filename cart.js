@@ -51,6 +51,9 @@ function addToCart(name, price){
 
 
 function removeItem(index){
+
+  couponData = null
+
   cart.splice(index,1)
   saveCart()
   updateCartCount()
@@ -60,6 +63,7 @@ function removeItem(index){
 
 function clearCart(){
   if(confirm("Xóa toàn bộ giỏ hàng?")){
+    couponData = null
     cart=[]
     saveCart()
     updateCartCount()
@@ -375,6 +379,9 @@ function closePay(){
 }
 
 function changeQty(index, delta){
+
+  couponData = null
+
   cart[index].qty += delta
   if(cart[index].qty <= 0) cart.splice(index,1)
 
@@ -388,6 +395,9 @@ function changeQty(index, delta){
 }
 
 function removeItemInPay(index){
+
+  couponData = null
+
   cart.splice(index,1)
   saveCart()
   updateCartCount()
