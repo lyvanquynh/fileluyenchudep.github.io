@@ -2,6 +2,7 @@ let cart = JSON.parse(localStorage.getItem("cart")) || []
 let confirmBtnTimer = null   // ===== thêm =====
 let tempOrderData = null     // ===== thêm bước 2 =====
 let couponData = null
+let paidLock = false
 
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
