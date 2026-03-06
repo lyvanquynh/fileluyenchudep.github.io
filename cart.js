@@ -168,10 +168,10 @@ function unlockConfirmBtn(){
 
 // ================= POPUP THANH TOÁN =================
 
-async function openPay(){
+function openPay(){
 
-  // reload coupon mới nhất từ server
-  await loadCoupons()
+  // load coupon background
+  loadCoupons()
 
   if(cart.length==0){
   showToast("Giỏ hàng trống", "warn")
@@ -574,54 +574,21 @@ cart.forEach(item=>{
 
 
 
-  // ===== TEST COUPON LOCAL =====
-// ===== KIỂM TRA SERVER =====
+// ===== CHECK LOCAL TRƯỚC =====
 
-const res =
-await fetch(COUPON_API,{
-method:"POST",
-body:JSON.stringify({
-action:"checkCoupon",
-code:code,
-email:email
-})
-})
+const data = couponCache.find(c => c.code === code)
 
-const result = await res.json()
-
-if(result.status==="invalid"){
+if(!data){
 showToast("Mã giảm giá không tồn tại","error")
 return
 }
-
-if(result.status==="disabled"){
-showToast("Mã đã bị tắt","error")
-return
-}
-
-if(result.status==="limit"){
-showToast("Mã đã hết lượt","error")
-return
-}
-
-if(result.status==="expired"){
-showToast("Mã đã hết hạn","error")
-return
-}
-
-if(result.status==="used"){
-showToast("Email đã dùng mã này","error")
-return
-}
-
-// ===== LẤY DATA TỪ CACHE =====
-
-const data = couponCache.find(c => c.code === code)
 
 if(total < data.min){
 showToast("Đơn chưa đạt giá trị tối thiểu","warn")
 return
 }
+
+// ===== TÍNH GIẢM NGAY =====
 
 let discount = 0
 
@@ -633,36 +600,46 @@ if(data.type==="money"){
 discount = data.value
 }
 
-// ===== LƯU ROW COUPON =====
-window._couponRow = data.row
+appliedCoupon = code
+couponDiscount = Math.min(discount,total)
 
-  appliedCoupon = code
-  couponDiscount = Math.min(discount,total)
+const finalTotal = total - couponDiscount
 
-  const finalTotal = total - couponDiscount
+document.getElementById("pay-amount").innerText =
+finalTotal.toLocaleString() + "đ"
 
-  // hiển thị thông báo
-  msg.innerHTML =
-  `Đã áp dụng mã <b>${code}</b> - giảm <b>${couponDiscount.toLocaleString()}đ</b>`
+msg.innerHTML =
+`Đã áp dụng mã <b>${code}</b> - giảm <b>${couponDiscount.toLocaleString()}đ</b>`
 
-  // cập nhật tổng tiền
-  const totalEl = document.getElementById("pay-amount")
-if(totalEl){
-  totalEl.innerText = finalTotal.toLocaleString() + "đ"
+
+// ===== CHECK SERVER NỀN =====
+
+fetch(COUPON_API,{
+method:"POST",
+body:JSON.stringify({
+action:"checkCoupon",
+code:code,
+email:email
+})
+})
+.then(r=>r.json())
+.then(result=>{
+
+if(result.status!=="ok"){
+
+appliedCoupon = null
+couponDiscount = 0
+
+document.getElementById("pay-amount").innerText =
+total.toLocaleString() + "đ"
+
+showToast("Mã không hợp lệ","error")
+
 }
 
-// ===== CẬP NHẬT QR =====
+})
 
-const orderId = window._currentOrderId
 
-const qrUrl =
-`https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
-`?amount=${finalTotal}` +
-`&addInfo=${orderId}` +
-`&accountName=${encodeURIComponent(BANK_NAME)}`
-
-window._currentQrUrl = qrUrl
-window._currentTotal = finalTotal
 
 }
 // ================= INIT =================
