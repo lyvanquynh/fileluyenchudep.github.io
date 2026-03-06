@@ -6,6 +6,9 @@ let tempOrderData = null     // ===== thêm bước 2 =====
 let appliedCoupon = null
 let couponDiscount = 0
 
+const COUPON_API =
+"https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec"
+
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
 const BANK_ACC  = "100867092003"
@@ -518,17 +521,52 @@ cart.forEach(item=>{
   let discount = 0
 
   // ===== TEST COUPON LOCAL =====
-  if(code === "SALE10"){
-    discount = total * 0.10
-  }
-  else if(code === "GIAM50K"){
-    discount = 50000
-  }
-  else{
-    msg.innerText = "Mã không hợp lệ"
-    showToast("Mã không hợp lệ","error")
-    return
-  }
+const res =
+await fetch(COUPON_API,{
+method:"POST",
+body:JSON.stringify({
+action:"checkCoupon",
+code:code
+})
+})
+
+const data =
+await res.json()
+
+if(data.status==="invalid"){
+showToast("Mã không tồn tại","error")
+return
+}
+
+if(data.status==="disabled"){
+showToast("Mã đã bị tắt","error")
+return
+}
+
+if(data.status==="limit"){
+showToast("Mã đã hết lượt","error")
+return
+}
+
+if(data.status==="expired"){
+showToast("Mã đã hết hạn","error")
+return
+}
+
+if(total < data.min){
+showToast("Đơn chưa đạt giá trị tối thiểu","warn")
+return
+}
+
+let discount = 0
+
+if(data.type==="percent"){
+discount = total * data.value/100
+}
+
+if(data.type==="money"){
+discount = data.value
+}
 
   appliedCoupon = code
   couponDiscount = Math.min(discount,total)
