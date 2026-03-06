@@ -469,43 +469,33 @@ function runNextToast(){
 
 // ================= XÁC NHẬN ĐÃ THANH TOÁN =================
 
-async function confirmPaid(){
+function confirmPaid(){
 
   if(!tempOrderData){
-    showToast("Lỗi dữ liệu đơn hàng", "error")
+    showToast("Lỗi dữ liệu đơn hàng","error")
     return
   }
 
-  // Gửi Google Sheet
-await fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
-method:"POST",
-mode:"no-cors",
-body:JSON.stringify({
-action:"createOrder",
-...tempOrderData
-})
-})
+  // gửi dữ liệu nhưng KHÔNG chờ
+  fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec",{
+    method:"POST",
+    mode:"no-cors",
+    body:JSON.stringify({
+      action:"createOrder",
+      ...tempOrderData
+    })
+  })
 
+  // chuyển step ngay lập tức
+  document.getElementById("pay-step2-modal").style.display="none"
+  document.getElementById("pay-step3-modal").style.display="flex"
 
-  // Đóng step 2
-  const modal2 = document.getElementById("pay-step2-modal")
-  if(modal2){
-    modal2.style.display = "none"
-  }
-
-  // Mở step 3
-  const modal3 = document.getElementById("pay-step3-modal")
-  if(modal3){
-    modal3.style.display = "flex"
-  }
-
-  // Xóa giỏ hàng
-  cart = []
+  cart=[]
   saveCart()
   updateCartCount()
   renderCart()
 
-  tempOrderData = null
+  tempOrderData=null
 }
 
 
