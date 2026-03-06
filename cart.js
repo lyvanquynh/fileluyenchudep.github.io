@@ -577,7 +577,7 @@ cart.forEach(item=>{
 // ===== CHECK LOCAL TRƯỚC =====
 
 const data = couponCache.find(c => c.code === code)
-
+window._couponRow = data.row
 if(!data){
 showToast("Mã giảm giá không tồn tại","error")
 return
@@ -633,7 +633,25 @@ couponDiscount = 0
 document.getElementById("pay-amount").innerText =
 total.toLocaleString() + "đ"
 
-showToast("Mã không hợp lệ","error")
+if(result.status==="invalid"){
+showToast("Mã giảm giá không tồn tại","error")
+}
+
+else if(result.status==="disabled"){
+showToast("Mã đã bị tắt","error")
+}
+
+else if(result.status==="limit"){
+showToast("Mã đã hết lượt","error")
+}
+
+else if(result.status==="expired"){
+showToast("Mã đã hết hạn","error")
+}
+
+else if(result.status==="used"){
+showToast("Email đã dùng mã này","error")
+}
 
 }
 
