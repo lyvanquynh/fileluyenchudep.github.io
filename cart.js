@@ -168,7 +168,11 @@ function unlockConfirmBtn(){
 
 // ================= POPUP THANH TOÁN =================
 
-function openPay(){
+async function openPay(){
+
+  // reload coupon mới nhất từ server
+  await loadCoupons()
+
   if(cart.length==0){
   showToast("Giỏ hàng trống", "warn")
   return
@@ -531,6 +535,14 @@ async function applyCoupon(){
 
   const code = input.value.trim().toUpperCase()
 
+const emailInput = document.getElementById("customer-email")
+const email = emailInput ? emailInput.value.trim() : ""
+
+if(!email){
+showToast("Nhập email trước khi dùng mã","warn")
+return
+}
+
 
 
 // ===== nếu xóa mã giảm giá → trả về giá gốc =====
@@ -563,27 +575,48 @@ cart.forEach(item=>{
 
 
   // ===== TEST COUPON LOCAL =====
-const data = couponCache.find(c => c.code === code)
+// ===== KIỂM TRA SERVER =====
 
-if(!data){
+const res =
+await fetch(COUPON_API,{
+method:"POST",
+body:JSON.stringify({
+action:"checkCoupon",
+code:code,
+email:email
+})
+})
+
+const result = await res.json()
+
+if(result.status==="invalid"){
 showToast("Mã giảm giá không tồn tại","error")
 return
 }
 
-if(data.status === "disabled"){
+if(result.status==="disabled"){
 showToast("Mã đã bị tắt","error")
 return
 }
 
-if(data.status === "limit"){
+if(result.status==="limit"){
 showToast("Mã đã hết lượt","error")
 return
 }
 
-if(data.status === "expired"){
+if(result.status==="expired"){
 showToast("Mã đã hết hạn","error")
 return
 }
+
+if(result.status==="used"){
+showToast("Email đã dùng mã này","error")
+return
+}
+
+// ===== LẤY DATA TỪ CACHE =====
+
+const data = couponCache.find(c => c.code === code)
 
 if(total < data.min){
 showToast("Đơn chưa đạt giá trị tối thiểu","warn")
