@@ -222,6 +222,15 @@ Sau đó bấm "Xác nhận Email & Copy nội dung đơn".
 
   confirmBtn.onclick = async function(){
 
+  const couponInput = document.getElementById("coupon-code")
+  const code = couponInput?.value.trim()
+
+  if(code && !appliedCoupon){
+    showToast("Mã giảm giá không tồn tại", "error")
+    couponInput.focus()
+    return
+  }
+
     const emailInput = document.getElementById("customer-email")
     const email = emailInput?.value.trim()
 
@@ -676,3 +685,32 @@ p.remove()
 }
 
 }
+
+// ===== AUTO RESET COUPON KHI XÓA =====
+
+const couponInput = document.getElementById("coupon-code")
+
+if(couponInput){
+  couponInput.addEventListener("input", function(){
+
+    if(this.value.trim() !== "") return
+
+    let total = 0
+    cart.forEach(item=>{
+      total += item.price * item.qty
+    })
+
+    appliedCoupon = null
+    couponDiscount = 0
+
+    const totalEl = document.getElementById("pay-amount")
+    if(totalEl){
+      totalEl.innerText = total.toLocaleString() + "đ"
+    }
+
+    const msg = document.getElementById("coupon-msg")
+    if(msg) msg.innerHTML = ""
+
+  })
+}
+
