@@ -170,8 +170,13 @@ function unlockConfirmBtn(){
 
 function openPay(){
 
-  // load coupon background
-  loadCoupons()
+// reset coupon mỗi lần mở popup
+appliedCoupon = null
+couponDiscount = 0
+window._couponRow = null
+
+// load coupon background
+loadCoupons()
 
   if(cart.length==0){
   showToast("Giỏ hàng trống", "warn")
@@ -515,11 +520,26 @@ row: window._couponRow
   document.getElementById("pay-step3-modal").style.display="flex"
 
   cart=[]
-  saveCart()
-  updateCartCount()
-  renderCart()
+saveCart()
+updateCartCount()
+renderCart()
 
-  tempOrderData=null
+// ===== RESET CHECKOUT =====
+appliedCoupon = null
+couponDiscount = 0
+window._couponRow = null
+window._currentTotal = 0
+tempOrderData = null
+
+// reset input
+const emailInput = document.getElementById("customer-email")
+if(emailInput) emailInput.value = ""
+
+const couponInput = document.getElementById("coupon-code")
+if(couponInput) couponInput.value = ""
+
+const couponMsg = document.getElementById("coupon-msg")
+if(couponMsg) couponMsg.innerHTML = ""
 }
 
 
