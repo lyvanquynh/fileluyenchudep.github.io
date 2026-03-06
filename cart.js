@@ -19,8 +19,12 @@ action:"getCoupons"
 
 couponCache = await res.json()
 
-}
+couponCache = couponCache.map(c=>{
+c.code = c.code.toUpperCase()
+return c
+})
 
+}
 
 
 const COUPON_API =
@@ -559,17 +563,9 @@ cart.forEach(item=>{
 
 
   // ===== TEST COUPON LOCAL =====
-const res = await fetch(COUPON_API,{
-method:"POST",
-body:JSON.stringify({
-action:"checkCoupon",
-code:code
-})
-})
+const data = couponCache.find(c => c.code === code)
 
-const data = await res.json()
-
-if(data.status === "invalid"){
+if(!data){
 showToast("Mã giảm giá không tồn tại","error")
 return
 }
