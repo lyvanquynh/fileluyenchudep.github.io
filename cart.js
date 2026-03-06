@@ -482,7 +482,7 @@ function confirmPaid(){
 
 // ================= APPLY COUPON =================
 
-function applyCoupon(){
+async function applyCoupon(){
 
   const input = document.getElementById("coupon-code")
   const msg   = document.getElementById("coupon-msg")
@@ -518,7 +518,7 @@ cart.forEach(item=>{
   total += item.price * item.qty
 })
 
-  let discount = 0
+
 
   // ===== TEST COUPON LOCAL =====
 const res =
