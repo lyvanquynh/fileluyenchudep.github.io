@@ -551,18 +551,20 @@ c.code.toUpperCase()===code.toUpperCase()
 )
 
 if(!data){
-showToast("Mã giảm giá không tồn tại","error")
-return
+  showToast("Mã giảm giá không tồn tại","error")
+  return
 }
 
-if(data.status==="disabled"){
-showToast("Mã đã bị tắt","error")
-return
+// kiểm tra trạng thái
+if(data.active === false){
+  showToast("Mã đã bị tắt","error")
+  return
 }
 
-if(data.status==="limit"){
-showToast("Mã đã hết lượt","error")
-return
+// kiểm tra hết lượt
+if(data.used >= data.limit){
+  showToast("Mã đã hết lượt","error")
+  return
 }
 
 if(data.status==="expired"){
