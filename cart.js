@@ -471,7 +471,7 @@ async function confirmPaid(){
   }
 
   // Gửi Google Sheet
-await fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
+const res = await fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
 method:"POST",
 headers:{
 "Content-Type":"application/json"
@@ -481,6 +481,11 @@ action:"createOrder",
 ...tempOrderData
 })
 })
+
+if(!res.ok){
+showToast("Không gửi được đơn hàng","error")
+return
+}
 
   // Đóng step 2
   const modal2 = document.getElementById("pay-step2-modal")
