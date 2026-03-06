@@ -211,7 +211,19 @@ if(couponInput){
     })
 
     document.getElementById("pay-amount").innerText =
-      newTotal.toLocaleString() + "đ"
+  newTotal.toLocaleString() + "đ"
+
+// ===== CẬP NHẬT LẠI QR =====
+const orderId = window._currentOrderId
+
+const qrUrl =
+`https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
+`?amount=${newTotal}` +
+`&addInfo=${orderId}` +
+`&accountName=${encodeURIComponent(BANK_NAME)}`
+
+window._currentQrUrl = qrUrl
+window._currentTotal = newTotal
 
     if(couponMsg) couponMsg.innerHTML = ""
 
