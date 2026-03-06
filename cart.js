@@ -6,8 +6,27 @@ let tempOrderData = null     // ===== thêm bước 2 =====
 let appliedCoupon = null
 let couponDiscount = 0
 
+let couponCache = []
+
+async function loadCoupons(){
+
+const res = await fetch(COUPON_API,{
+method:"POST",
+body:JSON.stringify({
+action:"getCoupons"
+})
+})
+
+couponCache = await res.json()
+
+}
+
+
+
 const COUPON_API =
 "https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec"
+
+loadCoupons()
 
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
@@ -299,7 +318,7 @@ if(!emailPattern.test(email)){
 tempOrderData = {
   order_id: orderId,
   time: formatTimeVN(),
-  total: total,
+  total: window._currentTotal,
   text: orderItemsText,
   items: orderItemsJson,
   email: email
@@ -521,20 +540,13 @@ cart.forEach(item=>{
 
 
   // ===== TEST COUPON LOCAL =====
-const res =
-await fetch(COUPON_API,{
-method:"POST",
-body:JSON.stringify({
-action:"checkCoupon",
-code:code
-})
-})
-
 const data =
-await res.json()
+couponCache.find(c =>
+c.code.toUpperCase()===code.toUpperCase()
+)
 
-if(data.status==="invalid"){
-showToast("Mã không tồn tại","error")
+if(!data){
+showToast("Mã giảm giá không tồn tại","error")
 return
 }
 
