@@ -463,7 +463,7 @@ function runNextToast(){
 
 // ================= XÁC NHẬN ĐÃ THANH TOÁN =================
 
-function confirmPaid(){
+async function confirmPaid(){
 
   if(!tempOrderData){
     showToast("Lỗi dữ liệu đơn hàng", "error")
