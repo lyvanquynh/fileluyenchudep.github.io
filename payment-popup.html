@@ -62,6 +62,7 @@
 
 <div id="pay-step2-modal"
      style="display:none;
+            flex-direction:column;
             position:fixed;
             inset:0;
             background:rgba(0,0,0,.4);
@@ -107,8 +108,8 @@
     </div>
 
     <div style="margin-top:15px;text-align:center">
-      <button onclick="confirmPaid()"
-        class="confirm-paid-btn">
+      <button class="confirm-paid-btn"
+        onclick="this.disabled=true;confirmPaid()">
   ✅ Xác nhận đã thanh toán
 </button>
     </div>
