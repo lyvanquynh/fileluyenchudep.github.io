@@ -318,7 +318,13 @@ if(!emailPattern.test(email)){
 tempOrderData = {
   order_id: orderId,
   time: formatTimeVN(),
+
+  original_total: total,
+  discount: couponDiscount,
+  coupon: appliedCoupon,
+
   total: window._currentTotal,
+
   text: orderItemsText,
   items: orderItemsJson,
   email: email
