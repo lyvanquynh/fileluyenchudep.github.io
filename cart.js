@@ -486,6 +486,22 @@ function confirmPaid(){
     })
   })
 
+
+// ===== ghi nhận đã dùng coupon =====
+if(appliedCoupon && window._couponRow){
+
+fetch(COUPON_API,{
+method:"POST",
+mode:"no-cors",
+body:JSON.stringify({
+action:"useCoupon",
+row: window._couponRow
+})
+})
+
+}
+
+
   // chuyển step ngay lập tức
   document.getElementById("pay-step2-modal").style.display="none"
   document.getElementById("pay-step3-modal").style.display="flex"
@@ -511,6 +527,8 @@ async function applyCoupon(){
 
   const code = input.value.trim().toUpperCase()
 
+
+
 // ===== nếu xóa mã giảm giá → trả về giá gốc =====
 if(!code){
 
@@ -521,6 +539,7 @@ if(!code){
 
   appliedCoupon = null
   couponDiscount = 0
+  window._couponRow = null   // ← THÊM DÒNG NÀY
 
   const totalEl = document.getElementById("pay-amount")
   if(totalEl){
@@ -540,29 +559,32 @@ cart.forEach(item=>{
 
 
   // ===== TEST COUPON LOCAL =====
-const data =
-couponCache.find(c =>
-c.code.toUpperCase()===code.toUpperCase()
-)
+const res = await fetch(COUPON_API,{
+method:"POST",
+body:JSON.stringify({
+action:"checkCoupon",
+code:code
+})
+})
 
-if(!data){
-  showToast("Mã giảm giá không tồn tại","error")
-  return
+const data = await res.json()
+
+if(data.status === "invalid"){
+showToast("Mã giảm giá không tồn tại","error")
+return
 }
 
-// kiểm tra trạng thái
-if(data.active === false){
-  showToast("Mã đã bị tắt","error")
-  return
+if(data.status === "disabled"){
+showToast("Mã đã bị tắt","error")
+return
 }
 
-// kiểm tra hết lượt
-if(data.used >= data.limit){
-  showToast("Mã đã hết lượt","error")
-  return
+if(data.status === "limit"){
+showToast("Mã đã hết lượt","error")
+return
 }
 
-if(data.status==="expired"){
+if(data.status === "expired"){
 showToast("Mã đã hết hạn","error")
 return
 }
@@ -581,6 +603,9 @@ discount = total * data.value/100
 if(data.type==="money"){
 discount = data.value
 }
+
+// ===== LƯU ROW COUPON =====
+window._couponRow = data.row
 
   appliedCoupon = code
   couponDiscount = Math.min(discount,total)
