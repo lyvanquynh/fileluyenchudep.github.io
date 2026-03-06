@@ -482,10 +482,8 @@ action:"createOrder",
 })
 })
 
-if(!res.ok){
-showToast("Không gửi được đơn hàng","error")
-return
-}
+const text = await res.text()
+console.log(text)
 
   // Đóng step 2
   const modal2 = document.getElementById("pay-step2-modal")
