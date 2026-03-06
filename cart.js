@@ -192,6 +192,33 @@ function openPay(){
   document.getElementById("pay-items").innerHTML = itemsHTML
   document.getElementById("pay-amount").innerText = total.toLocaleString() + "đ"
 
+  // ===== AUTO RESET COUPON =====
+const couponInput = document.getElementById("coupon-code")
+const couponMsg = document.getElementById("coupon-msg")
+
+if(couponInput){
+
+  couponInput.oninput = function(){
+
+    if(this.value.trim() !== "") return
+
+    appliedCoupon = null
+    couponDiscount = 0
+
+    let newTotal = 0
+    cart.forEach(item=>{
+      newTotal += item.price * item.qty
+    })
+
+    document.getElementById("pay-amount").innerText =
+      newTotal.toLocaleString() + "đ"
+
+    if(couponMsg) couponMsg.innerHTML = ""
+
+  }
+
+}
+
 // ===== SINH QR ĐỘNG =====
 const finalTotal = total - couponDiscount
 
@@ -684,33 +711,5 @@ p.remove()
 
 }
 
-}
-
-// ===== AUTO RESET COUPON KHI XÓA =====
-
-const couponInput = document.getElementById("coupon-code")
-
-if(couponInput){
-  couponInput.addEventListener("input", function(){
-
-    if(this.value.trim() !== "") return
-
-    let total = 0
-    cart.forEach(item=>{
-      total += item.price * item.qty
-    })
-
-    appliedCoupon = null
-    couponDiscount = 0
-
-    const totalEl = document.getElementById("pay-amount")
-    if(totalEl){
-      totalEl.innerText = total.toLocaleString() + "đ"
-    }
-
-    const msg = document.getElementById("coupon-msg")
-    if(msg) msg.innerHTML = ""
-
-  })
 }
 
