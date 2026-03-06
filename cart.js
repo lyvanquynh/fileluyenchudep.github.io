@@ -473,7 +473,10 @@ function confirmPaid(){
   // Gửi Google Sheet
   fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec", {
     method: "POST",
-    body: JSON.stringify(tempOrderData),
+    body: JSON.stringify({
+action:"createOrder",
+...tempOrderData
+}),
     mode: "no-cors"
   })
 
