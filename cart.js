@@ -174,6 +174,11 @@ function openPay(){
 appliedCoupon = null
 couponDiscount = 0
 window._couponRow = null
+  const couponInput = document.getElementById("coupon-code")
+if(couponInput) couponInput.value = ""
+
+const couponMsg = document.getElementById("coupon-msg")
+if(couponMsg) couponMsg.innerHTML = ""
 
 // load coupon background
 loadCoupons()
