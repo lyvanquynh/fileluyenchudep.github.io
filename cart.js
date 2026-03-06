@@ -597,11 +597,13 @@ cart.forEach(item=>{
 // ===== CHECK LOCAL TRƯỚC =====
 
 const data = couponCache.find(c => c.code === code)
-window._couponRow = data.row
+
 if(!data){
 showToast("Mã giảm giá không tồn tại","error")
 return
 }
+
+window._couponRow = data.row
 
 if(total < data.min){
 showToast("Đơn chưa đạt giá trị tối thiểu","warn")
