@@ -632,6 +632,18 @@ const finalTotal = total - couponDiscount
 document.getElementById("pay-amount").innerText =
 finalTotal.toLocaleString() + "đ"
 
+// ===== CẬP NHẬT QR =====
+const orderId = window._currentOrderId
+
+const qrUrl =
+`https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
+`?amount=${finalTotal}` +
+`&addInfo=${orderId}` +
+`&accountName=${encodeURIComponent(BANK_NAME)}`
+
+window._currentQrUrl = qrUrl
+window._currentTotal = finalTotal
+
 msg.innerHTML =
 `Đã áp dụng mã <b>${code}</b> - giảm <b>${couponDiscount.toLocaleString()}đ</b>`
 
