@@ -407,10 +407,10 @@ function changeQty(index, delta){
   unlockConfirmBtn()
 
   if(cart.length === 0){
-    closePay()
-  }else{
-    updatePaymentTotal()
-  }
+  closePay()
+}else{
+  openPay()
+}
 
 }
 
@@ -423,10 +423,10 @@ function removeItemInPay(index){
   unlockConfirmBtn()
 
   if(cart.length === 0){
-    closePay()
-  }else{
-    updatePaymentTotal()
-  }
+  closePay()
+}else{
+  openPay()
+}
 
 }
 
