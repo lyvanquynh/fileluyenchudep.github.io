@@ -776,9 +776,12 @@ setTimeout(()=>{
 
 img.remove()
 
+// lấy lại vị trí giỏ mới (giống cart-cu.js)
+const rect = cart.getBoundingClientRect()
+
 cartSparkle(
-cartRect.left + window.scrollX + cartRect.width/2,
-cartRect.top + window.scrollY + cartRect.height/2
+rect.left + rect.width/2,
+rect.top + rect.height/2
 )
 
 cart.classList.add("cart-bounce")
@@ -805,10 +808,14 @@ flyToCart(img.src, img)
 
 function cartSparkle(x,y){
 
-for(let i=0;i<8;i++){
+for(let i=0;i<12;i++){
 
 const p = document.createElement("div")
 p.className = "cart-sparkle"
+
+const size = 6 + Math.random()*6
+p.style.width = size + "px"
+p.style.height = size + "px"
 
 p.style.left = x + "px"
 p.style.top = y + "px"
@@ -821,9 +828,11 @@ p.style.setProperty("--y",dy)
 
 document.body.appendChild(p)
 
+const life = 500 + Math.random()*400
+
 setTimeout(()=>{
 p.remove()
-},600)
+},life)
 
 }
 
