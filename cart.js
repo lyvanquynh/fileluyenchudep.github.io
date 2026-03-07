@@ -774,9 +774,6 @@ img.style.opacity = "0.2"
 
 setTimeout(()=>{
 
-img.remove()
-
-// lấy lại vị trí giỏ mới (giống cart-cu.js)
 const rect = cart.getBoundingClientRect()
 
 cartSparkle(
@@ -790,7 +787,9 @@ setTimeout(()=>{
 cart.classList.remove("cart-bounce")
 },400)
 
-},700)
+img.remove()
+
+},620)
 
 }
 
@@ -830,8 +829,8 @@ p.style.height = size + "px"
 p.style.left = x + "px"
 p.style.top = y + "px"
 
-const dx = (Math.random()*120-60)+"px"
-const dy = (Math.random()*120-60)+"px"
+const dx = (Math.random()*240-120)+"px"
+const dy = (Math.random()*240-120)+"px"
 
 p.style.setProperty("--x",dx)
 p.style.setProperty("--y",dy)
