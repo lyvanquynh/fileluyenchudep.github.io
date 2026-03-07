@@ -780,6 +780,13 @@ cartSparkle(
 cartRect.left + window.scrollX + cartRect.width/2,
 cartRect.top + window.scrollY + cartRect.height/2
 )
+
+cart.classList.add("cart-bounce")
+
+setTimeout(()=>{
+cart.classList.remove("cart-bounce")
+},400)
+
 },700)
 
 }
