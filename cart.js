@@ -342,6 +342,7 @@ if(modal1){
 const modal2 = document.getElementById("pay-step2-modal")
 if(modal2){
   modal2.style.display = "flex"
+  document.body.style.overflow = "hidden"
 }
 
 // ===== GÁN QR CHO STEP 2 =====
@@ -364,7 +365,7 @@ if(totalEl) totalEl.innerText = window._currentTotal.toLocaleString() + "đ"
   }
 
 
-  const payContent = document.getElementById("pay-content")
+const payContent = document.getElementById("pay-content")
 const modal = document.getElementById("pay-modal")
 
 if(payContent && modal){
@@ -373,12 +374,14 @@ if(payContent && modal){
 
   modal.style.display="flex"
 
+  document.body.style.overflow = "hidden"
+
   payContent.getBoundingClientRect()
 
   requestAnimationFrame(()=>{
     payContent.classList.remove("zoom-from-cart")
   })
-}  // ← đóng if
+}
 }  // ← đóng openPay
 
 // ================= HÀM PHỤ =================
@@ -395,6 +398,7 @@ function closePay(){
     setTimeout(()=>{
       modal.style.display="none"
       payContent.classList.remove("zoom-from-cart")
+      document.body.style.overflow = ""
     },300)
   }
 }

@@ -447,12 +447,15 @@ cursor:pointer;
   -webkit-backdrop-filter: blur(6px);
   display:none;
   justify-content:center;
-  align-items:flex-start;   /* không center theo chiều dọc */
+  align-items:center;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
-  z-index:999;
+  z-index:9999;
 }
 
+#pay-content{
+  margin-top:20px;
+}
 
 #pay-content img{
 width:100%;
