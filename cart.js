@@ -738,13 +738,7 @@ function closeStep3(){
 
 function flyToCart(imgSrc, startEl){
 
-let cart = document.getElementById("cart-box")
-
-const cartFull = document.getElementById("cart-box-full")
-
-if(cartFull && cartFull.style.display !== "none"){
-  cart = cartFull
-}
+const cart = document.getElementById("cart-box")
 
 if(!cart || !startEl) return
 
@@ -777,7 +771,10 @@ document.body.appendChild(img)
 // ===== tính đường bay cong =====
 
 const midX = (start.left + end.left) / 2
-const midY = Math.min(start.top, end.top) - 120
+
+const distanceY = Math.abs(start.top - end.top)
+
+const midY = Math.min(start.top, end.top) - Math.min(150, distanceY / 2)
 
 let startTime = null
 const duration = 700
@@ -819,8 +816,8 @@ img.remove()
 const rect = cart.getBoundingClientRect()
 
 cartSparkle(
-rect.left + rect.width/2,
-rect.top + rect.height/2
+rect.left + window.scrollX + rect.width/2,
+rect.top + window.scrollY + rect.height/2
 )
 
 cart.classList.add("cart-bounce")
