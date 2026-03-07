@@ -637,18 +637,8 @@ if(data.type==="money"){
 discount = data.value
 }
 
-appliedCoupon = code
-couponDiscount = Math.min(discount,total)
-
-updatePaymentTotal()
-
-
-msg.innerHTML =
-`Đã áp dụng mã <b>${code}</b> - giảm <b>${couponDiscount.toLocaleString()}đ</b>`
-
-
 // ===== CHECK SERVER NỀN =====
-
+msg.innerHTML = "Đang kiểm tra mã..."
 fetch(COUPON_API,{
 method:"POST",
 body:JSON.stringify({
@@ -658,9 +648,21 @@ email:email
 })
 })
 .then(r=>r.json())
+
+
 .then(result=>{
 
-if(result.status!=="ok"){
+if(result.status==="ok"){
+
+appliedCoupon = code
+couponDiscount = Math.min(discount,total)
+
+updatePaymentTotal()
+
+msg.innerHTML =
+`Đã áp dụng mã <b>${code}</b> - giảm <b>${couponDiscount.toLocaleString()}đ</b>`
+
+}else{
 
 appliedCoupon = null
 couponDiscount = 0
