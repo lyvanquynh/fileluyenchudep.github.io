@@ -738,12 +738,23 @@ function closeStep3(){
 
 function flyToCart(imgSrc, startEl){
 
-const cart = document.getElementById("cart-box")
+const cart = document.querySelector("#cart-box")
 
 if(!cart || !startEl) return
 
+// nếu cart đang bị ẩn (khi mở giỏ full) thì tạm hiển thị để lấy vị trí
+const wasHidden = cart.style.display === "none"
+
+if(wasHidden){
+cart.style.display = "flex"
+}
+
 const startRect = startEl.getBoundingClientRect()
 const cartRect = cart.getBoundingClientRect()
+
+if(wasHidden){
+cart.style.display = "none"
+}
 
 const start = {
 left: startRect.left + window.scrollX,
