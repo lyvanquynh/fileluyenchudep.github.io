@@ -734,50 +734,57 @@ function closeStep3(){
 }
 
 
-
-
 function flyToCart(imgSrc, startEl){
 
 const cart = document.querySelector("#cart-box")
 
 if(!cart || !startEl) return
 
-// nếu cart đang bị ẩn (khi mở giỏ full) thì tạm hiển thị để lấy vị trí
-const wasHidden = cart.style.display === "none"
-
-if(wasHidden){
-cart.style.display = "flex"
-}
-
 const startRect = startEl.getBoundingClientRect()
 const cartRect = cart.getBoundingClientRect()
-
-if(wasHidden){
-cart.style.display = "none"
-}
-
-const start = {
-left: startRect.left + window.scrollX,
-top: startRect.top + window.scrollY,
-width: startRect.width,
-height: startRect.height
-}
-
-const end = {
-left: cartRect.left + window.scrollX + cartRect.width / 2,
-top: cartRect.top + window.scrollY + cartRect.height / 2
-}
 
 const img = document.createElement("img")
 img.src = imgSrc
 img.className = "fly-img"
 
-img.style.left = start.left + "px"
-img.style.top = start.top + "px"
-img.style.width = start.width + "px"
-img.style.height = start.height + "px"
+img.style.position = "fixed"
+img.style.left = startRect.left + "px"
+img.style.top = startRect.top + "px"
+img.style.width = startRect.width + "px"
+img.style.height = startRect.height + "px"
 
 document.body.appendChild(img)
+
+const dx = cartRect.left + cartRect.width/2 - startRect.left
+const dy = cartRect.top + cartRect.height/2 - startRect.top
+
+requestAnimationFrame(()=>{
+
+img.style.transition = "transform 0.7s cubic-bezier(.2,.8,.2,1), opacity 0.7s"
+
+img.style.transform = `translate(${dx}px, ${dy}px) scale(.2) rotate(25deg)`
+img.style.opacity = "0.2"
+
+})
+
+setTimeout(()=>{
+
+img.remove()
+
+cartSparkle(
+cartRect.left + cartRect.width/2,
+cartRect.top + cartRect.height/2
+)
+
+cart.classList.add("cart-bounce")
+
+setTimeout(()=>{
+cart.classList.remove("cart-bounce")
+},400)
+
+},700)
+
+}
 
 // ===== tính đường bay cong =====
 
