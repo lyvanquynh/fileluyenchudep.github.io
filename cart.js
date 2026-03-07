@@ -755,8 +755,13 @@ img.style.height = startRect.height + "px"
 
 document.body.appendChild(img)
 
-const dx = cartRect.left + cartRect.width/2 - startRect.left
-const dy = cartRect.top + cartRect.height/2 - startRect.top
+const dx =
+(cartRect.left + window.scrollX + cartRect.width/2) -
+(startRect.left + window.scrollX)
+
+const dy =
+(cartRect.top + window.scrollY + cartRect.height/2) -
+(startRect.top + window.scrollY)
 
 requestAnimationFrame(()=>{
 
@@ -772,87 +777,12 @@ setTimeout(()=>{
 img.remove()
 
 cartSparkle(
-cartRect.left + cartRect.width/2,
-cartRect.top + cartRect.height/2
+cartRect.left + window.scrollX + cartRect.width/2,
+cartRect.top + window.scrollY + cartRect.height/2
 )
-
-cart.classList.add("cart-bounce")
-
-setTimeout(()=>{
-cart.classList.remove("cart-bounce")
-},400)
-
 },700)
 
 }
-
-// ===== tính đường bay cong =====
-
-const midX = (start.left + end.left) / 2
-
-const distanceY = Math.abs(start.top - end.top)
-
-const midY = Math.min(start.top, end.top) - Math.min(150, distanceY / 2)
-
-let startTime = null
-const duration = 700
-
-function animate(time){
-
-if(!startTime) startTime = time
-
-const progress = Math.min((time - startTime)/duration,1)
-
-// cubic ease
-const t = progress
-const curve = 1 - Math.pow(1-t,3)
-
-// Bezier
-const x =
-(1-t)*(1-t)*start.left +
-2*(1-t)*t*midX +
-t*t*end.left
-
-const y =
-(1-t)*(1-t)*start.top +
-2*(1-t)*t*midY +
-t*t*end.top
-
-img.style.left = x + "px"
-img.style.top = y + "px"
-
-const scale = 1 - curve*0.85
-img.style.transform = `scale(${scale}) rotate(${curve*25}deg)`
-img.style.opacity = 1 - curve*0.7
-
-if(progress < 1){
-requestAnimationFrame(animate)
-}else{
-
-img.remove()
-
-const rect = cart.getBoundingClientRect()
-
-cartSparkle(
-rect.left + window.scrollX + rect.width/2,
-rect.top + window.scrollY + rect.height/2
-)
-
-cart.classList.add("cart-bounce")
-
-setTimeout(()=>{
-cart.classList.remove("cart-bounce")
-},400)
-
-}
-
-}
-
-requestAnimationFrame(animate)
-
-}
-
-
 
 function flyProduct(btn){
 
