@@ -336,6 +336,7 @@ showToast("Đã xác nhận email & copy đơn", "success")
 const modal1 = document.getElementById("pay-modal")
 if(modal1){
   modal1.style.display = "none"
+  document.body.style.overflow = ""
 }
 
 // ===== MỞ STEP 2 =====
