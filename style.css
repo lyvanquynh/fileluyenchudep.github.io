@@ -1403,7 +1403,9 @@ position:fixed;
 z-index:20000;
 pointer-events:none;
 
-width:120px;
+width:auto;
+max-width:120px;
+
 border-radius:10px;
 
 transition:
