@@ -742,7 +742,12 @@ const cart = document.getElementById("cart-box")
 if(!cart || !startEl) return
 
 const start = startEl.getBoundingClientRect()
-const end = cart.getBoundingClientRect()
+const cartRect = cart.getBoundingClientRect()
+
+const end = {
+left: cartRect.left + cartRect.width / 2,
+top: cartRect.top + cartRect.height / 2
+}
 
 const img = document.createElement("img")
 img.src = imgSrc
@@ -758,7 +763,7 @@ document.body.appendChild(img)
 // ===== tính đường bay cong =====
 
 const midX = (start.left + end.left) / 2
-const midY = start.top - 150
+const midY = Math.min(start.top, end.top) - 120
 
 let startTime = null
 const duration = 700
