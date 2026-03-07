@@ -629,7 +629,8 @@ method:"POST",
 body:JSON.stringify({
 action:"checkCoupon",
 code:code,
-email:email
+email:email,
+total:total
 })
 })
 .then(r=>r.json())
