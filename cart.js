@@ -690,8 +690,6 @@ showToast("Email đã dùng mã này","error")
 
 }
 
-}
-
 })
 
 
