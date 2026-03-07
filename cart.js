@@ -780,8 +780,8 @@ img.remove()
 const rect = cart.getBoundingClientRect()
 
 cartSparkle(
-rect.left + rect.width/2,
-rect.top + rect.height/2
+rect.left + window.scrollX + rect.width/2,
+rect.top + window.scrollY + rect.height/2
 )
 
 cart.classList.add("cart-bounce")
