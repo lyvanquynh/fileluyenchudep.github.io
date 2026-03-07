@@ -32,6 +32,11 @@ const COUPON_API =
 
 loadCoupons()
 
+// ===== AUTO RELOAD COUPON =====
+setInterval(()=>{
+loadCoupons()
+},30000)
+
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
 const BANK_ACC  = "100867092003"
@@ -629,13 +634,12 @@ email:email
 })
 .then(r=>r.json())
 
-
 .then(result=>{
 
 if(result.status==="ok"){
 
 appliedCoupon = code
-couponDiscount = Math.min(discount,total)
+couponDiscount = Number(result.discount || 0)
 
 updatePaymentTotal()
 
@@ -673,7 +677,6 @@ showToast("Email đã dùng mã này","error")
 }
 
 })
-
 
 
 }
