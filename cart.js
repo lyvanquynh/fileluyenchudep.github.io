@@ -738,15 +738,29 @@ function closeStep3(){
 
 function flyToCart(imgSrc, startEl){
 
-const cart = document.getElementById("cart-box")
+let cart = document.getElementById("cart-box")
+
+const cartFull = document.getElementById("cart-box-full")
+
+if(cartFull && cartFull.style.display !== "none"){
+  cart = cartFull
+}
+
 if(!cart || !startEl) return
 
-const start = startEl.getBoundingClientRect()
+const startRect = startEl.getBoundingClientRect()
 const cartRect = cart.getBoundingClientRect()
 
+const start = {
+left: startRect.left + window.scrollX,
+top: startRect.top + window.scrollY,
+width: startRect.width,
+height: startRect.height
+}
+
 const end = {
-left: cartRect.left + cartRect.width / 2,
-top: cartRect.top + cartRect.height / 2
+left: cartRect.left + window.scrollX + cartRect.width / 2,
+top: cartRect.top + window.scrollY + cartRect.height / 2
 }
 
 const img = document.createElement("img")
