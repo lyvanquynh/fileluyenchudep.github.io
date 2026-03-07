@@ -233,9 +233,6 @@ loadCoupons()
   document.getElementById("pay-amount").innerText = total.toLocaleString() + "đ"
 
   // ===== AUTO RESET COUPON =====
-const couponInput = document.getElementById("coupon-code")
-const couponMsg = document.getElementById("coupon-msg")
-
 if(couponInput){
 
   couponInput.oninput = function(){
