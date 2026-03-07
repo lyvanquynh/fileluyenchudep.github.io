@@ -660,7 +660,7 @@ showToast("Mã giảm giá không tồn tại","error")
 }
 
 else if(result.status==="disabled"){
-showToast("Mã đã bị tắt","error")
+showToast("Mã đã hết hạn","error")
 }
 
 else if(result.status==="limit"){
@@ -668,7 +668,7 @@ showToast("Mã đã hết lượt","error")
 }
 
 else if(result.status==="expired"){
-showToast("Mã đã hết hạn","error")
+showToast("Mã đã bị tắt","error")
 }
 
 else if(result.status==="used"){
