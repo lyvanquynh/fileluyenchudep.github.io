@@ -474,8 +474,6 @@ function runNextToast(){
   }, 1800)
 }
 
-// ================= XÁC NHẬN ĐÃ THANH TOÁN =================
-
 function confirmPaid(){
 
   if(!tempOrderData){
@@ -483,8 +481,7 @@ function confirmPaid(){
     return
   }
 
-  // gửi dữ liệu nhưng KHÔNG chờ
-  fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec",{
+fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec",{
     method:"POST",
     mode:"no-cors",
     body:JSON.stringify({
@@ -493,47 +490,29 @@ function confirmPaid(){
     })
   })
 
-
-// ===== ghi nhận đã dùng coupon =====
-if(appliedCoupon && window._couponRow){
-
-fetch(COUPON_API,{
-method:"POST",
-mode:"no-cors",
-body:JSON.stringify({
-action:"useCoupon",
-row: window._couponRow
-})
-})
-
-}
-
-
-  // chuyển step ngay lập tức
   document.getElementById("pay-step2-modal").style.display="none"
   document.getElementById("pay-step3-modal").style.display="flex"
 
   cart=[]
-saveCart()
-updateCartCount()
-renderCart()
+  saveCart()
+  updateCartCount()
+  renderCart()
 
-// ===== RESET CHECKOUT =====
-appliedCoupon = null
-couponDiscount = 0
-window._couponRow = null
-window._currentTotal = 0
-tempOrderData = null
+  appliedCoupon = null
+  couponDiscount = 0
+  window._couponRow = null
+  window._currentTotal = 0
+  tempOrderData = null
 
-// reset input
-const emailInput = document.getElementById("customer-email")
-if(emailInput) emailInput.value = ""
+  const emailInput = document.getElementById("customer-email")
+  if(emailInput) emailInput.value = ""
 
-const couponInput = document.getElementById("coupon-code")
-if(couponInput) couponInput.value = ""
+  const couponInput = document.getElementById("coupon-code")
+  if(couponInput) couponInput.value = ""
 
-const couponMsg = document.getElementById("coupon-msg")
-if(couponMsg) couponMsg.innerHTML = ""
+  const couponMsg = document.getElementById("coupon-msg")
+  if(couponMsg) couponMsg.innerHTML = ""
+
 }
 
 
@@ -618,7 +597,8 @@ showToast("Mã giảm giá không tồn tại","error")
 return
 }
 
-window._couponRow = data.row
+// KHÔNG lưu row ở client nữa
+// window._couponRow = data.row
 
 if(total < data.min){
 showToast("Đơn chưa đạt giá trị tối thiểu","warn")
