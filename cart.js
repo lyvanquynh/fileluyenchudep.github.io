@@ -180,8 +180,6 @@ if(couponInput) couponInput.value = ""
 const couponMsg = document.getElementById("coupon-msg")
 if(couponMsg) couponMsg.innerHTML = ""
 
-// load coupon background
-loadCoupons()
 
   if(cart.length==0){
   showToast("Giỏ hàng trống", "warn")
@@ -242,25 +240,7 @@ if(couponInput){
     appliedCoupon = null
     couponDiscount = 0
 
-    let newTotal = 0
-    cart.forEach(item=>{
-      newTotal += item.price * item.qty
-    })
-
-    document.getElementById("pay-amount").innerText =
-  newTotal.toLocaleString() + "đ"
-
-// ===== CẬP NHẬT LẠI QR =====
-const orderId = window._currentOrderId
-
-const qrUrl =
-`https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
-`?amount=${newTotal}` +
-`&addInfo=${orderId}` +
-`&accountName=${encodeURIComponent(BANK_NAME)}`
-
-window._currentQrUrl = qrUrl
-window._currentTotal = newTotal
+    updatePaymentTotal()
 
     if(couponMsg) couponMsg.innerHTML = ""
 
@@ -288,7 +268,7 @@ window._currentTotal = total - couponDiscount
 Sau đó bấm "Xác nhận Email & Copy nội dung đơn".
 `
 
-  orderText += "Tổng tiền: " + total.toLocaleString() + "đ\n"
+  orderText += "Tổng tiền: " + window._currentTotal.toLocaleString() + "đ\n"
   orderText += "Mã đơn: #" + orderId
 
 
@@ -416,26 +396,38 @@ function closePay(){
 
 function changeQty(index, delta){
   cart[index].qty += delta
-  if(cart[index].qty <= 0) cart.splice(index,1)
+
+  if(cart[index].qty <= 0){
+    cart.splice(index,1)
+  }
 
   saveCart()
   updateCartCount()
   renderCart()
   unlockConfirmBtn()
 
-  if(cart.length === 0) closePay()
-  else openPay()
+  if(cart.length === 0){
+    closePay()
+  }else{
+    updatePaymentTotal()
+  }
+
 }
 
 function removeItemInPay(index){
   cart.splice(index,1)
+
   saveCart()
   updateCartCount()
   renderCart()
   unlockConfirmBtn()
 
-  if(cart.length === 0) closePay()
-  else openPay()
+  if(cart.length === 0){
+    closePay()
+  }else{
+    updatePaymentTotal()
+  }
+
 }
 
 // ===== TOAST PRO SYSTEM =====
@@ -545,6 +537,35 @@ if(couponMsg) couponMsg.innerHTML = ""
 }
 
 
+function updatePaymentTotal(){
+
+  let total = 0
+
+  cart.forEach(item=>{
+    total += item.price * item.qty
+  })
+
+  const finalTotal = total - couponDiscount
+
+  const totalEl = document.getElementById("pay-amount")
+  if(totalEl){
+    totalEl.innerText = finalTotal.toLocaleString() + "đ"
+  }
+
+  const orderId = window._currentOrderId
+
+  const qrUrl =
+  `https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
+  `?amount=${finalTotal}` +
+  `&addInfo=${orderId}` +
+  `&accountName=${encodeURIComponent(BANK_NAME)}`
+
+  window._currentQrUrl = qrUrl
+  window._currentTotal = finalTotal
+
+}
+
+
 // ================= APPLY COUPON =================
 
 async function applyCoupon(){
@@ -570,19 +591,11 @@ return
 // ===== nếu xóa mã giảm giá → trả về giá gốc =====
 if(!code){
 
-  let total = 0
-  cart.forEach(item=>{
-    total += item.price * item.qty
-  })
-
   appliedCoupon = null
   couponDiscount = 0
-  window._couponRow = null   // ← THÊM DÒNG NÀY
+  window._couponRow = null
 
-  const totalEl = document.getElementById("pay-amount")
-  if(totalEl){
-    totalEl.innerText = total.toLocaleString() + "đ"
-  }
+  updatePaymentTotal()
 
   msg.innerHTML = ""
   return
@@ -627,22 +640,8 @@ discount = data.value
 appliedCoupon = code
 couponDiscount = Math.min(discount,total)
 
-const finalTotal = total - couponDiscount
+updatePaymentTotal()
 
-document.getElementById("pay-amount").innerText =
-finalTotal.toLocaleString() + "đ"
-
-// ===== CẬP NHẬT QR =====
-const orderId = window._currentOrderId
-
-const qrUrl =
-`https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
-`?amount=${finalTotal}` +
-`&addInfo=${orderId}` +
-`&accountName=${encodeURIComponent(BANK_NAME)}`
-
-window._currentQrUrl = qrUrl
-window._currentTotal = finalTotal
 
 msg.innerHTML =
 `Đã áp dụng mã <b>${code}</b> - giảm <b>${couponDiscount.toLocaleString()}đ</b>`
@@ -666,8 +665,8 @@ if(result.status!=="ok"){
 appliedCoupon = null
 couponDiscount = 0
 
-document.getElementById("pay-amount").innerText =
-total.toLocaleString() + "đ"
+updatePaymentTotal()
+msg.innerHTML = ""
 
 if(result.status==="invalid"){
 showToast("Mã giảm giá không tồn tại","error")
@@ -687,6 +686,8 @@ showToast("Mã đã hết hạn","error")
 
 else if(result.status==="used"){
 showToast("Email đã dùng mã này","error")
+}
+
 }
 
 }
