@@ -486,6 +486,13 @@ function runNextToast(){
 
 function confirmPaid(){
 
+  const btn = document.querySelector(".confirm-paid-btn")
+
+  if(btn){
+    btn.disabled = true
+    btn.innerText = "Đang xử lý..."
+  }
+
   if(!tempOrderData){
     showToast("Lỗi dữ liệu đơn hàng","error")
     return
