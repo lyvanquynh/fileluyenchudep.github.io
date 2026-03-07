@@ -490,7 +490,6 @@ function confirmPaid(){
 
   if(btn){
     btn.disabled = true
-    btn.innerText = "Đang xử lý..."
   }
 
   if(!tempOrderData){
