@@ -796,11 +796,21 @@ cart.classList.remove("cart-bounce")
 
 function flyProduct(btn){
 
+if(!btn) return
+
 const card = btn.closest(".product")
-if(!card) return
+
+if(!card){
+console.warn("Không tìm thấy .product")
+return
+}
 
 const img = card.querySelector("img")
-if(!img) return
+
+if(!img){
+console.warn("Không tìm thấy ảnh sản phẩm")
+return
+}
 
 flyToCart(img.src, img)
 
