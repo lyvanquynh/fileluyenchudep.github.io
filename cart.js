@@ -10,8 +10,12 @@ let couponCache = []
 
 async function loadCoupons(){
 
-const res = await fetch(COUPON_API,{
+const res = await fetch(COUPON_API + "?t=" + Date.now(),{
 method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+cache:"no-store",
 body:JSON.stringify({
 action:"getCoupons"
 })
@@ -35,7 +39,7 @@ loadCoupons()
 // ===== AUTO RELOAD COUPON =====
 setInterval(()=>{
 loadCoupons()
-},30000)
+},2000)
 
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
