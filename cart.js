@@ -592,6 +592,8 @@ cart.forEach(i=>{
 total += i.price * i.qty
 })
 
+  couponMsg.innerHTML = "⏳ Đang kiểm tra mã giảm giá..."
+
 try{
 
 const res = await fetch(COUPON_API,{
