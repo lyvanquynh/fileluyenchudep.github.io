@@ -189,12 +189,18 @@ const couponMsg = document.getElementById("coupon-msg")
 if(couponMsg) couponMsg.innerHTML = ""
 
 
-  if(cart.length==0){
+if(cart.length==0){
   showToast("Giỏ hàng trống", "warn")
   return
 }
 
-  unlockConfirmBtn() // ===== thêm =====
+unlockConfirmBtn() // ===== thêm =====
+
+// ===== RESET NÚT THANH TOÁN =====
+const paidBtn = document.querySelector(".confirm-paid-btn")
+if(paidBtn){
+  paidBtn.disabled = false
+}
 
   let total = 0
   let itemsHTML = ""
