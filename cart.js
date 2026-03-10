@@ -586,13 +586,27 @@ return
 
 const email = emailInput?.value.trim() || ""
 
+if(!email){
+couponMsg.innerHTML = "Vui lòng nhập email trước khi áp dụng mã giảm giá"
+emailInput?.focus()
+return
+}
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
+if(!emailPattern.test(email)){
+couponMsg.innerHTML = "Email không hợp lệ"
+emailInput?.focus()
+return
+}
+
 let total = 0
 
 cart.forEach(i=>{
 total += i.price * i.qty
 })
 
-  couponMsg.innerHTML = "⏳ Đang kiểm tra mã giảm giá..."
+couponMsg.innerHTML = "⏳ Đang kiểm tra mã giảm giá..."
 
 try{
 
