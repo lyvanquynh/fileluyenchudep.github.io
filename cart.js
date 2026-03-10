@@ -12,9 +12,6 @@ async function loadCoupons(){
 
 const res = await fetch(COUPON_API,{
 method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
 body:JSON.stringify({
 action:"getCoupons"
 })
@@ -599,9 +596,6 @@ try{
 
 const res = await fetch(COUPON_API,{
 method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
 body:JSON.stringify({
 action:"checkCoupon",
 code:code,
@@ -836,9 +830,6 @@ try{
 
 const res = await fetch(COUPON_API,{
 method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
 body:JSON.stringify({
 action:"getCoupons"
 })
