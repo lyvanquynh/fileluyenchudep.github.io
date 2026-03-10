@@ -184,7 +184,7 @@ function openPay(){
 // reset coupon mỗi lần mở popup
 appliedCoupon = null
 couponDiscount = 0
-window._couponRow = null
+
   const couponInput = document.getElementById("coupon-code")
 if(couponInput) couponInput.value = ""
 
@@ -522,7 +522,7 @@ fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79C
 
   appliedCoupon = null
   couponDiscount = 0
-  window._couponRow = null
+
   window._currentTotal = 0
   tempOrderData = null
 
@@ -602,7 +602,7 @@ if(!code){
 
   appliedCoupon = null
   couponDiscount = 0
-  window._couponRow = null
+
 
   updatePaymentTotal()
 
@@ -660,7 +660,7 @@ msg.innerHTML = "⏳ Đang kiểm tra mã..."
 
 await new Promise(r=>setTimeout(r,50))
 
-fetch(COUPON_API,{
+const res = await fetch(COUPON_API,{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
@@ -672,9 +672,8 @@ email:email,
 total:total
 })
 })
-.then(r=>r.json())
 
-.then(result=>{
+const result = await res.json()
 
 if(result.status==="ok"){
 
@@ -716,14 +715,25 @@ showToast("Email đã dùng mã này","error")
 
 }
 
-})
-
 
 }
 // ================= INIT =================
 
 updateCartCount()
 renderCart()
+
+// ===== GẮN NÚT ÁP DỤNG COUPON =====
+document.addEventListener("click", function(e){
+
+const btn = e.target.closest("#apply-coupon-btn")
+
+if(!btn) return
+
+e.preventDefault()
+
+applyCoupon()
+
+})
 
 const searchInput = document.getElementById("searchInput")
 if(searchInput){
