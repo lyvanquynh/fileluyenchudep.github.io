@@ -21,7 +21,9 @@ action:"getCoupons"
 })
 })
 
-couponCache = await res.json()
+const data = await res.json()
+
+couponCache = data.coupons || []
 
 couponCache = couponCache.map(c=>{
 c.code = c.code.toUpperCase()
