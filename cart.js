@@ -540,29 +540,32 @@ fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79C
 
 function updatePaymentTotal(){
 
-  let total = 0
+let total = 0
 
-  cart.forEach(item=>{
-    total += item.price * item.qty
-  })
+cart.forEach(i=>{
+total += i.price * i.qty
+})
 
-  const finalTotal = total - couponDiscount
+const finalTotal = total - couponDiscount
 
-  const totalEl = document.getElementById("pay-amount")
-  if(totalEl){
-    totalEl.innerText = finalTotal.toLocaleString() + "đ"
-  }
+const totalEl = document.getElementById("pay-amount")
 
-  const orderId = window._currentOrderId
+if(totalEl){
+totalEl.innerText = finalTotal.toLocaleString() + "đ"
+}
 
-  const qrUrl =
-  `https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
-  `?amount=${finalTotal}` +
-  `&addInfo=${orderId}` +
-  `&accountName=${encodeURIComponent(BANK_NAME)}`
+// cập nhật QR
 
-  window._currentQrUrl = qrUrl
-  window._currentTotal = finalTotal
+const orderId = window._currentOrderId || ""
+
+const qrUrl =
+`https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png`
++ `?amount=${finalTotal}`
++ `&addInfo=${orderId}`
++ `&accountName=${encodeURIComponent(BANK_NAME)}`
+
+window._currentQrUrl = qrUrl
+window._currentTotal = finalTotal
 
 }
 
@@ -571,94 +574,28 @@ function updatePaymentTotal(){
 
 async function applyCoupon(){
 
-  const input = document.getElementById("coupon-code")
-let msg   = document.getElementById("coupon-msg")
-
-if(!input) return
-
-if(!msg){
-msg = document.createElement("div")
-msg.id = "coupon-msg"
-msg.style.marginTop = "6px"
-msg.style.fontSize = "13px"
-input.parentNode.appendChild(msg)
-}
-
-
-  const code = input.value.trim().toUpperCase()
-
+const couponInput = document.getElementById("coupon-code")
 const emailInput = document.getElementById("customer-email")
-const email = emailInput ? emailInput.value.trim() : ""
+const couponMsg = document.getElementById("coupon-msg")
 
-if(!email){
-showToast("Nhập email trước khi dùng mã","warn")
+if(!couponInput) return
+
+const code = couponInput.value.trim().toUpperCase()
+
+if(!code){
+couponMsg.innerHTML = "Vui lòng nhập mã giảm giá"
 return
 }
 
+const email = emailInput?.value.trim() || ""
 
+let total = 0
 
-// ===== nếu xóa mã giảm giá → trả về giá gốc =====
-if(!code){
-
-  appliedCoupon = null
-  couponDiscount = 0
-
-
-  updatePaymentTotal()
-
-  msg.innerHTML = ""
-  return
-}
-
-  let total = 0
-
-cart.forEach(item=>{
-  total += item.price * item.qty
+cart.forEach(i=>{
+total += i.price * i.qty
 })
 
-
-
-// ===== CHECK LOCAL TRƯỚC =====
-
-let data = couponCache.find(c => c.code === code)
-
-if(!data){
-
-await loadCoupons()
-
-data = couponCache.find(c => c.code === code)
-
-}
-
-if(!data){
-showToast("Mã giảm giá không tồn tại","error")
-return
-}
-
-// KHÔNG lưu row ở client nữa
-// window._couponRow = data.row
-
-if(total < data.min){
-showToast("Đơn chưa đạt giá trị tối thiểu","warn")
-return
-}
-
-// ===== TÍNH GIẢM NGAY =====
-
-let discount = 0
-
-if(data.type==="percent"){
-discount = total * data.value/100
-}
-
-if(data.type==="money"){
-discount = data.value
-}
-
-// ===== CHECK SERVER NỀN =====
-msg.innerHTML = "⏳ Đang kiểm tra mã..."
-
-await new Promise(r=>setTimeout(r,50))
+try{
 
 const res = await fetch(COUPON_API,{
 method:"POST",
@@ -673,50 +610,58 @@ total:total
 })
 })
 
-const result = await res.json()
+const data = await res.json()
 
-if(result.status==="ok"){
+if(data.status === "invalid"){
+couponMsg.innerHTML = "Mã giảm giá không tồn tại"
+return
+}
+
+if(data.status === "disabled"){
+couponMsg.innerHTML = "Mã giảm giá chưa kích hoạt"
+return
+}
+
+if(data.status === "limit"){
+couponMsg.innerHTML = "Mã giảm giá đã hết lượt"
+return
+}
+
+if(data.status === "expired"){
+couponMsg.innerHTML = "Mã giảm giá đã hết hạn"
+return
+}
+
+if(data.status === "min"){
+couponMsg.innerHTML = "Đơn hàng chưa đạt giá trị tối thiểu"
+return
+}
+
+if(data.status === "used"){
+couponMsg.innerHTML = "Email đã sử dụng mã này"
+return
+}
+
+if(data.status === "ok"){
 
 appliedCoupon = code
-couponDiscount = Number(result.discount || 0)
+couponDiscount = Number(data.discount || 0)
+
+couponMsg.innerHTML =
+"✔ Giảm " + couponDiscount.toLocaleString() + "đ"
 
 updatePaymentTotal()
 
-msg.innerHTML =
-`Đã áp dụng mã <b>${code}</b> - giảm <b>${couponDiscount.toLocaleString()}đ</b>`
-
-}else{
-
-appliedCoupon = null
-couponDiscount = 0
-
-updatePaymentTotal()
-msg.innerHTML = ""
-
-if(result.status==="invalid"){
-showToast("Mã giảm giá không tồn tại","error")
 }
 
-else if(result.status==="disabled"){
-showToast("Mã đã hết hạn","error")
-}
+}catch(err){
 
-else if(result.status==="limit"){
-showToast("Mã đã hết lượt","error")
-}
+couponMsg.innerHTML = "Lỗi kết nối máy chủ"
 
-else if(result.status==="expired"){
-showToast("Mã đã bị tắt","error")
-}
-
-else if(result.status==="used"){
-showToast("Email đã dùng mã này","error")
 }
 
 }
 
-
-}
 // ================= INIT =================
 
 updateCartCount()
