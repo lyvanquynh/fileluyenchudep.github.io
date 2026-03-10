@@ -10,12 +10,11 @@ let couponCache = []
 
 async function loadCoupons(){
 
-const res = await fetch(COUPON_API + "?t=" + Date.now(),{
+const res = await fetch(COUPON_API,{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
 },
-cache:"no-store",
 body:JSON.stringify({
 action:"getCoupons"
 })
@@ -38,10 +37,11 @@ const COUPON_API =
 
 loadCoupons()
 
+checkCouponVersion()
 // ===== AUTO RELOAD COUPON =====
 setInterval(()=>{
-loadCoupons()
-},2000)
+checkCouponVersion()
+},3000)
 
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
@@ -659,6 +659,9 @@ discount = data.value
 msg.innerHTML = "Đang kiểm tra mã..."
 fetch(COUPON_API,{
 method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
 body:JSON.stringify({
 action:"checkCoupon",
 code:code,
@@ -864,6 +867,46 @@ const life = 500 + Math.random()*400
 setTimeout(()=>{
 p.remove()
 },life)
+
+}
+
+}
+
+async function checkCouponVersion(){
+
+try{
+
+const res = await fetch(COUPON_API,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+action:"getCoupons"
+})
+})
+const data = await res.json()
+
+const oldVersion = localStorage.getItem("couponVersion")
+
+if(oldVersion !== data.version){
+
+localStorage.setItem("couponVersion",data.version)
+
+couponCache = data.coupons || []
+
+couponCache = couponCache.map(c=>{
+c.code = c.code.toUpperCase()
+return c
+})
+
+console.log("Coupon updated realtime")
+
+}
+
+}catch(err){
+
+console.log("coupon check error",err)
 
 }
 
