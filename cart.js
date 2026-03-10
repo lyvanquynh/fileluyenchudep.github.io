@@ -572,9 +572,17 @@ function updatePaymentTotal(){
 async function applyCoupon(){
 
   const input = document.getElementById("coupon-code")
-  const msg   = document.getElementById("coupon-msg")
+let msg   = document.getElementById("coupon-msg")
 
-  if(!input) return
+if(!input) return
+
+if(!msg){
+msg = document.createElement("div")
+msg.id = "coupon-msg"
+msg.style.marginTop = "6px"
+msg.style.fontSize = "13px"
+input.parentNode.appendChild(msg)
+}
 
 
   const code = input.value.trim().toUpperCase()
