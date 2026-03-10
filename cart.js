@@ -656,7 +656,10 @@ discount = data.value
 }
 
 // ===== CHECK SERVER NỀN =====
-msg.innerHTML = "Đang kiểm tra mã..."
+msg.innerHTML = "⏳ Đang kiểm tra mã..."
+
+await new Promise(r=>setTimeout(r,50))
+
 fetch(COUPON_API,{
 method:"POST",
 headers:{
