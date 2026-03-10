@@ -612,7 +612,15 @@ cart.forEach(item=>{
 
 // ===== CHECK LOCAL TRƯỚC =====
 
-const data = couponCache.find(c => c.code === code)
+let data = couponCache.find(c => c.code === code)
+
+if(!data){
+
+await loadCoupons()
+
+data = couponCache.find(c => c.code === code)
+
+}
 
 if(!data){
 showToast("Mã giảm giá không tồn tại","error")
