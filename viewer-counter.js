@@ -1,12 +1,29 @@
 document.addEventListener("DOMContentLoaded",function(){
 
-const products=document.querySelectorAll(".product")
+const products=[...document.querySelectorAll(".product")]
 
 if(!products.length) return
 
-let scrollBoost=0
+let activeBoxes=[]
+let cartMemory=new WeakMap()
 
-products.forEach(product=>{
+function random(min,max){
+return Math.floor(Math.random()*(max-min+1))+min
+}
+
+function shuffle(arr){
+return arr.sort(()=>0.5-Math.random())
+}
+
+function clearViewers(){
+
+document.querySelectorAll(".viewer-counter").forEach(v=>v.remove())
+
+activeBoxes=[]
+
+}
+
+function createViewer(product){
 
 const priceBox=product.querySelector(".price-sale")
 
@@ -16,52 +33,90 @@ const viewer=document.createElement("div")
 
 viewer.className="viewer-counter"
 
+const viewerCount=random(6,14)
+
+const cartCount=random(1,3)
+
+cartMemory.set(viewer,cartCount)
+
 viewer.innerHTML=`
-<div class="viewer-line">👀 <span class="viewer-num">5</span> người đang xem</div>
-<div class="viewer-line">🛒 <span class="cart-num">1</span> người vừa thêm giỏ</div>
+<div class="viewer-line">👀 <span class="viewer-num">${viewerCount}</span> người đang xem</div>
+<div class="viewer-line">🛒 <span class="cart-num">${cartCount}</span> người vừa thêm giỏ</div>
 `
 
 priceBox.insertAdjacentElement("afterend",viewer)
 
-updateNumbers(viewer)
+activeBoxes.push(viewer)
 
-})
+}
 
-function updateNumbers(box){
+function updateNumbers(){
+
+activeBoxes.forEach(box=>{
 
 const viewerNum=box.querySelector(".viewer-num")
 const cartNum=box.querySelector(".cart-num")
 
-let baseViewer=random(5,10)+scrollBoost
-let baseCart=random(1,3)
+let currentViewer=parseInt(viewerNum.textContent)
 
-viewerNum.textContent=baseViewer
-cartNum.textContent=baseCart
+currentViewer+=random(-2,2)
+
+currentViewer=Math.max(5,currentViewer)
+
+viewerNum.textContent=currentViewer
+
+let cartValue=cartMemory.get(box)
+
+if(Math.random()>0.6){
+cartValue+=1
+}
+
+cartMemory.set(box,cartValue)
+
+cartNum.textContent=cartValue
+
+})
 
 }
 
-function random(min,max){
-return Math.floor(Math.random()*(max-min+1))+min
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+createViewer(entry.target)
+
+observer.unobserve(entry.target)
+
 }
 
-// khi cuộn trang → tăng số
-window.addEventListener("scroll",function(){
-
-scrollBoost=Math.min(scrollBoost+1,8)
-
-document.querySelectorAll(".viewer-counter").forEach(box=>{
-updateNumbers(box)
 })
 
+},{
+threshold:0.4
 })
 
-// update nhẹ mỗi 20s
-setInterval(()=>{
+function spawnViewers(){
 
-document.querySelectorAll(".viewer-counter").forEach(box=>{
-updateNumbers(box)
+clearViewers()
+
+const count=random(3,5)
+
+const selected=shuffle([...products]).slice(0,count)
+
+selected.forEach(product=>{
+
+observer.observe(product)
+
 })
 
-},20000)
+}
+
+spawnViewers()
+
+setInterval(updateNumbers,8000)
+
+setInterval(spawnViewers,15000)
 
 })
