@@ -319,6 +319,8 @@ applyCoupon()
 
 }
 
+}
+
 // ===== SINH QR ĐỘNG =====
 const finalTotal = total - couponDiscount
 
@@ -783,7 +785,10 @@ updatePaymentTotal()
 
 }catch(err){
 
-couponMsg.innerHTML = "Lỗi kết nối máy chủ"
+couponMsg.innerHTML =
+"<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
+"⚠ Lỗi kết nối máy chủ" +
+"</span>"
 
 }
 
