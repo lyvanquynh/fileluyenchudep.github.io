@@ -6,6 +6,9 @@ let tempOrderData = null     // ===== thêm bước 2 =====
 let appliedCoupon = null
 let couponDiscount = 0
 
+let couponTimerInterval = null
+let couponRemainSeconds = 0
+
 let couponCache = []
 
 async function loadCoupons(){
@@ -38,7 +41,7 @@ checkCouponVersion()
 // ===== AUTO RELOAD COUPON =====
 setInterval(()=>{
 checkCouponVersion()
-},3000)
+},15000)
 
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
@@ -181,6 +184,17 @@ function openPay(){
 // reset coupon mỗi lần mở popup
 appliedCoupon = null
 couponDiscount = 0
+
+if(couponTimerInterval){
+clearInterval(couponTimerInterval)
+couponTimerInterval = null
+}
+
+const timerEl = document.getElementById("coupon-timer")
+if(timerEl){
+timerEl.style.display = "none"
+timerEl.innerHTML = ""
+}
 
   const couponInput = document.getElementById("coupon-code")
 if(couponInput) couponInput.value = ""
@@ -664,7 +678,9 @@ appliedCoupon = code
 couponDiscount = Number(data.discount || 0)
 
 couponMsg.innerHTML =
-"✔ Giảm " + couponDiscount.toLocaleString() + "đ"
+"🎉 Bạn được giảm " + couponDiscount.toLocaleString() + "đ"
+
+startCouponCountdown(data.time)
 
 updatePaymentTotal()
 
@@ -675,6 +691,69 @@ updatePaymentTotal()
 couponMsg.innerHTML = "Lỗi kết nối máy chủ"
 
 }
+
+}
+
+function startCouponCountdown(minutes){
+
+const timerEl = document.getElementById("coupon-timer")
+
+if(!timerEl) return
+
+if(couponTimerInterval){
+clearInterval(couponTimerInterval)
+}
+
+minutes = Number(minutes || 0)
+
+couponRemainSeconds = minutes * 60
+
+timerEl.style.display = "inline-block"
+
+updateCouponTimer()
+
+couponTimerInterval = setInterval(()=>{
+
+couponRemainSeconds--
+
+updateCouponTimer()
+
+if(couponRemainSeconds <= 0){
+
+clearInterval(couponTimerInterval)
+
+timerEl.innerHTML = "⚠ Mã khuyến mại đã hết thời gian"
+
+const couponMsg = document.getElementById("coupon-msg")
+if(couponMsg){
+couponMsg.innerHTML = "Mã giảm giá đã hết thời gian"
+}
+
+appliedCoupon = null
+couponDiscount = 0
+
+updatePaymentTotal()
+
+}
+
+},1000)
+
+}
+
+function updateCouponTimer(){
+
+const timerEl = document.getElementById("coupon-timer")
+
+if(!timerEl) return
+
+const min = Math.floor(couponRemainSeconds / 60)
+const sec = couponRemainSeconds % 60
+
+const m = min.toString().padStart(2,"0")
+const s = sec.toString().padStart(2,"0")
+
+timerEl.innerHTML =
+"⏳ Mã khuyến mại còn " + m + ":" + s
 
 }
 
