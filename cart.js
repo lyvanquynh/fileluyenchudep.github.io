@@ -10,6 +10,7 @@ let couponTimerInterval = null
 let couponRemainSeconds = 0
 
 let couponCache = []
+let couponTypingTimer = null
 
 async function loadCoupons(){
 
@@ -261,7 +262,7 @@ if(paidBtn){
   // ===== AUTO RESET COUPON =====
 if(couponInput){
 
-  couponInput.oninput = function(){
+couponInput.oninput = function(){
 
 const val = this.value.trim()
 
@@ -273,7 +274,18 @@ couponDiscount = 0
 
 updatePaymentTotal()
 
-if(couponMsg) couponMsg.innerHTML = ""
+if(couponMsg){
+
+if(val !== ""){
+couponMsg.innerHTML =
+"<span style='color:#ff9800;font-style:italic'>" +
+"⚠ Nhấn 'Áp dụng giảm giá' để kích hoạt mã" +
+"</span>"
+}else{
+couponMsg.innerHTML = ""
+}
+
+}
 
 const timerEl = document.getElementById("coupon-timer")
 
@@ -288,6 +300,20 @@ couponTimerInterval = null
 }
 
 }
+
+// ===== AUTO APPLY COUPON SAU 1 GIÂY =====
+
+if(couponTypingTimer){
+clearTimeout(couponTypingTimer)
+}
+
+if(val !== ""){
+
+couponTypingTimer = setTimeout(()=>{
+
+applyCoupon()
+
+},1000)
 
 }
 
@@ -623,14 +649,20 @@ if(!couponInput) return
 const code = couponInput.value.trim().toUpperCase()
 
 if(!code){
-couponMsg.innerHTML = "Vui lòng nhập mã giảm giá"
+couponMsg.innerHTML =
+"<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
+"⚠ Vui lòng nhập mã giảm giá" +
+"</span>"
 return
 }
 
 const email = emailInput?.value.trim() || ""
 
 if(!email){
-couponMsg.innerHTML = "Vui lòng nhập email trước khi áp dụng mã giảm giá"
+couponMsg.innerHTML =
+"<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
+"⚠ Vui lòng nhập email trước khi áp dụng mã giảm giá" +
+"</span>"
 emailInput?.focus()
 return
 }
@@ -638,7 +670,10 @@ return
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 if(!emailPattern.test(email)){
-couponMsg.innerHTML = "Email không hợp lệ"
+couponMsg.innerHTML =
+"<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
+"⚠ Email không hợp lệ" +
+"</span>"
 emailInput?.focus()
 return
 }
@@ -677,7 +712,6 @@ return
 }
 
 if(data.status === "disabled"){
-couponMsg.innerHTML =
 couponMsg.innerHTML =
 "<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
 "⚠ Mã giảm giá chưa kích hoạt" +
