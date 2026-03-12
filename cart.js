@@ -263,16 +263,33 @@ if(couponInput){
 
   couponInput.oninput = function(){
 
-    if(this.value.trim() !== "") return
+const val = this.value.trim()
 
-    appliedCoupon = null
-    couponDiscount = 0
+// nếu xóa mã hoặc thay mã mới
+if(val === "" || val !== appliedCoupon){
 
-    updatePaymentTotal()
+appliedCoupon = null
+couponDiscount = 0
 
-    if(couponMsg) couponMsg.innerHTML = ""
+updatePaymentTotal()
 
-  }
+if(couponMsg) couponMsg.innerHTML = ""
+
+const timerEl = document.getElementById("coupon-timer")
+
+if(timerEl){
+timerEl.style.display = "none"
+timerEl.innerHTML = ""
+}
+
+if(couponTimerInterval){
+clearInterval(couponTimerInterval)
+couponTimerInterval = null
+}
+
+}
+
+}
 
 }
 
@@ -310,10 +327,16 @@ Sau đó bấm "Xác nhận Email & Copy nội dung đơn".
   const code = couponInput?.value.trim()
 
   if(code && !appliedCoupon){
-    showToast("Mã giảm giá không tồn tại", "error")
-    couponInput.focus()
-    return
-  }
+
+showToast(
+"Bạn đã nhập mã giảm giá nhưng chưa nhấn 'Áp dụng giảm giá'",
+"warn"
+)
+
+couponInput.focus()
+
+return
+}
 
     const emailInput = document.getElementById("customer-email")
     const email = emailInput?.value.trim()
@@ -646,32 +669,51 @@ total:total
 const data = await res.json()
 
 if(data.status === "invalid"){
-couponMsg.innerHTML = "Mã giảm giá không tồn tại"
+couponMsg.innerHTML =
+"<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
+"⚠ Mã giảm giá không tồn tại" +
+"</span>"
 return
 }
 
 if(data.status === "disabled"){
-couponMsg.innerHTML = "Mã giảm giá chưa kích hoạt"
+couponMsg.innerHTML =
+couponMsg.innerHTML =
+"<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
+"⚠ Mã giảm giá chưa kích hoạt" +
+"</span>"
 return
 }
 
 if(data.status === "limit"){
-couponMsg.innerHTML = "Mã giảm giá đã hết lượt"
+couponMsg.innerHTML =
+"<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
+"⚠ Mã giảm giá đã hết lượt" +
+"</span>"
 return
 }
 
 if(data.status === "expired"){
-couponMsg.innerHTML = "Mã giảm giá đã hết hạn"
+couponMsg.innerHTML =
+"<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
+"⚠ Mã giảm giá đã hết hạn" +
+"</span>"
 return
 }
 
 if(data.status === "min"){
-couponMsg.innerHTML = "Đơn hàng chưa đạt giá trị tối thiểu"
+couponMsg.innerHTML =
+"<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
+"⚠ Đơn hàng chưa đạt giá trị tối thiểu" +
+"</span>"
 return
 }
 
 if(data.status === "used"){
-couponMsg.innerHTML = "Email đã sử dụng mã này"
+couponMsg.innerHTML =
+"<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
+"⚠ Email đã sử dụng mã này" +
+"</span>"
 return
 }
 
