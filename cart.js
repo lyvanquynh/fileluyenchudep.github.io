@@ -665,7 +665,6 @@ couponMsg.innerHTML =
 "<span style='color:#d32f2f;font-style:italic;font-weight:600'>" +
 "⚠ Vui lòng nhập email trước khi áp dụng mã giảm giá" +
 "</span>"
-emailInput?.focus()
 return
 }
 
