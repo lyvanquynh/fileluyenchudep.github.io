@@ -61,14 +61,21 @@ function saveCart(){
   localStorage.setItem("cart", JSON.stringify(cart))
 }
 
-function addToCart(name, price){
+function addToCart(productId){
+
+  const product = PRODUCTS[productId]
+
+  if(!product) return
+
+  const name = product.name
+  const price = product.price
 
   const found = cart.find(item => item.name === name)
 
   if(found){
     found.qty += 1
   }else{
-    cart.push({name, price, qty:1})
+    cart.push({name:name, price:price, qty:1})
   }
 
   saveCart()

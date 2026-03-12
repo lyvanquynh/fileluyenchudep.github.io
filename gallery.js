@@ -1,37 +1,31 @@
-// ===== THÔNG TIN SẢN PHẨM =====
+// ===== LẤY THÔNG TIN TỪ PRODUCTS =====
 
-const PRODUCT_INFO = {
-A1:{name:"A1 - Giáo trình kỹ thuật LCĐ",price:600000},
-A2:{name:"A2 - Giáo án dạy chữ nhỡ - TTH",price:150000},
-A3:{name:"A3 - Giáo án dạy chữ nhỏ - TH",price:150000},
-A4:{name:"A4 – Hạ cỡ chữ tròn li",price:69000},
-A5:{name:"A5 – Hạ cỡ nhỏ chữ chuẩn BGD",price:89000},
+function getProductInfo(key){
 
-E1:{name:"E1 – Chữ sáng tạo (Cơ bản)",price:69000},
-E2:{name:"E2 - Copperplate Calligraphy",price:89000},
-E3:{name:"E3 - Modern Calligraphy",price:89000},
-E4:{name:"E4 - Unical Calligraphy",price:59000},
+const p = PRODUCTS[key]
 
-G1:{name:"G1 - Luyện viết nhanh/Tốc ký",price:99000}
+if(!p) return null
+
+return {
+name:p.name,
+price:p.price
+}
+
 }
 
 
-// ===== CẤU HÌNH GALLERY =====
+// ===== LẤY CẤU HÌNH GALLERY TỪ PRODUCTS =====
 
-const PRODUCT_GALLERY = {
+function getGalleryConfig(key){
 
-"A1":{path:"A1-Giaotrinhkythuat/images",count:20},
-"A2":{path:"A2-Thuc hanhTTH5mm/images",count:20},
-"A3":{path:"A3-ThuchanhTH2.5mm/images",count:20},
-"A4":{path:"A4-Hacotronli/images",count:20},
-"A5":{path:"A5-HaCoChuNho-ChuChuan-TieuHoc/images",count:20},
+const p = PRODUCTS[key]
 
-"E1":{path:"E1-SangtaoQuyen1Coban/images",count:20},
-"E2":{path:"E2-SangtaoQuyen2Nangcao/images",count:20},
-"E3":{path:"E3-SangtaoModernCalligraphy/images",count:20},
-"E4":{path:"E4-Chuvietnghethuat/images",count:20},
+if(!p) return null
 
-"G1":{path:"G1-Luyenviettocky/images",count:20}
+return {
+path:p.galleryPath,
+count:p.galleryCount
+}
 
 }
 
@@ -40,7 +34,8 @@ const PRODUCT_GALLERY = {
 
 function buildImages(key){
 
-const cfg=PRODUCT_GALLERY[key]
+const cfg = getGalleryConfig(key)
+
 if(!cfg) return []
 
 const arr=[]
@@ -69,7 +64,7 @@ function openGallery(key){
 const images=buildImages(key)
 if(!images.length) return
 
-const product=PRODUCT_INFO[key]
+const product=getProductInfo(key)
 
 const lightbox=new PhotoSwipeLightbox({
 
@@ -110,7 +105,7 @@ onInit:(el)=>{
 
 el.querySelector(".pswp-add-cart").onclick=()=>{
 
-addToCart(product.name,product.price)
+addToCart(key)
 
 const img = document.querySelector(".pswp__img")
 
@@ -180,13 +175,16 @@ openGallery(key)
 el.addEventListener("mouseenter",()=>{
 
 const key = el.dataset.gallery
-const cfg = PRODUCT_GALLERY[key]
 
-if(!cfg) return
+const product = PRODUCTS[key]
+
+if(!product) return
+
+if(!product.galleryPath) return
 
 const img = new Image()
 
-img.src = `${cfg.path}/01.jpg`
+img.src = `${product.galleryPath}/01.jpg`
 
 })
 
