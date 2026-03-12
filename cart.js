@@ -626,7 +626,10 @@ cart.forEach(i=>{
 total += i.price * i.qty
 })
 
-couponMsg.innerHTML = "⏳ Đang kiểm tra mã giảm giá..."
+couponMsg.innerHTML =
+"<span style='color:#e53935;font-weight:700'>" +
+"⏳ Đang kiểm tra mã giảm giá..." +
+"</span>"
 
 try{
 
@@ -677,8 +680,24 @@ if(data.status === "ok"){
 appliedCoupon = code
 couponDiscount = Number(data.discount || 0)
 
+const originalTotal = total
+const finalTotal = total - couponDiscount
+
 couponMsg.innerHTML =
-"🎉 Bạn được giảm " + couponDiscount.toLocaleString() + "đ"
+"<div style='background:#e8f5e9;padding:10px;border-radius:10px;margin-top:6px'>" +
+"<div style='color:#2e7d32;font-weight:700;font-size:16px'>" +
+"🎉 Bạn được giảm <b>" + couponDiscount.toLocaleString() + "đ</b>" +
+"</div>" +
+
+"<div style='font-size:13px;margin-top:2px'>" +
+"Giá gốc: <s>" + originalTotal.toLocaleString() + "đ</s>" +
+"</div>" +
+
+"<div style='color:#e60000;font-weight:700'>" +
+"Chỉ còn: " + finalTotal.toLocaleString() + "đ" +
+"</div>" +
+
+"</div>"
 
 startCouponCountdown(data.time)
 
