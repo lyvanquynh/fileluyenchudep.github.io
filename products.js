@@ -174,7 +174,7 @@ image:"G1-Luyenviettocky/thumb.jpg",
 galleryPath:"G1-Luyenviettocky/images",
 galleryCount:20,
 drive:"https://drive.google.com/drive/folders/1E7hXI4eMbr2lYH8749WaWJjV-aTprgOW?usp=drive_link"
-}
+},
 
 /* ===== KHÓA HỌC ===== */
 
