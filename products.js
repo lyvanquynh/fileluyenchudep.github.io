@@ -176,4 +176,36 @@ galleryCount:20,
 drive:"https://drive.google.com/drive/folders/1E7hXI4eMbr2lYH8749WaWJjV-aTprgOW?usp=drive_link"
 }
 
+/* ===== KHÓA HỌC ===== */
+
+KHOA1:{
+id:"KHOA1",
+name:"KHÓA 1 – Thực hành luyện viết chữ đẹp trên iPad",
+description:"Khóa học Procreate luyện chữ trên iPad",
+category:"course",
+price:999000,
+oldPrice:1600000,
+image:"images/khoa1.png"
+},
+
+KHOA2:{
+id:"KHOA2",
+name:"KHÓA 2 – Thiết kế file vở in ấn trên iPad",
+description:"Khóa học thiết kế file vở và tài liệu luyện chữ",
+category:"course",
+price:1999000,
+oldPrice:3000000,
+image:"images/khoa2.png"
+},
+
+COMBO_KHOA:{
+id:"COMBO_KHOA",
+name:"COMBO 2 KHÓA HỌC",
+description:"Combo khóa học luyện chữ và thiết kế file vở",
+category:"course",
+price:2399000,
+oldPrice:2998000,
+image:"images/khoa1.png"
+}
+
 }
