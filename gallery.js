@@ -170,7 +170,32 @@ const key=el.dataset.gallery
 
 openGallery(key)
 
+location.hash = key
+
 })
+
+// preload ảnh khi hover
+el.addEventListener("mouseenter",()=>{
+
+const key = el.dataset.gallery
+
+const product = PRODUCTS[key]
+
+if(!product) return
+if(!product.galleryPath) return
+
+const img = new Image()
+
+const ext = product.galleryExt || "jpg"
+
+img.src = `${product.galleryPath}/01.${ext}`
+
+})
+
+})
+
+})
+
 
 
 // preload ảnh khi hover
@@ -193,5 +218,23 @@ img.src = `${product.galleryPath}/01.${ext}`
 })
 
 })
+
+})
+
+// ===== MỞ SẢN PHẨM TỪ URL =====
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+const hash = location.hash.replace("#","")
+
+if(!hash) return
+
+if(PRODUCTS[hash]){
+
+setTimeout(()=>{
+openGallery(hash)
+},300)
+
+}
 
 })
