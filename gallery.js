@@ -1,3 +1,5 @@
+import PhotoSwipeLightbox from './photoswipe-lightbox.esm.js'
+
 // ===== LẤY THÔNG TIN TỪ PRODUCTS =====
 
 function getProductInfo(key){
@@ -72,9 +74,7 @@ const lightbox=new PhotoSwipeLightbox({
 
 dataSource:images,
 
-pswpModule:()=>import(
-'https://unpkg.com/photoswipe@5/dist/photoswipe.esm.js'
-),
+pswpModule:()=>import('./photoswipe.esm.js'),
 
 preload:[1,2],
 
