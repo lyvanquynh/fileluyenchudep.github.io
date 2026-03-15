@@ -219,6 +219,7 @@ oldPrice:250000,
 image:"ST1-Chusangtaoviettay/thumb.webp",
 galleryPath:"ST1-Chusangtaoviettay/images",
 galleryCount:20,
+galleryExt:"webp",
 drive:""
 },
 

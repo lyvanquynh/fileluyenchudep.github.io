@@ -24,7 +24,8 @@ if(!p) return null
 
 return {
 path:p.galleryPath,
-count:p.galleryCount
+count:p.galleryCount,
+ext:p.galleryExt
 }
 
 }
@@ -45,7 +46,10 @@ for(let i=1;i<=cfg.count;i++){
 const num=i.toString().padStart(2,"0")
 
 arr.push({
-src:`${cfg.path}/${num}.jpg`,
+const ext = cfg.ext || "jpg"
+
+arr.push({
+src:`${cfg.path}/${num}.${ext}`,
 width:1600,
 height:2400
 })
