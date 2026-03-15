@@ -5,6 +5,7 @@ const container=document.getElementById("sanpham")
 if(!container) return
 
 const groups={
+featured:[],
 combo:[],
 bo1:[],
 bo2:[],
@@ -105,6 +106,12 @@ html+=`
 container.insertAdjacentHTML("beforeend",html)
 
 }
+
+renderGroup(
+"🔥 SẢN PHẨM MỚI",
+"Sản phẩm mới cập nhật",
+groups.featured
+)
 
 renderGroup(
 "🔥 COMBO ƯU ĐÃI",

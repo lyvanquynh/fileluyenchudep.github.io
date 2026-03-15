@@ -208,4 +208,18 @@ oldPrice:2998000,
 image:"images/khoa1.png"
 }
 
+ST1:{
+id:"ST1",
+name:"Luyện chữ sáng tạo - Chữ viết tay",
+description:"Thực hành luyện chữ sáng tạo viết tay",
+category:"featured",
+badge:"NEW",
+price:125000,
+oldPrice:250000,
+image:"ST1-Chusangtaoviettay/thumb.webp",
+galleryPath:"ST1-Chusangtaoviettay/images",
+galleryCount:20,
+drive:""
+},
+
 }
