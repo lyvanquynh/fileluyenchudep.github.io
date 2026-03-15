@@ -67,15 +67,21 @@ function addToCart(productId){
 
   if(!product) return
 
+  const id = product.id
   const name = product.name
   const price = product.price
 
-  const found = cart.find(item => item.name === name)
+  const found = cart.find(item => item.id === id)
 
   if(found){
     found.qty += 1
   }else{
-    cart.push({name:name, price:price, qty:1})
+    cart.push({
+      id:id,
+      name:name,
+      price:price,
+      qty:1
+    })
   }
 
   saveCart()
@@ -253,12 +259,16 @@ if(paidBtn){
     orderText += line + "\n"
     orderItemsText += (i < cart.length-1) ? line+"\n" : line
 
-    orderItemsJson.push({
+const product = PRODUCTS[item.id]
+
+orderItemsJson.push({
+  id: item.id,
   name: item.name,
+  drive: product?.drive || "",
   price: item.price,
   qty: item.qty,
   total: lineTotal
-  })
+})
 })
   const orderId = "HD" + Math.floor(100000 + Math.random()*900000)
 

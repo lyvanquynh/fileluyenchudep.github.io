@@ -2,7 +2,7 @@
 
 const PRODUCTS = {
 
-    COMBO_ALL:{
+COMBO_ALL:{
 id:"COMBO_ALL",
 name:"Combo Trọn bộ (All in One)",
 description:"Gồm: A1+A2+A3+A4+A5 + E1+E2+E3+E4 + G1",
@@ -10,7 +10,8 @@ category:"combo",
 badge:"TRỌN BỘ",
 price:899000,
 oldPrice:1464000,
-image:"images/combo-all.jpg"
+image:"images/combo-all.jpg",
+drive:"https://drive.google.com/drive/folders/1QzgB_B82hdSYOI0IGziawUzk16vQ1Ahm?usp=drive_link"
 },
 
 COMBO_GV:{
@@ -21,7 +22,8 @@ category:"combo",
 badge:"Tiết kiệm",
 price:699000,
 oldPrice:900000,
-image:"images/combo-gv.jpg"
+image:"images/combo-gv.jpg",
+drive:"https://drive.google.com/drive/folders/1Vtoq-8AG3UhMXgeog-XPjN6D4KNZWKpH?usp=drive_link"
 },
 
 COMBO_HS:{
@@ -32,7 +34,8 @@ category:"combo",
 badge:"Hot",
 price:129000,
 oldPrice:158000,
-image:"images/combo-hs.jpg"
+image:"images/combo-hs.jpg",
+drive:"https://drive.google.com/drive/folders/1napqvbvBIvpQJ_ADrPhq-d3nvEY8culC?usp=drive_link"
 },
 
 COMBO_CALLI:{
@@ -43,7 +46,8 @@ category:"combo",
 badge:"Best",
 price:199000,
 oldPrice:306000,
-image:"images/combo-calligraphy.jpg"
+image:"images/combo-calligraphy.jpg",
+drive:"https://drive.google.com/drive/folders/1j7GeIH7AgIwptLG-ZZHSSEZ121T7hOYC?usp=drive_link"
 },
 
 A1:{
@@ -220,7 +224,7 @@ image:"ST1-Chusangtaoviettay/thumb.webp",
 galleryPath:"ST1-Chusangtaoviettay/images",
 galleryCount:20,
 galleryExt:"webp",
-drive:""
+drive:"https://drive.google.com/drive/folders/1gy3QK5k6iGIjK4Kr-Gunj15r59mGrKWV?usp=drive_link"
 },
 
 }
