@@ -10,7 +10,7 @@ category:"combo",
 badge:"TRỌN BỘ",
 price:899000,
 oldPrice:1464000,
-image:"images/combo-all.webp"
+image:"images/combo-all.webp",
 drive:"https://drive.google.com/drive/folders/1QzgB_B82hdSYOI0IGziawUzk16vQ1Ahm?usp=drive_link"
 },
 
@@ -22,7 +22,7 @@ category:"combo",
 badge:"Tiết kiệm",
 price:699000,
 oldPrice:900000,
-image:"images/combo-gv.webp"
+image:"images/combo-gv.webp",
 drive:"https://drive.google.com/drive/folders/1Vtoq-8AG3UhMXgeog-XPjN6D4KNZWKpH?usp=drive_link"
 },
 
@@ -34,7 +34,7 @@ category:"combo",
 badge:"Hot",
 price:129000,
 oldPrice:158000,
-image:"images/combo-hs.webp"
+image:"images/combo-hs.webp",
 drive:"https://drive.google.com/drive/folders/1napqvbvBIvpQJ_ADrPhq-d3nvEY8culC?usp=drive_link"
 },
 
@@ -46,7 +46,7 @@ category:"combo",
 badge:"Best",
 price:199000,
 oldPrice:306000,
-image:"images/combo-calligraphy.webp"
+image:"images/combo-calligraphy.webp",
 drive:"https://drive.google.com/drive/folders/1j7GeIH7AgIwptLG-ZZHSSEZ121T7hOYC?usp=drive_link"
 },
 
@@ -60,7 +60,7 @@ oldPrice:1500000,
 image:"A1-Giaotrinhkythuat/thumb.jpg",
 galleryPath:"A1-Giaotrinhkythuat/images",
 galleryCount:20,
-galleryExt:"webp"
+galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/1lKQu6_N5T9At9ged_ViPdcIFhoO_f-kB?usp=drive_link"
 },
 
@@ -74,7 +74,7 @@ oldPrice:450000,
 image:"A2-Thuc hanhTTH5mm/thumb.jpg",
 galleryPath:"A2-Thuc hanhTTH5mm/images",
 galleryCount:20,
-galleryExt:"webp"
+galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/1q7VB_6tK98Jc-5S2pDSgp_NCsa_UibFa?usp=drive_link"
 },
 
@@ -88,7 +88,7 @@ oldPrice:450000,
 image:"A3-ThuchanhTH2.5mm/thumb.jpg",
 galleryPath:"A3-ThuchanhTH2.5mm/images",
 galleryCount:20,
-galleryExt:"webp"
+galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/18pBjXUXYc2NjZgYHFa2MdOWB8HeVDzRB?usp=drive_link"
 },
 
@@ -102,7 +102,7 @@ oldPrice:250000,
 image:"A4-Hacotronli/thumb.jpg",
 galleryPath:"A4-Hacotronli/images",
 galleryCount:20,
-galleryExt:"webp"
+galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/1Eu8F2BDkuIkNiKjApNyJ0aOsbq_h9JLW?usp=drive_link"
 },
 
@@ -116,7 +116,7 @@ oldPrice:250000,
 image:"A5-HaCoChuNho-ChuChuan-TieuHoc/thumb.jpg",
 galleryPath:"A5-HaCoChuNho-ChuChuan-TieuHoc/images",
 galleryCount:20,
-galleryExt:"webp"
+galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/1O-or_c5nsJwFBraS-Tg3N32JvWA7Eowr?usp=drive_link"
 },
 
@@ -130,7 +130,7 @@ oldPrice:150000,
 image:"E1-SangtaoQuyen1Coban/thumb.jpg",
 galleryPath:"E1-SangtaoQuyen1Coban/images",
 galleryCount:20,
-galleryExt:"webp"
+galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/15Od0N-wiZ0NvsuFruDKuorg_hhjsxRZ3?usp=drive_link"
 },
 
@@ -144,7 +144,7 @@ oldPrice:220000,
 image:"E2-SangtaoQuyen2Nangcao/thumb.jpg",
 galleryPath:"E2-SangtaoQuyen2Nangcao/images",
 galleryCount:20,
-galleryExt:"webp"
+galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/1fovH0KT3kR-0Z1dazYALmZ-GWPyfl8Jd?usp=drive_link"
 },
 
@@ -158,7 +158,7 @@ oldPrice:220000,
 image:"E3-SangtaoModernCalligraphy/thumb.jpg",
 galleryPath:"E3-SangtaoModernCalligraphy/images",
 galleryCount:20,
-galleryExt:"webp"
+galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/1jvOR29l-oGoAhT_tuxLOlED0CsQDDRal?usp=drive_link"
 },
 
@@ -172,7 +172,7 @@ oldPrice:160000,
 image:"E4-Chuvietnghethuat/thumb.jpg",
 galleryPath:"E4-Chuvietnghethuat/images",
 galleryCount:20,
-galleryExt:"webp"
+galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/1D5NqYlkJKiBpuSdlU5VryUwwph6j6cM3?usp=drive_link"
 },
 
@@ -186,7 +186,7 @@ oldPrice:250000,
 image:"G1-Luyenviettocky/thumb.jpg",
 galleryPath:"G1-Luyenviettocky/images",
 galleryCount:20,
-galleryExt:"webp"
+galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/1E7hXI4eMbr2lYH8749WaWJjV-aTprgOW?usp=drive_link"
 },
 
