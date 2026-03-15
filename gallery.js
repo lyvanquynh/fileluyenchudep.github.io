@@ -186,7 +186,9 @@ if(!product.galleryPath) return
 
 const img = new Image()
 
-img.src = `${product.galleryPath}/01.jpg`
+const ext = product.galleryExt || "jpg"
+
+img.src = `${product.galleryPath}/01.${ext}`
 
 })
 
