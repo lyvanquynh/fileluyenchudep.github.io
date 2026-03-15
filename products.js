@@ -206,7 +206,7 @@ category:"course",
 price:2399000,
 oldPrice:2998000,
 image:"images/khoa1.png"
-}
+},
 
 ST1:{
 id:"ST1",
