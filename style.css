@@ -134,9 +134,10 @@ font-weight:500
 /* ================= PRODUCTS ================= */
 .products{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,320px));
-justify-content:center;
-gap:24px
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+max-width:1200px;
+margin:auto;
+gap:24px;
 }
 
 .product{
