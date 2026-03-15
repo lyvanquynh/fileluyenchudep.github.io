@@ -40,13 +40,11 @@ const cfg = getGalleryConfig(key)
 if(!cfg) return []
 
 const arr=[]
+const ext = cfg.ext || "jpg"
 
 for(let i=1;i<=cfg.count;i++){
 
 const num=i.toString().padStart(2,"0")
-
-arr.push({
-const ext = cfg.ext || "jpg"
 
 arr.push({
 src:`${cfg.path}/${num}.${ext}`,
