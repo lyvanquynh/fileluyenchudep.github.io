@@ -5,7 +5,7 @@ const PRODUCTS = {
 COMBO_ALL:{
 id:"COMBO_ALL",
 name:"Combo Trọn bộ (All in One)",
-description:"Gồm: A1+A2+A3+A4+A5 + E1+E2+E3+E4 + G1",
+description:"Bao gồm tất cả tài liệu",
 category:"combo",
 badge:"TRỌN BỘ",
 price:899000,
@@ -17,7 +17,7 @@ drive:"https://drive.google.com/drive/folders/1QzgB_B82hdSYOI0IGziawUzk16vQ1Ahm?
 COMBO_GV:{
 id:"COMBO_GV",
 name:"Combo Giáo viên Tiểu học",
-description:"Gồm: A1 + A2 + A3",
+description:"Gồm Mã SP: A1 + A2 + A3",
 category:"combo",
 badge:"Tiết kiệm",
 price:699000,
@@ -29,7 +29,7 @@ drive:"https://drive.google.com/drive/folders/1Vtoq-8AG3UhMXgeog-XPjN6D4KNZWKpH?
 COMBO_HS:{
 id:"COMBO_HS",
 name:"Combo Luyện chữ cơ bản",
-description:"Gồm: A4 + A5",
+description:"Gồm Mã SP: A4 + A5",
 category:"combo",
 badge:"Hot",
 price:129000,
@@ -41,7 +41,7 @@ drive:"https://drive.google.com/drive/folders/1napqvbvBIvpQJ_ADrPhq-d3nvEY8culC?
 COMBO_CALLI:{
 id:"COMBO_CALLI",
 name:"Combo Chữ sáng tạo",
-description:"Gồm: E1 + E2 + E3 + E4",
+description:"Gồm Mã SP: E1 + E2 + E3 + E4",
 category:"combo",
 badge:"Best",
 price:199000,
@@ -224,8 +224,8 @@ image:"images/khoa1.png"
 
 ST1:{
 id:"ST1",
-name:"Luyện chữ sáng tạo - Chữ viết tay",
-description:"Thực hành luyện chữ sáng tạo viết tay",
+name:"Luyện chữ sáng tạo 1",
+description:"Mẫu chữ sáng tạo viết tay",
 category:"featured",
 badge:"NEW",
 price:99000,
@@ -239,8 +239,8 @@ drive:"https://drive.google.com/drive/folders/1gy3QK5k6iGIjK4Kr-Gunj15r59mGrKWV?
 
 ST2:{
 id:"ST2",
-name:"Luyện chữ sáng tạo 2 - Mẫu chữ viết tay",
-description:"Thực hành luyện chữ sáng tạo viết tay",
+name:"Luyện chữ sáng tạo 2",
+description:"Mẫu chữ sáng tạo viết tay",
 category:"featured",
 badge:"NEW",
 price:69000,
