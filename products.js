@@ -40,7 +40,7 @@ drive:"https://drive.google.com/drive/folders/1napqvbvBIvpQJ_ADrPhq-d3nvEY8culC?
 
 COMBO_CALLI:{
 id:"COMBO_CALLI",
-name:"Combo Chữ sáng tạo",
+name:"Combo chữ Calligraphy",
 description:"Gồm Mã SP: E1 + E2 + E3 + E4",
 category:"combo",
 badge:"Best",
