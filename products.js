@@ -237,4 +237,18 @@ galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/1gy3QK5k6iGIjK4Kr-Gunj15r59mGrKWV?usp=drive_link"
 },
 
+ST2:{
+id:"ST2",
+name:"Luyện chữ sáng tạo 2 - Mẫu chữ viết tay",
+description:"Thực hành luyện chữ sáng tạo viết tay",
+category:"featured",
+badge:"NEW",
+price:69000,
+oldPrice:150000,
+image:"ST2-Chusangtaoviettay2/thumb.webp",
+galleryPath:"ST2-Chusangtaoviettay2/images",
+galleryCount:20,
+galleryExt:"webp",
+drive:"https://drive.google.com/drive/folders/1xFqjNwWtqviWOGXq4S-kK8tEAIdFPgZb?usp=drive_link"
+},
 }
