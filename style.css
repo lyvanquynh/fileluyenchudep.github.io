@@ -1519,3 +1519,19 @@ opacity:0;
 }
 
 }
+
+
+.product-id{
+font-size:13px;
+color:#e74c3c;
+font-weight:600;
+margin-top:4px;
+margin-bottom:4px;
+}
+
+.product-code{
+font-size:13px;
+color:#e74c3c;
+font-weight:600;
+margin:4px 0;
+}

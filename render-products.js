@@ -42,6 +42,10 @@ style="cursor:pointer">
 
 <p>${p.description}</p>
 
+<div class="product-code">
+Mã SP: ${p.id}
+</div>
+
 <div class="price-sale">
 
 ${p.oldPrice ? `
