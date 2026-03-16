@@ -247,7 +247,7 @@ price:69000,
 oldPrice:150000,
 image:"ST2-Chusangtaoviettay2/thumb.webp",
 galleryPath:"ST2-Chusangtaoviettay2/images",
-galleryCount:20,
+galleryCount:10,
 galleryExt:"webp",
 drive:"https://drive.google.com/drive/folders/1xFqjNwWtqviWOGXq4S-kK8tEAIdFPgZb?usp=drive_link"
 },
