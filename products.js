@@ -52,8 +52,8 @@ drive:"https://drive.google.com/drive/folders/1j7GeIH7AgIwptLG-ZZHSSEZ121T7hOYC?
 
 A1:{
 id:"A1",
-name:"A1 - Giáo trình kỹ thuật LCĐ",
-description:"Hướng dẫn kỹ thuật viết chữ đẹp",
+name:"Giáo trình kỹ thuật LCĐ",
+description:"Tổng hợp kỹ thuật luyện chữ",
 category:"bo1",
 price:600000,
 oldPrice:1500000,
@@ -66,7 +66,7 @@ drive:"https://drive.google.com/drive/folders/1lKQu6_N5T9At9ged_ViPdcIFhoO_f-kB?
 
 A2:{
 id:"A2",
-name:"A2 - Giáo án dạy chữ nhỡ - TTH",
+name:"Giáo án dạy chữ nhỡ - TTH",
 description:"Thực hành chữ chuẩn cỡ nhỡ",
 category:"bo1",
 price:150000,
@@ -80,7 +80,7 @@ drive:"https://drive.google.com/drive/folders/1q7VB_6tK98Jc-5S2pDSgp_NCsa_UibFa?
 
 A3:{
 id:"A3",
-name:"A3 - Giáo án dạy chữ nhỏ - TH",
+name:"Giáo án dạy chữ nhỏ - TH",
 description:"Thực hành chữ chuẩn hạ cỡ nhỏ",
 category:"bo1",
 price:150000,
@@ -94,7 +94,7 @@ drive:"https://drive.google.com/drive/folders/18pBjXUXYc2NjZgYHFa2MdOWB8HeVDzRB?
 
 A4:{
 id:"A4",
-name:"A4 – Hạ cỡ chữ tròn li",
+name:"Hạ cỡ chữ nhỏ tròn li",
 description:"Thực hành hạ cỡ chữ nhỏ tròn li",
 category:"bo1",
 price:69000,
@@ -108,7 +108,7 @@ drive:"https://drive.google.com/drive/folders/1Eu8F2BDkuIkNiKjApNyJ0aOsbq_h9JLW?
 
 A5:{
 id:"A5",
-name:"A5 – Hạ cỡ nhỏ chữ chuẩn BGD",
+name:"Hạ cỡ nhỏ - chữ chuẩn BGD",
 description:"Thực hành cỡ chữ nhỏ mẫu chữ chuẩn",
 category:"bo1",
 price:89000,
@@ -122,7 +122,7 @@ drive:"https://drive.google.com/drive/folders/1O-or_c5nsJwFBraS-Tg3N32JvWA7Eowr?
 
 E1:{
 id:"E1",
-name:"E1 – Chữ sáng tạo (Cơ bản)",
+name:"Chữ sáng tạo (Basic)",
 description:"Tài liệu luyện chữ sáng tạo cơ bản",
 category:"bo2",
 price:69000,
@@ -136,7 +136,7 @@ drive:"https://drive.google.com/drive/folders/15Od0N-wiZ0NvsuFruDKuorg_hhjsxRZ3?
 
 E2:{
 id:"E2",
-name:"E2 - Copperplate Calligraphy",
+name:"Copperplate Calligraphy",
 description:"Tài liệu luyện chữ sáng tạo nâng cao",
 category:"bo2",
 price:89000,
@@ -150,7 +150,7 @@ drive:"https://drive.google.com/drive/folders/1fovH0KT3kR-0Z1dazYALmZ-GWPyfl8Jd?
 
 E3:{
 id:"E3",
-name:"E3 - Modern Calligraphy",
+name:"Modern Calligraphy",
 description:"Tài liệu luyện chữ sáng tạo nâng cao",
 category:"bo2",
 price:89000,
@@ -164,7 +164,7 @@ drive:"https://drive.google.com/drive/folders/1jvOR29l-oGoAhT_tuxLOlED0CsQDDRal?
 
 E4:{
 id:"E4",
-name:"E4 - Unical Calligraphy",
+name:"Unical Calligraphy",
 description:"Tài liệu luyện chữ nghệ thuật nâng cao",
 category:"bo2",
 price:59000,
@@ -178,7 +178,7 @@ drive:"https://drive.google.com/drive/folders/1D5NqYlkJKiBpuSdlU5VryUwwph6j6cM3?
 
 G1:{
 id:"G1",
-name:"G1 - Luyện viết nhanh/Tốc ký",
+name:"Luyện viết nhanh/Tốc ký",
 description:"Tài liệu luyện chữ viết nhanh",
 category:"bo3",
 price:99000,
