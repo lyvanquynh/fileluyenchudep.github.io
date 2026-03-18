@@ -91,7 +91,7 @@ let html=`
 <section class="section">
 
 <div class="block-title ${getSectionClass(title)}">
-<h2>${title}</h2>
+<h2><span class="title-icon">🔥</span>${title.replace("🔥","")}</h2>
 <p>${desc}</p>
 </div>
 
