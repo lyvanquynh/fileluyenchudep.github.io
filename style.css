@@ -1463,19 +1463,32 @@ color:#e53935;
 
 background:conic-gradient(
   from 0deg,
-  transparent 0deg,
-  transparent 350deg,
-  #00e5ff 355deg,
-  #4CAF50 358deg,
-  #00e5ff 360deg
+
+  /* vùng tối */
+  transparent 0deg 340deg,
+
+  /* đuôi mờ */
+  rgba(0,229,255,0.15) 342deg,
+  rgba(0,229,255,0.35) 346deg,
+
+  /* lõi sáng */
+  #00f7ff 350deg,
+  #00ff9d 353deg,
+
+  /* fade ra */
+  rgba(0,255,157,0.6) 356deg,
+  rgba(0,255,157,0.2) 358deg,
+
+  transparent 360deg
 );
 
-  animation:rotateLight 1.5s linear infinite;
+  animation:rotateLight 1.2s linear infinite;
 
   filter:
-  drop-shadow(0 0 8px #00e5ff)
-  drop-shadow(0 0 18px #4CAF50)
-  drop-shadow(0 0 28px #00e5ff);
+  drop-shadow(0 0 6px #00f7ff)
+  drop-shadow(0 0 16px #00ff9d)
+  drop-shadow(0 0 26px #00f7ff)
+  drop-shadow(0 0 36px #00ff9d);
 
   z-index:0;
 
