@@ -1072,6 +1072,7 @@ if(text.trim() === "PAID" && !window._paidDone){
   document.getElementById("pay-step2-modal").style.display="none"
   document.getElementById("pay-step3-modal").style.display="flex"
 
+  // ===== GỬI MAIL ADMIN =====
   fetch(COUPON_API,{
     method:"POST",
     mode:"no-cors",
@@ -1080,6 +1081,28 @@ if(text.trim() === "PAID" && !window._paidDone){
       orderId:orderId
     })
   })
+
+  // ===== XOÁ GIỎ HÀNG =====
+  cart = []
+  saveCart()
+  updateCartCount()
+  renderCart()
+
+  // ===== RESET BIẾN =====
+  appliedCoupon = null
+  couponDiscount = 0
+
+  window._currentTotal = 0
+  tempOrderData = null
+
+  const emailInput = document.getElementById("customer-email")
+  if(emailInput) emailInput.value = ""
+
+  const couponInput = document.getElementById("coupon-code")
+  if(couponInput) couponInput.value = ""
+
+  const couponMsg = document.getElementById("coupon-msg")
+  if(couponMsg) couponMsg.innerHTML = ""
 
 }
 
