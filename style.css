@@ -1731,3 +1731,11 @@ margin:4px 0;
     filter:drop-shadow(0 0 12px #4CAF50);
   }
 }
+
+.check-circle{
+  fill: none !important;
+}
+
+.check-mark{
+  fill: none !important;
+}

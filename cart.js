@@ -1066,17 +1066,24 @@ if(text.trim() === "PAID" && !window._paidDone){
   clearInterval(interval)
 
   document.getElementById("pay-step2-modal").style.display="none"
-  document.getElementById("pay-step3-modal").style.display="flex"
+  const modal3 = document.getElementById("pay-step3-modal")
+const box = document.querySelector(".step3-box")
 
-// thêm animation
-setTimeout(()=>{
-  const box = document.querySelector(".step3-box")
-  if(box){
-    box.classList.remove("show")
-    void box.offsetWidth
+if(modal3 && box){
+
+  // hiển thị popup
+  modal3.style.display = "flex"
+
+  // reset animation (tránh lỗi không chạy lần 2)
+  box.classList.remove("show")
+  void box.offsetWidth
+
+  // trigger animation
+  setTimeout(()=>{
     box.classList.add("show")
-  }
-},50)
+  },50)
+
+}
 
 // ===== TẠO ĐƠN + GỬI MAIL (SAU KHI THANH TOÁN) =====
 if(tempOrderData){
