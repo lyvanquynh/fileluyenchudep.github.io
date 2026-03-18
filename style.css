@@ -1456,75 +1456,36 @@ color:#e53935;
 .step3-box::before{
   content:"";
   position:absolute;
-  inset:0;
-  border-radius:20px;
+  inset:-2px;
+  border-radius:22px;
 
-  background:
-  linear-gradient(90deg, transparent, #00e5ff, #4CAF50, #00e5ff, transparent) top/100% 3px no-repeat,
-  linear-gradient(180deg, transparent, #00e5ff, #4CAF50, #00e5ff, transparent) right/3px 100% no-repeat,
-  linear-gradient(270deg, transparent, #00e5ff, #4CAF50, #00e5ff, transparent) bottom/100% 3px no-repeat,
-  linear-gradient(360deg, transparent, #00e5ff, #4CAF50, #00e5ff, transparent) left/3px 100% no-repeat;
+  padding:2px;
 
-  animation:borderLight 2s linear infinite;
+background:conic-gradient(
+  from 0deg,
+  transparent 0deg,
+  transparent 350deg,
+  #00e5ff 355deg,
+  #4CAF50 358deg,
+  #00e5ff 360deg
+);
+
+  animation:rotateLight 1.5s linear infinite;
 
   filter:
-  drop-shadow(0 0 10px #00e5ff)
-  drop-shadow(0 0 20px #4CAF50)
-  drop-shadow(0 0 30px #00e5ff);
+  drop-shadow(0 0 8px #00e5ff)
+  drop-shadow(0 0 18px #4CAF50)
+  drop-shadow(0 0 28px #00e5ff);
 
   z-index:0;
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
 }
-@keyframes borderLight{
 
-  0%{
-    background-position:
-      0% 0,
-      100% 0,
-      100% 100%,
-      0% 100%;
-  }
-
-  25%{
-    background-position:
-      100% 0,
-      100% 100%,
-      0% 100%,
-      0% 0;
-  }
-
-  50%{
-    background-position:
-      100% 100%,
-      0% 100%,
-      0% 0,
-      100% 0;
-  }
-
-  75%{
-    background-position:
-      0% 100%,
-      0% 0,
-      100% 0,
-      100% 100%;
-  }
-
-  100%{
-    background-position:
-      0% 0,
-      100% 0,
-      100% 100%,
-      0% 100%;
-  }
-}
-/* lớp nền che */
-.step3-box::after{
-  content:"";
-  position:absolute;
-  inset:3px;
-  background:white;
-  border-radius:18px;
-  z-index:1;
-}
 
 /* animation tia chạy */
 @keyframes lightRun{
