@@ -1456,30 +1456,57 @@ color:#e53935;
 .step3-box::before{
   content:"";
   position:absolute;
-
-  /* 👉 tăng độ dày + lan ra ngoài */
   inset:-6px;
-
   border-radius:26px;
 
-  /* 👉 gradient kiểu sao chổi */
+  padding:2px;
+
   background:conic-gradient(
     from 0deg,
-    transparent 0deg,
-    transparent 250deg,
-    rgba(76,175,80,0.2) 280deg,
-    rgba(76,175,80,0.6) 300deg,
-    #4CAF50 320deg,
-    #00e5ff 340deg,
-    #4CAF50 360deg
+    transparent 0deg 80deg,
+    #00e5ff 90deg,
+    #4CAF50 110deg,
+    #00e5ff 130deg,
+    transparent 140deg 360deg
   );
 
-  /* 👉 blur tạo glow */
-  filter:blur(6px);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
 
-  animation:rotateBorder 2s linear infinite;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  animation:borderRun 2s linear infinite;
+
+  filter:drop-shadow(0 0 6px #00e5ff)
+         drop-shadow(0 0 12px #4CAF50);
 
   z-index:0;
+}
+@keyframes borderRun{
+  to{
+    transform:rotate(360deg);
+  }
+}
+/* lớp nền che */
+.step3-box::after{
+  content:"";
+  position:absolute;
+  inset:3px;
+  background:white;
+  border-radius:18px;
+  z-index:1;
+}
+
+/* animation tia chạy */
+@keyframes lightRun{
+  0%{
+    background-position:0% 50%;
+  }
+  100%{
+    background-position:300% 50%;
+  }
 }
 
 /* lớp nền che bên trong */
@@ -1766,9 +1793,11 @@ margin:4px 0;
 .check-circle{
   fill:none;
   stroke:#4CAF50;
-  stroke-width:5;
+  stroke-width:6;
   stroke-dasharray:283;
   stroke-dashoffset:283;
+
+  filter:drop-shadow(0 0 6px #4CAF50);
 }
 
 /* dấu tick */
@@ -1780,6 +1809,8 @@ margin:4px 0;
   stroke-linejoin:round;
   stroke-dasharray:50;
   stroke-dashoffset:50;
+
+  filter:drop-shadow(0 0 6px #4CAF50);
 }
 
 /* ===== CHỈ CHẠY ANIMATION KHI SHOW ===== */
@@ -1791,6 +1822,12 @@ margin:4px 0;
 .step3-box.show .check-mark{
   animation:drawTick 0.4s ease forwards;
   animation-delay:0.6s;
+}
+
+@keyframes borderRun{
+  to{
+    transform:rotate(360deg);
+  }
 }
 
 /* glow */

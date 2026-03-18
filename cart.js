@@ -1080,20 +1080,27 @@ if(modal3 && box){
 
   if(circle && tick){
 
-    // reset stroke
-    circle.style.strokeDashoffset = "283"
-    tick.style.strokeDashoffset = "50"
+  // reset stroke
+  circle.style.strokeDasharray = "283"
+  circle.style.strokeDashoffset = "283"
 
-    // reset animation
-    circle.style.animation = "none"
-    tick.style.animation = "none"
+  tick.style.strokeDasharray = "50"
+  tick.style.strokeDashoffset = "50"
 
-    void circle.offsetWidth
-    void tick.offsetWidth
+  // reset animation
+  circle.style.animation = "none"
+  tick.style.animation = "none"
 
+  // force reflow mạnh hơn
+  circle.getBoundingClientRect()
+  tick.getBoundingClientRect()
+
+  // delay nhỏ để đảm bảo reset xong
+  setTimeout(()=>{
     circle.style.animation = ""
     tick.style.animation = ""
-  }
+  },20)
+}
 
   // reset class
   box.classList.remove("show")
