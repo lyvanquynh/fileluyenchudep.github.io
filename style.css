@@ -1456,37 +1456,64 @@ color:#e53935;
 .step3-box::before{
   content:"";
   position:absolute;
-  inset:-6px;
-  border-radius:26px;
+  inset:0;
+  border-radius:20px;
 
-  padding:2px;
+  background:
+  linear-gradient(90deg, transparent, #00e5ff, #4CAF50, #00e5ff, transparent) top/100% 3px no-repeat,
+  linear-gradient(180deg, transparent, #00e5ff, #4CAF50, #00e5ff, transparent) right/3px 100% no-repeat,
+  linear-gradient(270deg, transparent, #00e5ff, #4CAF50, #00e5ff, transparent) bottom/100% 3px no-repeat,
+  linear-gradient(360deg, transparent, #00e5ff, #4CAF50, #00e5ff, transparent) left/3px 100% no-repeat;
 
-  background:conic-gradient(
-    from 0deg,
-    transparent 0deg 80deg,
-    #00e5ff 90deg,
-    #4CAF50 110deg,
-    #00e5ff 130deg,
-    transparent 140deg 360deg
-  );
+  animation:borderLight 2s linear infinite;
 
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-
-  animation:borderRun 2s linear infinite;
-
-  filter:drop-shadow(0 0 6px #00e5ff)
-         drop-shadow(0 0 12px #4CAF50);
+  filter:
+  drop-shadow(0 0 10px #00e5ff)
+  drop-shadow(0 0 20px #4CAF50)
+  drop-shadow(0 0 30px #00e5ff);
 
   z-index:0;
 }
-@keyframes borderRun{
-  to{
-    transform:rotate(360deg);
+@keyframes borderLight{
+
+  0%{
+    background-position:
+      0% 0,
+      100% 0,
+      100% 100%,
+      0% 100%;
+  }
+
+  25%{
+    background-position:
+      100% 0,
+      100% 100%,
+      0% 100%,
+      0% 0;
+  }
+
+  50%{
+    background-position:
+      100% 100%,
+      0% 100%,
+      0% 0,
+      100% 0;
+  }
+
+  75%{
+    background-position:
+      0% 100%,
+      0% 0,
+      100% 0,
+      100% 100%;
+  }
+
+  100%{
+    background-position:
+      0% 0,
+      100% 0,
+      100% 100%,
+      0% 100%;
   }
 }
 /* lớp nền che */
@@ -1513,9 +1540,7 @@ color:#e53935;
 .step3-box::after{
   content:"";
   position:absolute;
-
-  /* 👉 giữ khoảng cách để thấy viền rõ */
-  inset:4px;
+  inset:2px;
 
   background:white;
   border-radius:18px;
@@ -1538,17 +1563,40 @@ color:#e53935;
 }
 
 .step3-icon{
-  width:70px;
-  height:70px;
+  width:90px;
+  height:90px;
   margin:0 auto 16px;
-  background:#4caf50;
+
+  background:radial-gradient(circle at 30% 30%, #66bb6a, #2e7d32);
+
   color:white;
-  font-size:32px;
+  font-size:42px;
+  font-weight:bold;
+
   border-radius:50%;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:0 6px 20px rgba(76,175,80,.4);
+
+  box-shadow:
+    0 0 20px rgba(76,175,80,.6),
+    0 0 40px rgba(76,175,80,.4);
+
+  animation:iconPop .4s ease;
+}
+@keyframes iconPop{
+  0%{
+    transform:scale(0.5);
+    opacity:0;
+  }
+  60%{
+    transform:scale(1.2);
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
 }
 
 .step3-title{
