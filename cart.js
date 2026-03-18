@@ -1074,7 +1074,28 @@ if(modal3 && box){
   // hiển thị popup
   modal3.style.display = "flex"
 
-  // reset animation (tránh lỗi không chạy lần 2)
+  // ===== RESET SVG ANIMATION =====
+  const circle = box.querySelector(".check-circle")
+  const tick = box.querySelector(".check-mark")
+
+  if(circle && tick){
+
+    // reset stroke
+    circle.style.strokeDashoffset = "283"
+    tick.style.strokeDashoffset = "50"
+
+    // reset animation
+    circle.style.animation = "none"
+    tick.style.animation = "none"
+
+    void circle.offsetWidth
+    void tick.offsetWidth
+
+    circle.style.animation = ""
+    tick.style.animation = ""
+  }
+
+  // reset class
   box.classList.remove("show")
   void box.offsetWidth
 

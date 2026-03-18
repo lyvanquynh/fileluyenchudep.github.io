@@ -1438,28 +1438,44 @@ color:#e53935;
   border-radius:20px;
   padding:28px;
   text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,.3);
-  animation:scaleIn .3s ease;
-  overflow:hidden;
+
+  /* 👉 shadow + glow */
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.3),
+    0 0 25px rgba(76,175,80,.25);
+
+  /* 👉 thêm rung */
+  animation:
+  scaleIn .3s ease,
+  shakeSuccess 0.5s ease 0.3s;
+
+  overflow:visible;
 }
 
 /* ===== VIỀN CHẠY ===== */
-
 .step3-box::before{
   content:"";
   position:absolute;
-  inset:-2px; /* độ dày viền */
 
-  border-radius:22px;
+  /* 👉 tăng độ dày + lan ra ngoài */
+  inset:-6px;
 
+  border-radius:26px;
+
+  /* 👉 gradient kiểu sao chổi */
   background:conic-gradient(
-  from 0deg,
-  transparent 0deg,
-  transparent 300deg,
-  #4CAF50,
-  #00e5ff,
-  #4CAF50
-);
+    from 0deg,
+    transparent 0deg,
+    transparent 250deg,
+    rgba(76,175,80,0.2) 280deg,
+    rgba(76,175,80,0.6) 300deg,
+    #4CAF50 320deg,
+    #00e5ff 340deg,
+    #4CAF50 360deg
+  );
+
+  /* 👉 blur tạo glow */
+  filter:blur(6px);
 
   animation:rotateBorder 2s linear infinite;
 
@@ -1470,9 +1486,13 @@ color:#e53935;
 .step3-box::after{
   content:"";
   position:absolute;
-  inset:2px;
+
+  /* 👉 giữ khoảng cách để thấy viền rõ */
+  inset:4px;
+
   background:white;
   border-radius:18px;
+
   z-index:1;
 }
 
@@ -1554,6 +1574,16 @@ color:#e53935;
 @keyframes fadeIn{
   from{opacity:0;}
   to{opacity:1;}
+}
+
+@keyframes shakeSuccess{
+  0%   { transform:translateX(0); }
+  15%  { transform:translateX(-6px); }
+  30%  { transform:translateX(5px); }
+  45%  { transform:translateX(-4px); }
+  60%  { transform:translateX(3px); }
+  75%  { transform:translateX(-2px); }
+  100% { transform:translateX(0); }
 }
 
 /* ===== NÚT ĐÓNG STEP 1 MÀU XÁM ===== */
