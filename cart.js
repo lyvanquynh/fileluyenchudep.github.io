@@ -1068,6 +1068,16 @@ if(text.trim() === "PAID" && !window._paidDone){
   document.getElementById("pay-step2-modal").style.display="none"
   document.getElementById("pay-step3-modal").style.display="flex"
 
+// thêm animation
+setTimeout(()=>{
+  const box = document.querySelector(".step3-box")
+  if(box){
+    box.classList.remove("show")
+    void box.offsetWidth
+    box.classList.add("show")
+  }
+},50)
+
 // ===== TẠO ĐƠN + GỬI MAIL (SAU KHI THANH TOÁN) =====
 if(tempOrderData){
 
