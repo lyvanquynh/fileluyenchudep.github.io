@@ -1063,14 +1063,15 @@ function startCheckPaid(orderId){
 
       const text = await res.text()
 
-if(text.trim() === "PAID"){
+if(text.trim() === "PAID" && !window._paidDone){
+
+  window._paidDone = true
 
   clearInterval(interval)
 
   document.getElementById("pay-step2-modal").style.display="none"
   document.getElementById("pay-step3-modal").style.display="flex"
 
-  // ===== GỬI MAIL ADMIN =====
   fetch(COUPON_API,{
     method:"POST",
     mode:"no-cors",
