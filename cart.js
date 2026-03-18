@@ -433,6 +433,17 @@ if(modal1){
 // ===== MỞ STEP 2 =====
 const modal2 = document.getElementById("pay-step2-modal")
 if(modal2){
+
+  // ===== TẠO ĐƠN NGAY =====
+  fetch(COUPON_API,{
+    method:"POST",
+    mode:"no-cors",
+    body:JSON.stringify({
+      action:"createOrder",
+      ...tempOrderData
+    })
+  })
+
   modal2.style.display = "flex"
   document.body.style.overflow = "hidden"
 }
@@ -447,6 +458,7 @@ if(qrImg2) qrImg2.src = window._currentQrUrl
 if(qrLink2) qrLink2.href = window._currentQrUrl
 if(orderIdEl) orderIdEl.innerText = "Mã đơn: #" + window._currentOrderId
 if(totalEl) totalEl.innerText = window._currentTotal.toLocaleString() + "đ"
+startCheckPaid(window._currentOrderId)
 
   }
 
@@ -576,50 +588,7 @@ function runNextToast(){
 }
 
 function confirmPaid(){
-
-  const btn = document.querySelector(".confirm-paid-btn")
-
-  if(btn){
-    btn.disabled = true
-  }
-
-  if(!tempOrderData){
-    showToast("Lỗi dữ liệu đơn hàng","error")
-    return
-  }
-
-fetch("https://script.google.com/macros/s/AKfycby_RLqohuq-mtIX3lRbqkhLeMlV1cA79Cu9NUed0J-glAGewX5rFOgTZwg4HIyqbiqa/exec",{
-    method:"POST",
-    mode:"no-cors",
-    body:JSON.stringify({
-      action:"createOrder",
-      ...tempOrderData
-    })
-  })
-
-  document.getElementById("pay-step2-modal").style.display="none"
-  document.getElementById("pay-step3-modal").style.display="flex"
-
-  cart=[]
-  saveCart()
-  updateCartCount()
-  renderCart()
-
-  appliedCoupon = null
-  couponDiscount = 0
-
-  window._currentTotal = 0
-  tempOrderData = null
-
-  const emailInput = document.getElementById("customer-email")
-  if(emailInput) emailInput.value = ""
-
-  const couponInput = document.getElementById("coupon-code")
-  if(couponInput) couponInput.value = ""
-
-  const couponMsg = document.getElementById("coupon-msg")
-  if(couponMsg) couponMsg.innerHTML = ""
-
+  // đã loại bỏ — dùng Sepay auto
 }
 
 
@@ -1075,6 +1044,37 @@ console.log("Coupon updated realtime")
 console.log("coupon check error",err)
 
 }
+
+}
+
+function startCheckPaid(orderId){
+
+  const interval = setInterval(async ()=>{
+
+    try{
+
+      const res = await fetch(COUPON_API,{
+        method:"POST",
+        body:JSON.stringify({
+          action:"checkPaid",
+          orderId:orderId
+        })
+      })
+
+      const text = await res.text()
+
+      if(text === "PAID"){
+
+        clearInterval(interval)
+
+        document.getElementById("pay-step2-modal").style.display="none"
+        document.getElementById("pay-step3-modal").style.display="flex"
+
+      }
+
+    }catch(err){}
+
+  },3000)
 
 }
 
