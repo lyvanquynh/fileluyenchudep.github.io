@@ -449,15 +449,7 @@ if(qrLink2) qrLink2.href = window._currentQrUrl
 if(orderIdEl) orderIdEl.innerText = "Mã đơn: #" + window._currentOrderId
 if(totalEl) totalEl.innerText = window._currentTotal.toLocaleString() + "đ"
 
-// ===== TẠO ĐƠN NGAY STEP 2 =====
-fetch(COUPON_API,{
-  method:"POST",
-  mode:"no-cors",
-  body:JSON.stringify({
-    action:"createOrder",
-    ...tempOrderData
-  })
-})
+
 
 // reset trạng thái thanh toán mỗi đơn mới
 window._paidDone = false
@@ -1076,16 +1068,27 @@ if(text.trim() === "PAID" && !window._paidDone){
   document.getElementById("pay-step2-modal").style.display="none"
   document.getElementById("pay-step3-modal").style.display="flex"
 
-// ===== GỬI MAIL ADMIN (SAU KHI THANH TOÁN) =====
+// ===== TẠO ĐƠN + GỬI MAIL (SAU KHI THANH TOÁN) =====
 if(tempOrderData){
+
+// 1. TẠO ĐƠN
 fetch(COUPON_API,{
   method:"POST",
-  mode:"no-cors",
+  body:JSON.stringify({
+    action:"createOrder",
+    ...tempOrderData
+  })
+})
+
+// 2. GỬI MAIL ADMIN
+fetch(COUPON_API,{
+  method:"POST",
   body:JSON.stringify({
     action:"sendAdminMail",
     ...tempOrderData
   })
 })
+
 }
 
   // ===== XOÁ GIỎ HÀNG =====
