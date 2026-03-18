@@ -93,8 +93,14 @@ let html=`
 <section class="section">
 
 <div class="block-title ${data.class}">
-<h2><span class="title-icon">${data.icon}</span>${title.replace("🔥","")}</h2>
-<p>${desc}</p>
+  <div class="title-main">
+    <span class="title-label">
+      <span class="title-icon">${data.icon}</span>
+      ${title.replace("🔥","")}
+    </span>
+    <div class="title-line"></div>
+  </div>
+  <p class="title-desc">${desc}</p>
 </div>
 
 <div class="products">
