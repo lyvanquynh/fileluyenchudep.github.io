@@ -325,20 +325,66 @@ cursor:pointer;
   line-height:1;
 }
 
-/* ================= BADGE ================= */
-.badge{
+/* ===== RIBBON GÓC PHẢI (FIX NHỎ GỌN) ===== */
+
+/* khung ribbon */
+.badge-ribbon{
   position:absolute;
-  top:12px;
-  right:12px;
-  background:#e53935;
-  color:white;
-  padding:4px 10px;
-  border-radius:12px;
-  font-size:13px;
-  font-weight:bold;
-  box-shadow:0 2px 6px rgba(0,0,0,.2);
+  top:0;
+  right:0;
+  width:65px;
+  height:65px;
+  pointer-events:none;
 }
 
+/* tam giác */
+.badge-ribbon::before{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+
+  border-top:65px solid #e53935;
+  border-left:65px solid transparent;
+}
+
+/* text */
+.badge-ribbon::after{
+  content:attr(data-text);
+  position:absolute;
+
+  top:14px;
+  right:-20px;
+
+  transform:rotate(45deg);
+
+  color:white;
+  font-size:10px;
+  font-weight:700;
+
+  width:90px;
+  text-align:center;
+}
+
+.badge-ribbon[data-text="Bán chạy"]::before{
+  border-top-color:#e53935;
+}
+
+.badge-ribbon[data-text="Hot"]::before{
+  border-top-color:#ff9800;
+}
+
+.badge-ribbon[data-text="NEW"]::before{
+  border-top-color:#2ecc71;
+}
+
+.badge-ribbon[data-text="Best"]::before{
+  border-top-color:#9c27b0;
+}
+
+.badge-ribbon[data-text="Tiết kiệm"]::before{
+  border-top-color:#2196f3;
+}
 /* ================= SEARCH ================= */
 .search-box{
 max-width:420px;

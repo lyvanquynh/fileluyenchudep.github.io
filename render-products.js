@@ -29,7 +29,7 @@ percent = Math.round((1-(p.price/p.oldPrice))*100)
 return `
 <div class="product">
 
-${p.badge ? `<span class="badge">${p.badge}</span>` : ""}
+${p.badge ? `<div class="badge-ribbon" data-text="${p.badge}"></div>` : ""}
 
 <img src="${p.image}"
 loading="lazy"
