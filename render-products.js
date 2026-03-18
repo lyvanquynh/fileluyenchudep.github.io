@@ -90,7 +90,7 @@ let html=`
 
 <section class="section">
 
-<div class="block-title">
+<div class="block-title ${getSectionClass(title)}">
 <h2>${title}</h2>
 <p>${desc}</p>
 </div>
@@ -142,3 +142,14 @@ groups.bo3
 )
 
 })
+
+function getSectionClass(title){
+
+if(title.includes("COMBO")) return "combo"
+if(title.includes("Bộ 1")) return "bo1"
+if(title.includes("Bộ 2")) return "bo2"
+if(title.includes("Bộ 3")) return "bo3"
+if(title.includes("SẢN PHẨM MỚI")) return "new"
+
+return ""
+}

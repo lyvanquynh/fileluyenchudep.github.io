@@ -92,12 +92,21 @@ line-height:1.6
 
 /* ================= SECTION ================= */
 .section{
-padding:20px 20px;
+padding:24px 20px;
 max-width:1200px;
-margin:auto
+margin:20px auto;
+
+background:white;
+border-radius:16px;
+
+box-shadow:0 6px 20px rgba(0,0,0,.06);
 }
 
-/* ================= BLOCK TITLE ================= */
+.section + .section{
+  margin-top:30px;
+}
+
+
 /* ================= BLOCK TITLE (UPGRADE) ================= */
 .block-title{
   text-align:center;
@@ -1571,4 +1580,24 @@ font-size:13px;
 color:#e74c3c;
 font-weight:600;
 margin:4px 0;
+}
+
+.block-title.combo h2{
+  background:linear-gradient(90deg,#ff8008,#ffc837);
+}
+
+.block-title.bo1 h2{
+  background:linear-gradient(90deg,#00c6ff,#0072ff);
+}
+
+.block-title.bo2 h2{
+  background:linear-gradient(90deg,#f953c6,#b91d73);
+}
+
+.block-title.bo3 h2{
+  background:linear-gradient(90deg,#43e97b,#38f9d7);
+}
+
+.block-title.new h2{
+  background:linear-gradient(90deg,#ff416c,#ff4b2b);
 }
