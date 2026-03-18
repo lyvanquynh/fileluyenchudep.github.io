@@ -144,8 +144,8 @@ groups.bo2
 )
 
 renderGroup(
-"Bộ 3 – Luyện viết tốc ký, chữ hoa sáng tạo",
-"Luyện chữ viết nhanh và chữ hoa sáng tạo",
+"Bộ 3 – Luyện viết nhanh tốc ký",
+"Luyện chữ viết nhanh chuẩn mẫu cho học sinh cấp 2 và người lớn",
 groups.bo3
 )
 
