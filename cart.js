@@ -344,7 +344,7 @@ const finalTotal = total - couponDiscount
 const qrUrl =
   `https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png` +
   `?amount=${finalTotal}` +
-  `&addInfo=${orderId}` +
+  `&addInfo=SEVQR ${orderId}` +
   `&accountName=${encodeURIComponent(BANK_NAME)}`
 
 // LƯU QR để dùng cho step 2
@@ -615,7 +615,7 @@ const orderId = window._currentOrderId || ""
 const qrUrl =
 `https://img.vietqr.io/image/${BANK_CODE}-${BANK_ACC}-compact2.png`
 + `?amount=${finalTotal}`
-+ `&addInfo=${orderId}`
++ `&addInfo=SEVQR ${orderId}`
 + `&accountName=${encodeURIComponent(BANK_NAME)}`
 
 window._currentQrUrl = qrUrl
@@ -1063,14 +1063,24 @@ function startCheckPaid(orderId){
 
       const text = await res.text()
 
-      if(text === "PAID"){
+if(text.trim() === "PAID"){
 
-        clearInterval(interval)
+  clearInterval(interval)
 
-        document.getElementById("pay-step2-modal").style.display="none"
-        document.getElementById("pay-step3-modal").style.display="flex"
+  document.getElementById("pay-step2-modal").style.display="none"
+  document.getElementById("pay-step3-modal").style.display="flex"
 
-      }
+  // ===== GỬI MAIL ADMIN =====
+  fetch(COUPON_API,{
+    method:"POST",
+    mode:"no-cors",
+    body:JSON.stringify({
+      action:"sendAdminMail",
+      orderId:orderId
+    })
+  })
+
+}
 
     }catch(err){}
 
