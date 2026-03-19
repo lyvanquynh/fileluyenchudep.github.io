@@ -1196,14 +1196,64 @@ function confirmById(){
 
   showToast("Xác nhận ID thành công", "success")
 
-  // ===== GỬI ĐƠN LÊN GAS =====
-  sendOrderToServer()
+  // ===== GỬI ĐƠN =====
+  if(tempOrderData){
 
-  // ===== GỬI MAIL ADMIN =====
-  sendAdminNotify()
+    fetch(COUPON_API,{
+      method:"POST",
+      body:JSON.stringify({
+        action:"createOrder",
+        ...tempOrderData
+      })
+    })
 
-  // ===== CHUYỂN STEP 3 =====
-  openSuccessStep()
+    fetch(COUPON_API,{
+      method:"POST",
+      body:JSON.stringify({
+        action:"sendAdminMail",
+        ...tempOrderData
+      })
+    })
+
+  }
+
+  // ===== ẨN STEP 2 =====
+  const step2 = document.getElementById("pay-step2-modal")
+  if(step2){
+    step2.style.display = "none"
+  }
+
+  // ===== HIỆN STEP 3 =====
+  const modal3 = document.getElementById("pay-step3-modal")
+  if(modal3){
+    modal3.style.display = "flex"
+  }
+
+  // ===== XOÁ GIỎ HÀNG (QUAN TRỌNG) =====
+  cart = []
+  saveCart()
+  updateCartCount()
+  renderCart()
+
+  // ===== RESET BIẾN =====
+  appliedCoupon = null
+  couponDiscount = 0
+
+  window._currentTotal = 0
+  tempOrderData = null
+
+  // ===== RESET INPUT =====
+  const emailInput = document.getElementById("customer-email")
+  if(emailInput) emailInput.value = ""
+
+  const couponInput = document.getElementById("coupon-code")
+  if(couponInput) couponInput.value = ""
+
+  const couponMsg = document.getElementById("coupon-msg")
+  if(couponMsg) couponMsg.innerHTML = ""
+
+  // ===== RESET ID INPUT =====
+  input.value = ""
 
 }
 
