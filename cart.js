@@ -18,6 +18,17 @@ async function checkSiteVersion(){
 // nếu khác version → HIỆN POPUP (KHÔNG reload ngay)
 if(localVersion !== serverVersion){
 
+  // ===== CHẶN KHI ĐANG THANH TOÁN =====
+  const payModal = document.getElementById("pay-modal")
+  const step2Modal = document.getElementById("pay-step2-modal")
+
+  if(
+    (payModal && payModal.style.display === "flex") ||
+    (step2Modal && step2Modal.style.display === "flex")
+  ){
+    return
+  }
+
   // tránh gọi nhiều lần
   if(!window._showingUpdatePopup){
     window._showingUpdatePopup = true
@@ -546,6 +557,9 @@ function closePay(){
       modal.style.display="none"
       payContent.classList.remove("zoom-from-cart")
       document.body.style.overflow = ""
+
+// check lại version sau khi đóng thanh toán
+checkSiteVersion()
     },300)
   }
 }
