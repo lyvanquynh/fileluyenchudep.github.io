@@ -45,7 +45,7 @@ checkCouponVersion()
 },15000)
 
 // ===== MANUAL ID BYPASS =====
-const VALID_IDS = ["VIP123", "FREE999", "TEST001"]
+const VALID_IDS = ["HONGYEUQUYNH", "FREE999", "TEST001"]
 
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
