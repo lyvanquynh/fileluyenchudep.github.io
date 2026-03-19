@@ -1,3 +1,43 @@
+// ===== GLOBAL VERSION CONTROL =====
+async function checkSiteVersion(){
+
+  try{
+
+    const res = await fetch("version.json?t=" + Date.now())
+    const data = await res.json()
+
+    const serverVersion = data.version
+    const localVersion = localStorage.getItem("site_version")
+
+    // lần đầu vào
+    if(!localVersion){
+      localStorage.setItem("site_version", serverVersion)
+      return
+    }
+
+// nếu khác version → HIỆN POPUP (KHÔNG reload ngay)
+if(localVersion !== serverVersion){
+
+  showUpdatePopup(serverVersion)
+
+  return
+}
+
+  }catch(err){
+    console.log("Version check error", err)
+  }
+
+}
+
+// chạy ngay khi load
+checkSiteVersion()
+
+// ===== CHECK VERSION ĐỊNH KỲ =====
+setInterval(()=>{
+  checkSiteVersion()
+},15000)
+
+
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 let confirmBtnTimer = null   // ===== thêm =====
 let tempOrderData = null     // ===== thêm bước 2 =====
@@ -1297,5 +1337,37 @@ function openSuccessStep(){
     step3.style.display = "flex"
     document.body.style.overflow = "hidden"
   }
+
+}
+
+function showUpdatePopup(newVersion){
+
+  // tránh tạo nhiều popup
+  if(document.getElementById("update-popup")) return
+
+  const div = document.createElement("div")
+  div.id = "update-popup"
+
+  div.innerHTML = `
+    <div class="update-box">
+      <div class="update-text">
+        Cảm ơn bạn đã ghé thăm website Baolongedu
+      </div>
+
+      <button class="update-btn" onclick="confirmUpdate('${newVersion}')">
+        Tiếp tục
+      </button>
+    </div>
+  `
+
+  document.body.appendChild(div)
+
+}
+
+function confirmUpdate(newVersion){
+
+  localStorage.setItem("site_version", newVersion)
+
+  location.reload()
 
 }
