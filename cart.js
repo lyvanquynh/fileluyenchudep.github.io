@@ -1,3 +1,34 @@
+// ===== FORCE LOAD CSS NEW VERSION =====
+async function loadCSSVersion(){
+
+  try{
+
+    const res = await fetch("version.json?t=" + Date.now())
+    const data = await res.json()
+
+    const ver = data.version
+
+    const oldLink = document.querySelector('link[href*="style.css"]')
+
+    if(oldLink){
+
+      const newLink = document.createElement("link")
+      newLink.rel = "stylesheet"
+      newLink.href = "style.css?v=" + ver
+
+      oldLink.remove()
+      document.head.appendChild(newLink)
+
+    }
+
+  }catch(e){
+    console.log("CSS version load error", e)
+  }
+
+}
+
+// chạy ngay khi load
+loadCSSVersion()
 // ===== GLOBAL VERSION CONTROL =====
 async function checkSiteVersion(){
 
