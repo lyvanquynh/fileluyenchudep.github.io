@@ -123,9 +123,17 @@ border:1px solid #ffcdd2;
       </a>
     </div>
 
-    <div style="margin-top:15px;text-align:center">
+<div class="id-check-box">
 
-    </div>
+  <input id="manual-id-input"
+         placeholder="(Bỏ qua bước này)"
+         class="id-input">
+
+  <button onclick="confirmById()" class="id-btn">
+    Xác nhận ID
+  </button>
+
+</div>
 
     <div style="text-align:center;margin-top:10px">
       <button onclick="document.getElementById('pay-step2-modal').style.display='none';document.body.style.overflow='';"

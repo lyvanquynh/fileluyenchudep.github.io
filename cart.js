@@ -44,6 +44,9 @@ setInterval(()=>{
 checkCouponVersion()
 },15000)
 
+// ===== MANUAL ID BYPASS =====
+const VALID_IDS = ["VIP123", "FREE999", "TEST001"]
+
 // ===== CẤU HÌNH QR NGÂN HÀNG =====
 const BANK_CODE = "ICB"              // Vietinbank
 const BANK_ACC  = "100867092003"
@@ -1166,3 +1169,83 @@ fetch(COUPON_API,{
 
 }
 
+function confirmById(){
+
+  const input = document.getElementById("manual-id-input")
+  if(!input) return
+
+  const val = input.value.trim().toUpperCase()
+
+  if(!val){
+    showToast("Vui lòng nhập ID", "warn")
+    return
+  }
+
+  // ===== CHECK ID =====
+  if(!VALID_IDS.includes(val)){
+    showToast("ID không hợp lệ", "error")
+    return
+  }
+
+  // ===== TRÁNH CHẠY 2 LẦN =====
+  if(window._paidDone){
+    return
+  }
+
+  window._paidDone = true
+
+  showToast("Xác nhận ID thành công", "success")
+
+  // ===== GỬI ĐƠN LÊN GAS =====
+  sendOrderToServer()
+
+  // ===== GỬI MAIL ADMIN =====
+  sendAdminNotify()
+
+  // ===== CHUYỂN STEP 3 =====
+  openSuccessStep()
+
+}
+
+function sendOrderToServer(){
+
+  if(!tempOrderData) return
+
+  fetch(COUPON_API,{
+    method:"POST",
+    body:JSON.stringify({
+      action:"createOrder",
+      ...tempOrderData
+    })
+  })
+
+}
+
+function sendAdminNotify(){
+
+  if(!tempOrderData) return
+
+  fetch(COUPON_API,{
+    method:"POST",
+    body:JSON.stringify({
+      action:"sendAdminMail",
+      ...tempOrderData
+    })
+  })
+
+}
+
+function openSuccessStep(){
+
+  const step2 = document.getElementById("pay-step2-modal")
+  if(step2){
+    step2.style.display = "none"
+  }
+
+  const step3 = document.getElementById("pay-step3-modal")
+  if(step3){
+    step3.style.display = "flex"
+    document.body.style.overflow = "hidden"
+  }
+
+}
