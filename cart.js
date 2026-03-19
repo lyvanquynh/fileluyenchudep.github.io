@@ -18,7 +18,11 @@ async function checkSiteVersion(){
 // nếu khác version → HIỆN POPUP (KHÔNG reload ngay)
 if(localVersion !== serverVersion){
 
-  showUpdatePopup(serverVersion)
+  // tránh gọi nhiều lần
+  if(!window._showingUpdatePopup){
+    window._showingUpdatePopup = true
+    showUpdatePopup(serverVersion)
+  }
 
   return
 }
@@ -1342,7 +1346,6 @@ function openSuccessStep(){
 
 function showUpdatePopup(newVersion){
 
-  // tránh tạo nhiều popup
   if(document.getElementById("update-popup")) return
 
   const div = document.createElement("div")
@@ -1350,6 +1353,9 @@ function showUpdatePopup(newVersion){
 
   div.innerHTML = `
     <div class="update-box">
+      
+      <div class="update-icon">✨</div>
+
       <div class="update-text">
         Cảm ơn bạn đã ghé thăm website Baolongedu
       </div>
@@ -1357,6 +1363,7 @@ function showUpdatePopup(newVersion){
       <button class="update-btn" onclick="confirmUpdate('${newVersion}')">
         Tiếp tục
       </button>
+
     </div>
   `
 

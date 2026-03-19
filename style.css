@@ -1922,45 +1922,79 @@ margin:4px 0;
   background:#999;
 }
 
-/* ===== UPDATE POPUP ===== */
+/* ===== UPDATE POPUP PRO ===== */
 
 #update-popup{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.5);
+  inset:0;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(6px);
   display:flex;
   justify-content:center;
   align-items:center;
-  z-index:9999;
+  z-index:99999;
+  animation:fadeIn .3s ease;
 }
 
 .update-box{
   background:white;
-  padding:30px 25px;
-  border-radius:16px;
+  padding:28px 24px;
+  border-radius:18px;
   text-align:center;
-  max-width:300px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  max-width:320px;
+  width:90%;
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.3),
+    0 0 20px rgba(43,124,255,.2);
+
+  animation:popupZoom .35s ease;
 }
 
+/* icon */
+.update-icon{
+  font-size:40px;
+  margin-bottom:12px;
+  animation:iconFloat 2s infinite ease-in-out;
+}
+
+/* text */
 .update-text{
   font-size:16px;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
+/* button */
 .update-btn{
-  background:#2b7cff;
+  background:linear-gradient(135deg,#2b7cff,#00c6ff);
   color:white;
   border:none;
-  padding:10px 20px;
-  border-radius:8px;
+  padding:10px 22px;
+  border-radius:10px;
   cursor:pointer;
   font-weight:600;
+  transition:.25s;
 }
 
 .update-btn:hover{
-  background:#1a5fe0;
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:0 6px 18px rgba(0,0,0,.3);
+}
+
+/* ===== ANIMATION ===== */
+
+@keyframes popupZoom{
+  from{
+    transform:scale(.7);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+@keyframes iconFloat{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-6px); }
 }
