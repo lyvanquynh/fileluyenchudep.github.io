@@ -1371,8 +1371,9 @@ function showUpdatePopup(newVersion){
       <div class="update-icon">✨</div>
 
       <div class="update-text">
-        Cảm ơn bạn đã ghé thăm website Baolongedu
-      </div>
+  Cảm ơn bạn đã ghé thăm website
+  <b>Baolongedu</b>
+</div>
 
       <button class="update-btn" onclick="confirmUpdate('${newVersion}')">
         Tiếp tục
