@@ -83,6 +83,20 @@ setInterval(()=>{
   checkSiteVersion()
 },15000)
 
+// ===== CHECK NGAY KHI USER QUAY LẠI TAB =====
+document.addEventListener("visibilitychange", function(){
+
+  if(document.visibilityState === "visible"){
+    checkSiteVersion()
+  }
+
+})
+
+
+// ===== CHECK KHI USER CLICK (ĐẢM BẢO 100%) =====
+document.addEventListener("click", function(){
+  checkSiteVersion()
+})
 
 let cart = JSON.parse(localStorage.getItem("cart")) || []
 let confirmBtnTimer = null   // ===== thêm =====
